@@ -1,3 +1,5 @@
+include ':library-network'
+include ':libbrary-common'
 include ':library-base'
 include ':app'
 rootProject.name = "MvvmEmptyProject"

@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    sourceSets {
+        main {
+//            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+            } else {
+                resources {
+                    //正式版本时，排除debug文件夹下所有调试文件
+                    exclude 'src/debug/*'
+                }
+            }
+        }
+    }
+
+    //统一资源前缀,规范资源引用
+    resourcePrefix "common_"
+
+    dataBinding {
+        enabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api project(':library-base')
+    api project(':library-network')
+    //api project(':library-servicemanager')
+    api rootProject.ext.dependencies["smart-refresh-kernel"]
+    api rootProject.ext.dependencies["smart-refresh-header-classics"]
+    api rootProject.ext.dependencies["smart-refresh-footer-classics"]
+    api rootProject.ext.dependencies["arouter-api"]
+    api rootProject.ext.dependencies["logger"]
+    api rootProject.ext.dependencies["annotations"]
+    api rootProject.ext.dependencies["utilcodex"]
+    api rootProject.ext.dependencies["banner"]
+}
