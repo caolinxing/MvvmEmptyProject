@@ -1,4 +1,4 @@
-package com.zhulong.eduvideo;
+package com.zhulong.main;
 
 import org.junit.Test;
 

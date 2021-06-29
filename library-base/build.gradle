@@ -41,8 +41,8 @@ android {
 
 
 
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding true
     }
 
     //统一资源前缀,规范资源引用

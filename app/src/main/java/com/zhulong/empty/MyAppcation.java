@@ -1,7 +1,7 @@
-package com.zhulong.eduvideo;
+package com.zhulong.empty;
 
-import android.app.Application;
 
+import com.zhulong.common.config.ModuleLifecycleConfig;
 import com.zhulong.library_base.base.BaseApplication;
 
 /**
@@ -21,6 +21,6 @@ public class MyAppcation extends BaseApplication {
         super.onCreate();
         setsDebug(BuildConfig.DEBUG);
         // 初始化需要初始化的组件
-        //ModuleLifecycleConfig.getInstance().initModuleAhead(this);
+        ModuleLifecycleConfig.getInstance().initModuleAhead(this);
     }
 }
