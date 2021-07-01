@@ -10,18 +10,18 @@ public class ModuleLifecycleReflexs {
     /**
      * 基础库
      */
-    private static final String BaseInit = "com.drz.common.CommonModuleInit";
+    private static final String BaseInit = "com.zhulong.common.CommonModuleInit";
 
     /**
      * main组件库
      */
     private static final String MainInit =
-            "com.drz.main.application.MainModuleInit";
+            "com.zhulong.main.application.MainModuleInit";
 
     /**
      * 用户组件初始化
      */
-    private static final String UserInit = "com.drz.user.UserModuleInit";
+    private static final String UserInit = "com.zhulong.user.UserModuleInit";
 
     public static String[] initModuleNames = {BaseInit, MainInit, UserInit};
 }

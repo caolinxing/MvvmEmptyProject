@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         if (isBuildModule.toBoolean()){
-            applicationId "com.drz.main"
+            applicationId "com.zhulong.main"
         }
         //统一资源前缀，规范资源引用
         resourcePrefix "main_"
@@ -14,7 +14,7 @@ android {
 
 dependencies {
     //组件依赖基础库
-    api project(':libbrary-common')
+    api project(':library-common')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
