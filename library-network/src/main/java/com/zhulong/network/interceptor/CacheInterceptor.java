@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import com.zhulong.network.utils.HttpLog;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import okhttp3.Interceptor;
 import okhttp3.Response;
@@ -38,17 +39,21 @@ public class CacheInterceptor implements Interceptor {
     protected Context context;
     protected String cacheControlValue_Offline;
     protected String cacheControlValue_Online;
-    //set cahe times is 3 days
-    protected static final int maxStale = 60 * 60 * 24 * 3;
-    // read from cache for 60 s
-    protected static final int maxStaleOnline = 60;
+    /**
+     * set cache times is 3 days
+     */
+    protected static final int MAX_STALE = 60 * 60 * 24 * 3;
+    /**
+     * read from cache for 60 s
+     */
+    protected static final int MAX_STALE_ONLINE = 60;
 
     public CacheInterceptor(Context context) {
-        this(context, String.format("max-age=%d", maxStaleOnline));
+        this(context, String.format(Locale.getDefault(),"max-age=%d", MAX_STALE_ONLINE));
     }
 
     public CacheInterceptor(Context context, String cacheControlValue) {
-        this(context, cacheControlValue, String.format("max-age=%d", maxStale));
+        this(context, cacheControlValue, String.format(Locale.getDefault(),"max-age=%d", MAX_STALE));
     }
 
     public CacheInterceptor(Context context, String cacheControlValueOffline, String cacheControlValueOnline) {
@@ -59,17 +64,15 @@ public class CacheInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        //Request request = chain.request();
         okhttp3.Response originalResponse = chain.proceed(chain.request());
         String cacheControl = originalResponse.header("Cache-Control");
-        //String cacheControl = request.cacheControl().toString();
-       HttpLog.e( maxStaleOnline + "s load cache:" + cacheControl);
+       HttpLog.e( MAX_STALE_ONLINE + "s load cache:" + cacheControl);
         if (TextUtils.isEmpty(cacheControl) || cacheControl.contains("no-store") || cacheControl.contains("no-cache") ||
                 cacheControl.contains("must-revalidate") || cacheControl.contains("max-age") || cacheControl.contains("max-stale")) {
             return originalResponse.newBuilder()
                     .removeHeader("Pragma")
                     .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, max-age=" + maxStale)
+                    .header("Cache-Control", "public, max-age=" + MAX_STALE)
                     .build();
 
         } else {

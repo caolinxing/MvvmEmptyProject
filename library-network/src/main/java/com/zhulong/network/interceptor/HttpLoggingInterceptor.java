@@ -74,7 +74,9 @@ public class HttpLoggingInterceptor implements Interceptor {
     }
 
     public HttpLoggingInterceptor setLevel(Level level) {
-        if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
+        if (level == null) {
+            throw new NullPointerException("level == null. Use Level.NONE instead.");
+        }
         this.level = level;
         return this;
     }
@@ -161,11 +163,11 @@ public class HttpLoggingInterceptor implements Interceptor {
                     log("\t" + headers.name(i) + ": " + headers.value(i));
                 }
                 log(" ");
-                if (logBody && HttpHeaders.hasBody(clone)) {
+                if (logBody && HttpHeaders.promisesBody(clone)) {
                     if (isPlaintext(responseBody.contentType())) {
                         String body = responseBody.string();
                         log("\tbody:" + body);
-                        responseBody = ResponseBody.create(responseBody.contentType(), body);
+                        responseBody = ResponseBody.create(body,responseBody.contentType());
                         return response.newBuilder().body(responseBody).build();
                     } else {
                         log("\tbody: maybe [file part] , too large too print , ignored!");
@@ -186,8 +188,10 @@ public class HttpLoggingInterceptor implements Interceptor {
      * of code points to detect unicode control characters commonly used in binary file signatures.
      */
     static boolean isPlaintext(MediaType mediaType) {
-        if (mediaType == null) return false;
-        if (mediaType.type() != null && mediaType.type().equals("text")) {
+        if (mediaType == null) {
+            return false;
+        }
+        if (mediaType.type() != null && "text".equals(mediaType.type())) {
             return true;
         }
         String subtype = mediaType.subtype();
@@ -196,8 +200,9 @@ public class HttpLoggingInterceptor implements Interceptor {
             if (subtype.contains("x-www-form-urlencoded") ||
                     subtype.contains("json") ||
                     subtype.contains("xml") ||
-                    subtype.contains("html")) //
+                    subtype.contains("html")){
                 return true;
+            }
         }
         return false;
     }
@@ -232,6 +237,8 @@ public class HttpLoggingInterceptor implements Interceptor {
     }
 
     public void e(Throwable t) {
-        if (isLogEnable) t.printStackTrace();
+        if (isLogEnable) {
+            t.printStackTrace();
+        }
     }
 }

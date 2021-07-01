@@ -31,8 +31,11 @@ public class HttpUtil {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append(url);
-            if (url.indexOf('&') > 0 || url.indexOf('?') > 0) sb.append("&");
-            else sb.append("?");
+            if (url.indexOf('&') > 0 || url.indexOf('?') > 0){
+                sb.append("&");
+            } else{
+                sb.append("?");
+            }
             for (Map.Entry<String, String> urlParams : params.entrySet()) {
                 String urlValues = urlParams.getValue();
                 //对参数进行 utf-8 编码,防止头信息传中文

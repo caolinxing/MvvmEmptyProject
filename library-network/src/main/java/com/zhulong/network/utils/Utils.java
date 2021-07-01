@@ -16,9 +16,6 @@
 
 package com.zhulong.network.utils;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Looper;
 
 import java.io.Closeable;
@@ -32,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 /**
@@ -54,7 +52,7 @@ public class Utils {
 
     public static RequestBody createJson(String jsonString) {
         checkNotNull(jsonString, "json not null!");
-        return RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonString);
+        return RequestBody.create(jsonString, MediaType.parse("application/json; charset=utf-8"));
     }
 
     /**
@@ -63,7 +61,7 @@ public class Utils {
      */
     public static RequestBody createFile(String name) {
         checkNotNull(name, "name not null!");
-        return RequestBody.create(okhttp3.MediaType.parse("multipart/form-data; charset=utf-8"), name);
+        return RequestBody.create(name, MediaType.parse("multipart/form-data; charset=utf-8"));
     }
 
     /**
@@ -72,7 +70,7 @@ public class Utils {
      */
     public static RequestBody createFile(File file) {
         checkNotNull(file, "file not null!");
-        return RequestBody.create(okhttp3.MediaType.parse("multipart/form-data; charset=utf-8"), file);
+        return RequestBody.create(file, MediaType.parse("multipart/form-data; charset=utf-8"));
     }
 
     /**
@@ -81,7 +79,7 @@ public class Utils {
      */
     public static RequestBody createImage(File file) {
         checkNotNull(file, "file not null!");
-        return RequestBody.create(okhttp3.MediaType.parse("image/jpg; charset=utf-8"), file);
+        return RequestBody.create(file, MediaType.parse("image/jpg; charset=utf-8"));
     }
 
     public static void close(Closeable close) {
@@ -154,7 +152,7 @@ public class Utils {
             return type;
         }
     }
-    
+
     public static Type getParameterizedType(Type type, int i) {
         if (type instanceof ParameterizedType) { // 处理泛型类型    
             Type genericType = ((ParameterizedType) type).getActualTypeArguments()[i];
@@ -192,17 +190,6 @@ public class Utils {
         }
     }
 
-    public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext().getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        if (null == manager)
-            return false;
-        NetworkInfo info = manager.getActiveNetworkInfo();
-        if (null == info || !info.isAvailable())
-            return false;
-        return true;
-    }
-
 
     /**
      * 普通类反射获取泛型方式，获取需要实际解析的类型
@@ -217,7 +204,9 @@ public class Utils {
         Type type = params[0];
         Type finalNeedType;
         if (params.length > 1) {//这个类似是：CacheResult<SkinTestResult> 2层
-            if (!(type instanceof ParameterizedType)) throw new IllegalStateException("没有填写泛型参数");
+            if (!(type instanceof ParameterizedType)) {
+                throw new IllegalStateException("没有填写泛型参数");
+            }
             finalNeedType = ((ParameterizedType) type).getActualTypeArguments()[0];
             //Type rawType = ((ParameterizedType) type).getRawType();
         } else {//这个类似是:SkinTestResult  1层

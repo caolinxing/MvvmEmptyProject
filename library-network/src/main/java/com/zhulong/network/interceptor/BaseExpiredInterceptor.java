@@ -47,7 +47,7 @@ public abstract class BaseExpiredInterceptor implements Interceptor {
         ResponseBody responseBody = response.body();
         BufferedSource source = responseBody.source();
         source.request(Long.MAX_VALUE); // Buffer the entire body.
-        Buffer buffer = source.buffer();
+        Buffer buffer = source.getBuffer();
         Charset charset = UTF8;
         MediaType contentType = responseBody.contentType();
         if (contentType != null) {
@@ -67,13 +67,14 @@ public abstract class BaseExpiredInterceptor implements Interceptor {
     }
 
     private boolean isText(MediaType mediaType) {
-        if (mediaType == null)
+        if (mediaType == null) {
             return false;
-        if (mediaType.type() != null && mediaType.type().equals("text")) {
+        }
+        if (mediaType.type() != null && "text".equals(mediaType.type())) {
             return true;
         }
         if (mediaType.subtype() != null) {
-            if (mediaType.subtype().equals("json")) {
+            if ("json".equals(mediaType.subtype())) {
                 return true;
             }
         }

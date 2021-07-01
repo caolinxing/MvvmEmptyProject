@@ -15,9 +15,9 @@ import java.lang.reflect.Type;
 public class GsonUtils {
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
 
-    private static final Gson sLocalGson = createLocalGson();
+    private static final Gson S_LOCAL_GSON = createLocalGson();
 
-    private static final Gson sRemoteGson = createRemoteGson();
+    private static final Gson S_REMOTE_GSON = createRemoteGson();
 
     private static GsonBuilder createLocalGsonBuilder() {
         final GsonBuilder gsonBuilder = new GsonBuilder();
@@ -36,13 +36,13 @@ public class GsonUtils {
     }
 
     public static Gson getLocalGson() {
-        return sLocalGson;
+        return S_LOCAL_GSON;
     }
 
     public static <T> T fromLocalJson(String json, Class<T> clazz)
             throws JsonSyntaxException {
         try {
-            return sLocalGson.fromJson(json, clazz);
+            return S_LOCAL_GSON.fromJson(json, clazz);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
             return null;
@@ -50,14 +50,14 @@ public class GsonUtils {
     }
 
     public static <T> T fromLocalJson(String json, Type typeOfT) {
-        return sLocalGson.fromJson(json, typeOfT);
+        return S_LOCAL_GSON.fromJson(json, typeOfT);
     }
 
     public static String toJson(Object src) {
-        return sLocalGson.toJson(src);
+        return S_LOCAL_GSON.toJson(src);
     }
 
     public static String toRemoteJson(Object src) {
-        return sRemoteGson.toJson(src);
+        return S_REMOTE_GSON.toJson(src);
     }
 }

@@ -36,6 +36,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.ObservableTransformer;
 import io.reactivex.rxjava3.disposables.Disposable;
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
@@ -109,12 +110,12 @@ public class PutRequest extends BaseBodyRequest<PutRequest> {
         if (this.requestBody != null) { //自定义的请求体
             return apiManager.putBody(url, this.requestBody);
         } else if (this.json != null) {//Json
-            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), this.json);
+            RequestBody body = RequestBody.create(this.json,MediaType.parse("application/json; charset=utf-8"));
             return apiManager.putJson(url, body);
         }  else if (this.object != null) {//自定义的请求object
             return apiManager.putBody(url, object);
         } else if (this.string != null) {//文本内容
-            RequestBody body = RequestBody.create(mediaType, this.string);
+            RequestBody body = RequestBody.create(this.string,mediaType);
             return apiManager.putBody(url, body);
         } else {
             return apiManager.put(url, params.urlParamsMap);

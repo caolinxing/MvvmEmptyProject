@@ -86,9 +86,13 @@ public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> implements
      * @param isCancel 对话框是否可以取消
      */
     private void init(boolean isCancel) {
-        if (progressDialog == null) return;
+        if (progressDialog == null){
+            return;
+        }
         mDialog = progressDialog.getDialog();
-        if (mDialog == null) return;
+        if (mDialog == null){
+            return;
+        }
         mDialog.setCancelable(isCancel);
         if (isCancel) {
             mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {

@@ -20,7 +20,7 @@ import java.security.NoSuchAlgorithmException;
  * @version 1.0.0 <br/>
  */
 public class MD5 {
-    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f'};
     /**
      * 消息摘要.
@@ -58,8 +58,8 @@ public class MD5 {
             char str[] = new char[j * 2];
             int k = 0;
             for (byte byte0 : md) {
-                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
-                str[k++] = hexDigits[byte0 & 0xf];
+                str[k++] = HEX_DIGITS[byte0 >>> 4 & 0xf];
+                str[k++] = HEX_DIGITS[byte0 & 0xf];
             }
             String dd = new String(str);
             return dd;
@@ -82,14 +82,16 @@ public class MD5 {
         char[] charArray = inStr.toCharArray();
         byte[] byteArray = new byte[charArray.length];
 
-        for (int i = 0; i < charArray.length; i++)
+        for (int i = 0; i < charArray.length; i++){
             byteArray[i] = (byte) charArray[i];
+        }
         byte[] md5Bytes = sDigest.digest(byteArray);
         StringBuilder hexValue = new StringBuilder();
         for (byte md5Byte : md5Bytes) {
             int val = ((int) md5Byte) & 0xff;
-            if (val < 16)
+            if (val < 16){
                 hexValue.append("0");
+            }
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue.toString();

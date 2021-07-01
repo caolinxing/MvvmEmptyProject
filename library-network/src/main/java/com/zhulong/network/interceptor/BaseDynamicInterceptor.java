@@ -92,10 +92,10 @@ public abstract class BaseDynamicInterceptor<R extends BaseDynamicInterceptor> i
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        if (request.method().equals("GET")) {
+        if ("GET".equals(request.method())) {
             this.httpUrl = HttpUrl.parse(parseUrl(request.url().url().toString()));
             request = addGetParamsSign(request);
-        } else if (request.method().equals("POST")) {
+        } else if ("POST".equals(request.method())) {
             this.httpUrl = request.url();
             request = addPostParamsSign(request);
         }

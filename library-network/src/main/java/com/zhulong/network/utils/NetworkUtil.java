@@ -2,8 +2,9 @@ package com.zhulong.network.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
+import android.os.Build;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -12,6 +13,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.URL;
 import java.util.Enumeration;
+
+import io.reactivex.rxjava3.annotations.NonNull;
 
 public class NetworkUtil {
 
@@ -24,30 +27,42 @@ public class NetworkUtil {
 
     /**
      * check NetworkAvailable
+     *
      * @param context
      * @return
      */
+    @SuppressWarnings("deprecation")
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext().getSystemService(
                 Context.CONNECTIVITY_SERVICE);
-        if (null == manager)
+        if (null == manager) {
             return false;
-        NetworkInfo info = manager.getActiveNetworkInfo();
-        if (null == info || !info.isAvailable())
-            return false;
-        return true;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            NetworkCapabilities networkCapabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+            if (networkCapabilities != null) {
+                return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                        || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                        || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
+            }
+        } else {
+            NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
     }
 
     /**
      * getLocalIpAddress
+     *
      * @return
      */
     public static String getLocalIpAddress() {
         String ret = "";
         try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
                         ret = inetAddress.getHostAddress().toString();
@@ -71,16 +86,14 @@ public class NetworkUtil {
             ConnectivityManager connectivity = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null) {
-                NetworkInfo networkinfo = connectivity.getActiveNetworkInfo();
-                if (networkinfo != null) {
-                    if (networkinfo.isAvailable() && networkinfo.isConnected()) {
-                        if (!connectionNetwork())
-                            return NET_CNNT_BAIDU_TIMEOUT;
-                        else
-                            return NET_CNNT_BAIDU_OK;
+                if (isNetworkAvailable(context)) {
+                    if (!connectionNetwork()) {
+                        return NET_CNNT_BAIDU_TIMEOUT;
                     } else {
-                        return NET_NOT_PREPARE;
+                        return NET_CNNT_BAIDU_OK;
                     }
+                } else {
+                    return NET_NOT_PREPARE;
                 }
             }
         } catch (Exception e) {
@@ -90,7 +103,8 @@ public class NetworkUtil {
     }
 
     /**
-     *ping "http://www.baidu.com"
+     * ping "http://www.baidu.com"
+     *
      * @return
      */
     static private boolean connectionNetwork() {
@@ -112,67 +126,71 @@ public class NetworkUtil {
         return result;
     }
 
-    /**
-     * check is3G
-     * @param context
-     * @return boolean
-     */
-    public static boolean is3G(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetInfo != null
-                && activeNetInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * isWifi
+     *
      * @param context
      * @return boolean
      */
+    @SuppressWarnings("deprecation")
     public static boolean isWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetInfo != null
-                && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-            return true;
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                NetworkCapabilities networkCapabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+                if (networkCapabilities != null) {
+                    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                }
+            } else {
+                NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+                return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            }
         }
         return false;
     }
 
+
     /**
-     * is2G
-     * @param context
-     * @return boolean
+     * 是否为流量
      */
-    public static boolean is2G(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetInfo != null
-                && (activeNetInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_EDGE
-                || activeNetInfo.getSubtype() == TelephonyManager.NETWORK_TYPE_GPRS || activeNetInfo
-                .getSubtype() == TelephonyManager.NETWORK_TYPE_CDMA)) {
-            return true;
+    @SuppressWarnings("deprecation")
+    public static boolean isMobileData(@NonNull Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                NetworkCapabilities networkCapabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+                if (networkCapabilities != null) {
+                    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
+                }
+            } else {
+                NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+                return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+            }
         }
         return false;
     }
 
-    /**
-     *  is wifi on
-     */
-    public static boolean isWifiEnabled(Context context) {
-        ConnectivityManager mgrConn = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        TelephonyManager mgrTel = (TelephonyManager) context
-                .getSystemService(Context.TELEPHONY_SERVICE);
-        return ((mgrConn.getActiveNetworkInfo() != null && mgrConn
-                .getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED) || mgrTel
-                .getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS);
-    }
 
+    /**
+     * Wifi是否已连接
+     *
+     * @return true:已连接 false:未连接
+     */
+    @SuppressWarnings("deprecation")
+    public static boolean isWifiConnected(@NonNull Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                NetworkCapabilities networkCapabilities = manager.getNetworkCapabilities(manager.getActiveNetwork());
+                if (networkCapabilities != null) {
+                    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                }
+            } else {
+                NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+                return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            }
+        }
+        return false;
+    }
 }

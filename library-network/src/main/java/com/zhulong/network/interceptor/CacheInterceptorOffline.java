@@ -20,6 +20,7 @@ import android.content.Context;
 
 
 import com.zhulong.network.utils.HttpLog;
+import com.zhulong.network.utils.NetworkUtil;
 import com.zhulong.network.utils.Utils;
 
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class CacheInterceptorOffline extends CacheInterceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        if (!Utils.isNetworkAvailable(context)) {
+        if (!NetworkUtil.isNetworkAvailable(context)) {
             HttpLog.i(" no network load cache:"+ request.cacheControl().toString());
            /* request = request.newBuilder()
                     .removeHeader("Pragma")

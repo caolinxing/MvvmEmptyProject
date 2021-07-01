@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -305,17 +306,17 @@ public class StringUtils {
 
     private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
     private static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-    private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
+    private final static ThreadLocal<SimpleDateFormat> DATE_FORMATER = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         }
     };
 
-    private final static ThreadLocal<SimpleDateFormat> dateFormater2 = new ThreadLocal<SimpleDateFormat>() {
+    private final static ThreadLocal<SimpleDateFormat> DATE_FORMATER2 = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd");
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         }
     };
 
@@ -340,7 +341,7 @@ public class StringUtils {
             return true;
         }
         for (int i = 0; i < strLen; i++) {
-            if (Character.isWhitespace(cs.charAt(i)) == false) {
+            if (!Character.isWhitespace(cs.charAt(i))) {
                 return false;
             }
         }
@@ -368,10 +369,11 @@ public class StringUtils {
      * @return String
      */
     public static String getFileName(String path) {
-        if (isNullString(path))
+        if (isNullString(path)){
             return null;
-        int bingindex = path.lastIndexOf("/");
-        return path.substring(bingindex + 1, path.length());
+        }
+        int bingIndex = path.lastIndexOf("/");
+        return path.substring(bingIndex + 1, path.length());
     }
 
     /**
@@ -381,8 +383,9 @@ public class StringUtils {
      * @return String
      */
     public static String getFileNamePrefix(String path) {
-        if (isNullString(path))
+        if (isNullString(path)){
             return null;
+        }
         int bingindex = path.lastIndexOf("/");
         int endindex = path.lastIndexOf(".");
         return path.substring(bingindex + 1, endindex);
@@ -631,8 +634,9 @@ public class StringUtils {
      * @return String
      */
     public static String stringFilter(String input) {
-        if (input == null)
+        if (input == null){
             return null;
+        }
         input = input.replaceAll("【", "[").replaceAll("】", "]")
                 .replaceAll("！", "!").replaceAll("：", ":");// 替换中文标号
         String regEx = "[『』]"; // 清除掉特殊字符
@@ -648,16 +652,18 @@ public class StringUtils {
      * @return String
      */
     public static String ToDBC(String input) {
-        if (input == null)
+        if (input == null){
             return null;
+        }
         char[] c = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (c[i] == 12288) {
                 c[i] = (char) 32;
                 continue;
             }
-            if (c[i] > 65280 && c[i] < 65375)
+            if (c[i] > 65280 && c[i] < 65375){
                 c[i] = (char) (c[i] - 65248);
+            }
         }
         return new String(c);
     }
@@ -804,8 +810,9 @@ public class StringUtils {
      */
     public static int getThemeNum(String content) {
         int tnum = -1;
-        if (isNullOrEmpty(content))
+        if (isNullOrEmpty(content)){
             return tnum;
+        }
         int a = content.indexOf(".");
         if (a > 0) {
             String num = content.substring(0, a);
@@ -829,7 +836,7 @@ public class StringUtils {
             int len = str.length();
             for (int i = 0; i < len; i++) {
                 String tmp = str.substring(i, i + 1);
-                if (tmp.equals("+") || tmp.equals("*") || tmp.equals("=")) {
+                if ("+".equals(tmp) || "*".equals(tmp) || "=".equals(tmp)) {
                     tmp = " " + tmp + " ";
                 }
                 result += tmp;
@@ -845,8 +852,9 @@ public class StringUtils {
      * @return String
      */
     public static String detailNum(String oldnum) {
-        if (isNullOrEmpty(oldnum))
+        if (isNullOrEmpty(oldnum)){
             return oldnum;
+        }
         int newnum = Integer.parseInt(oldnum);
         return newnum + ".";
     }
@@ -877,8 +885,9 @@ public class StringUtils {
     public static String resetStoreNum(String str) {
         String value = "";
         try {
-            if (str == null || str.length() < 1)
+            if (str == null || str.length() < 1){
                 return value;
+            }
             String[] results = str.split(",");
             String[] newarr = getStoreArr(results);
             for (String aNewarr : newarr) {
@@ -964,11 +973,15 @@ public class StringUtils {
         IP = trimSpaces(IP);
         if (IP.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) {
             String s[] = IP.split("\\.");
-            if (Integer.parseInt(s[0]) < 255)
-                if (Integer.parseInt(s[1]) < 255)
-                    if (Integer.parseInt(s[2]) < 255)
-                        if (Integer.parseInt(s[3]) < 255)
+            if (Integer.parseInt(s[0]) < 255){
+                if (Integer.parseInt(s[1]) < 255){
+                    if (Integer.parseInt(s[2]) < 255){
+                        if (Integer.parseInt(s[3]) < 255){
                             b = true;
+                        }
+                    }
+                }
+            }
         }
         return b;
     }
@@ -981,7 +994,7 @@ public class StringUtils {
      */
     public static Date toDate(String sdate) {
         try {
-            return dateFormater.get().parse(sdate);
+            return DATE_FORMATER.get().parse(sdate);
         } catch (ParseException e) {
             return null;
         }
@@ -995,7 +1008,9 @@ public class StringUtils {
      * @return String  转换后的距离
      */
     public static String distanceSize(double distance) {
-        if (distance < 1.0) return (int) (distance * 1000) + "m";
+        if (distance < 1.0){
+            return (int) (distance * 1000) + "m";
+        }
         String dd = "0";
         try {
             DecimalFormat fnum = new DecimalFormat("##0.00");
@@ -1014,8 +1029,9 @@ public class StringUtils {
      * @return String    返回类型
      */
     public static String replaceResult(String content) {
-        if (!isEmpty(content))
+        if (!isEmpty(content)){
             content = content.replace("\\", "").replace("\"{", "{").replace("}\"", "}");
+        }
         return content;
     }
 
@@ -1026,10 +1042,13 @@ public class StringUtils {
      * @param content
      * @return ArrayList<String>    返回类型
      */
+    public static Pattern p = Pattern.compile("1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}");
+
     public static ArrayList<String> checkPhone(String content) {
         ArrayList<String> list = new ArrayList<String>();
-        if (isEmpty(content)) return list;
-        Pattern p = Pattern.compile("1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}");
+        if (isEmpty(content)){
+            return list;
+        }
         Matcher m = p.matcher(content);
         while (m.find()) {
             list.add(m.group());
@@ -1044,25 +1063,31 @@ public class StringUtils {
      * @return 设定文件
      */
     public static String parseStr(String value) {
-        if (isNullString(value)) return "0.0";
+        if (isNullString(value)){
+            return "0.0";
+        }
         DecimalFormat df = new DecimalFormat("######0.0");
         double mvalue = Double.parseDouble(value);
         return df.format(mvalue);
     }
 
     public static String parseStr2(String value) {
-        if (isNullString(value)) return "--";
+        if (isNullString(value)){
+            return "--";
+        }
         DecimalFormat df = new DecimalFormat("######0.0");
         double mvalue = Double.parseDouble(value);
         String mStr = df.format(mvalue);
-        if (mStr.equals("0") || mStr.equals("0.0")) {
+        if ("0".equals(mStr) || "0.0".equals(mStr)) {
             return "--";
         }
         return mStr;
     }
 
     public static String parseStr(double value) {
-        if (value == 0) return "0.0";
+        if (value == 0){
+            return "0.0";
+        }
         DecimalFormat df = new DecimalFormat("######0.0");
         return df.format(Double.parseDouble(String.valueOf(value)));
     }
@@ -1080,8 +1105,9 @@ public class StringUtils {
                 c[i] = (char) 32;
                 continue;
             }
-            if (c[i] > 65280 && c[i] < 65375)
+            if (c[i] > 65280 && c[i] < 65375){
                 c[i] = (char) (c[i] - 65248);
+            }
         }
         return new String(c);
     }

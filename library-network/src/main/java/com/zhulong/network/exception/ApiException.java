@@ -80,12 +80,14 @@ public class ApiException extends Exception {
     }
 
     public static boolean isOk(ApiResult apiResult) {
-        if (apiResult == null)
+        if (apiResult == null) {
             return false;
-        if (apiResult.isOk() /*|| ignoreSomeIssue(apiResult.getCode())*/)
+        }
+        if (apiResult.isOk() /*|| ignoreSomeIssue(apiResult.getCode())*/) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public static ApiException handleException(Throwable e) {

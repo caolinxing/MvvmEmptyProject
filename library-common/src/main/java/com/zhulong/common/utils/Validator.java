@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -32,7 +31,7 @@ public class Validator {
     /**
      * 正则表达式：验证邮箱
      */
-    private static final String REGEX_EMAIL = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";//"^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+    private static final String REGEX_EMAIL = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
     /**
      * 正则表达式：验证汉字
      */
@@ -45,6 +44,19 @@ public class Validator {
      * 正则表达式：验证IP地址
      */
     private static final String REGEX_IP_ADDR = "(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)";
+    /**
+     * 正则表达式：金额
+     */
+    public static final String REGEX_IS_PRICE = "^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$";
+    /**
+     * 正则表达式：数字
+     */
+    public static final String REGEX_IS_NUMERIC = "^[0-9]*";
+    /**
+     * 正则表达式：日期
+     */
+    public static final String REGEX_IS_DATE = "^((\\d{2}(([02468][048])|([13579][26]))[\\-/\\s]?((((0?[13578])|(1[02]))[\\-/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-/\\s]?((((0?[13578])|(1[02]))[\\-/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s(((0?[0-9])|([1-2][0-3])):([0-5]?[0-9])((\\s)|(:([0-5]?[0-9])))))?$";
+
 
     /**
      * 禁止实例化.
@@ -124,12 +136,10 @@ public class Validator {
         return Pattern.matches(REGEX_IP_ADDR, ipAddr);
     }
 
-
     // 金额验证
     public static boolean isPrice(String str) {
-        Pattern pattern = Pattern
-                .compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 判断小数点后2位的数字的正则表达式
-        return pattern.matcher(str).matches();
+        // 判断小数点后2位的数字的正则表达式
+        return Pattern.matches(REGEX_IS_PRICE, str);
     }
 
     /**
@@ -138,10 +148,9 @@ public class Validator {
      * @param str
      * @return
      */
+
     public static boolean isNumeric(String str) {
-        Pattern pattern = Pattern.compile("[0-9]*");
-        Matcher isNum = pattern.matcher(str);
-        return isNum.matches();
+        return Pattern.matches(REGEX_IS_NUMERIC, str);
     }
 
     /**
@@ -151,10 +160,8 @@ public class Validator {
      * @return
      */
     public static boolean isDate(String strDate) {
-        Pattern pattern = Pattern
-                .compile("^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s(((0?[0-9])|([1-2][0-3]))\\:([0-5]?[0-9])((\\s)|(\\:([0-5]?[0-9])))))?$");
-        Matcher m = pattern.matcher(strDate);
-        return m.matches();
+
+        return Pattern.matches(REGEX_IS_DATE, strDate);
     }
 
     /**

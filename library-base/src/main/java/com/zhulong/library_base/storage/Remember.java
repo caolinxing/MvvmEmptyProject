@@ -216,7 +216,7 @@ public class Remember {
      * Clears all data from this store.
      */
     public static void clear() {
-        getInstance().clear(null);
+        clear(null);
     }
 
     /**
@@ -252,7 +252,7 @@ public class Remember {
      * Removes the mapping indicated by the given key.
      */
     public static void remove(String key) {
-        getInstance().remove(key, null);
+        remove(key, null);
     }
 
     /**

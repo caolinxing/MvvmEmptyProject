@@ -74,7 +74,9 @@ public class HttpLog {
     }
 
     public static void d(String content) {
-        if (!allowD) return;
+        if (!allowD){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -90,7 +92,9 @@ public class HttpLog {
     }
 
     public static void d(String content, Throwable tr) {
-        if (!allowD) return;
+        if (!allowD){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -102,7 +106,9 @@ public class HttpLog {
     }
 
     public static void e(String content) {
-        if (!allowE) return;
+        if (!allowE){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -114,7 +120,9 @@ public class HttpLog {
     }
 
     public static void e(Exception e) {
-        if (!allowE) return;
+        if (!allowE){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -126,7 +134,9 @@ public class HttpLog {
     }
 
     public static void e(String content, Throwable tr) {
-        if (!allowE) return;
+        if (!allowE){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -138,7 +148,9 @@ public class HttpLog {
     }
 
     public static void i(String content) {
-        if (!allowI) return;
+        if (!allowI){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -150,7 +162,9 @@ public class HttpLog {
     }
 
     public static void i(String content, Throwable tr) {
-        if (!allowI) return;
+        if (!allowI){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -162,7 +176,9 @@ public class HttpLog {
     }
 
     public static void v(String content) {
-        if (!allowV) return;
+        if (!allowV){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -174,7 +190,9 @@ public class HttpLog {
     }
 
     public static void v(String content, Throwable tr) {
-        if (!allowV) return;
+        if (!allowV){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -186,7 +204,9 @@ public class HttpLog {
     }
 
     public static void w(String content) {
-        if (!allowW) return;
+        if (!allowW){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -198,7 +218,9 @@ public class HttpLog {
     }
 
     public static void w(String content, Throwable tr) {
-        if (!allowW) return;
+        if (!allowW){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -210,7 +232,9 @@ public class HttpLog {
     }
 
     public static void w(Throwable tr) {
-        if (!allowW) return;
+        if (!allowW){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -223,7 +247,9 @@ public class HttpLog {
 
 
     public static void wtf(String content) {
-        if (!allowWtf) return;
+        if (!allowWtf){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -235,7 +261,9 @@ public class HttpLog {
     }
 
     public static void wtf(String content, Throwable tr) {
-        if (!allowWtf) return;
+        if (!allowWtf){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 
@@ -247,7 +275,9 @@ public class HttpLog {
     }
 
     public static void wtf(Throwable tr) {
-        if (!allowWtf) return;
+        if (!allowWtf){
+            return;
+        }
         StackTraceElement caller = getCallerStackTraceElement();
         String tag = generateTag(caller);
 

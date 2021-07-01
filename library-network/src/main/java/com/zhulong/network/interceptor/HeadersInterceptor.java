@@ -45,7 +45,9 @@ public class HeadersInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        if (headers.headersMap.isEmpty()) return chain.proceed(builder.build());
+        if (headers.headersMap.isEmpty()){
+            return chain.proceed(builder.build());
+        }
         try {
             for (Map.Entry<String, String> entry : headers.headersMap.entrySet()) {
                 //去除重复的header

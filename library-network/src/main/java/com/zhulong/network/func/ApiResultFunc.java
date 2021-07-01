@@ -139,8 +139,9 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ApiResult<T>> {
     }
 
     private ApiResult parseApiResult(String json, ApiResult apiResult) throws JSONException {
-        if (TextUtils.isEmpty(json))
+        if (TextUtils.isEmpty(json)){
             return null;
+        }
         JSONObject jsonObject = new JSONObject(json);
         if (jsonObject.has("code")) {
             apiResult.setCode(jsonObject.getInt("code"));

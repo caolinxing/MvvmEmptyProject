@@ -143,8 +143,9 @@ public final class EasyHttp {
     }
 
     private static void testInitialize() {
-        if (sContext == null)
+        if (sContext == null) {
             throw new ExceptionInInitializerError("请先在全局Application中调用 EasyHttp.init() 初始化！");
+        }
     }
 
     public static OkHttpClient getOkHttpClient() {
@@ -290,7 +291,9 @@ public final class EasyHttp {
      * 超时重试次数
      */
     public EasyHttp setRetryCount(int retryCount) {
-        if (retryCount < 0) throw new IllegalArgumentException("retryCount must > 0");
+        if (retryCount < 0){
+            throw new IllegalArgumentException("retryCount must > 0");
+        }
         mRetryCount = retryCount;
         return this;
     }
@@ -306,7 +309,9 @@ public final class EasyHttp {
      * 超时重试延迟时间
      */
     public EasyHttp setRetryDelay(int retryDelay) {
-        if (retryDelay < 0) throw new IllegalArgumentException("retryDelay must > 0");
+        if (retryDelay < 0) {
+            throw new IllegalArgumentException("retryDelay must > 0");
+        }
         mRetryDelay = retryDelay;
         return this;
     }
@@ -322,8 +327,9 @@ public final class EasyHttp {
      * 超时重试延迟叠加时间
      */
     public EasyHttp setRetryIncreaseDelay(int retryIncreaseDelay) {
-        if (retryIncreaseDelay < 0)
+        if (retryIncreaseDelay < 0) {
             throw new IllegalArgumentException("retryIncreaseDelay must > 0");
+        }
         mRetryIncreaseDelay = retryIncreaseDelay;
         return this;
     }
@@ -354,7 +360,9 @@ public final class EasyHttp {
      * 全局的缓存过期时间
      */
     public EasyHttp setCacheTime(long cacheTime) {
-        if (cacheTime <= -1) cacheTime = DEFAULT_CACHE_NEVER_EXPIRE;
+        if (cacheTime <= -1){
+            cacheTime = DEFAULT_CACHE_NEVER_EXPIRE;
+        }
         mCacheTime = cacheTime;
         return this;
     }
@@ -385,8 +393,9 @@ public final class EasyHttp {
      * 全局设置缓存的版本，默认为1，缓存的版本号
      */
     public EasyHttp setCacheVersion(int cacheersion) {
-        if (cacheersion < 0)
+        if (cacheersion < 0) {
             throw new IllegalArgumentException("cacheersion must > 0");
+        }
         rxCacheBuilder.appVersion(cacheersion);
         return this;
     }
@@ -434,7 +443,9 @@ public final class EasyHttp {
      * 添加全局公共请求参数
      */
     public EasyHttp addCommonParams(HttpParams commonParams) {
-        if (mCommonParams == null) mCommonParams = new HttpParams();
+        if (mCommonParams == null){
+            mCommonParams = new HttpParams();
+        }
         mCommonParams.put(commonParams);
         return this;
     }
@@ -457,7 +468,9 @@ public final class EasyHttp {
      * 添加全局公共请求参数
      */
     public EasyHttp addCommonHeaders(HttpHeaders commonHeaders) {
-        if (mCommonHeaders == null) mCommonHeaders = new HttpHeaders();
+        if (mCommonHeaders == null){
+            mCommonHeaders = new HttpHeaders();
+        }
         mCommonHeaders.put(commonHeaders);
         return this;
     }
