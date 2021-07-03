@@ -16,7 +16,12 @@
             <option value="$PROJECT_DIR$/library-base" />
             <option value="$PROJECT_DIR$/library-common" />
             <option value="$PROJECT_DIR$/library-network" />
+            <option value="$PROJECT_DIR$/module-data" />
+            <option value="$PROJECT_DIR$/module-home" />
+            <option value="$PROJECT_DIR$/module-lesson" />
             <option value="$PROJECT_DIR$/module-main" />
+            <option value="$PROJECT_DIR$/module-mine" />
+            <option value="$PROJECT_DIR$/module-vip" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

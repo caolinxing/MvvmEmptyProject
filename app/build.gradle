@@ -100,20 +100,19 @@ dependencies {
    if (isBuildModule.toBoolean()) {
         //组件独立运行时，宿主项目直接依赖基础库，避免编译错误
         implementation project(':library-common')
-
     } else {
         //主业务模块
         implementation project(':module-main')
-        /*//首页模块
+        //首页模块
         implementation project(':module-home')
         //社区模块
-        implementation project(':module-community')
+        implementation project(':module-lesson')
         //更多模块
-        implementation project(':module-more')
+        implementation project(':module-vip')
         //视频播放模块
-        implementation project(':module-player')
+        implementation project(':module-data')
         //用户模块
-        implementation project(':module-user')*/
+        implementation project(':module-mine')
     }
-    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+    // debugImplementation rootProject.ext.dependencies["leakcanary"]
 }

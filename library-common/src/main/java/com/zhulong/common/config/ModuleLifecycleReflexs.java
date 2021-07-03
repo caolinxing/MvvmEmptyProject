@@ -13,15 +13,10 @@ public class ModuleLifecycleReflexs {
     private static final String BASE_INIT = "com.zhulong.common.CommonModuleInit";
 
     /**
-     * main组件库
+     * main组件库初始化
      */
-    private static final String MAIN_INIT =
-            "com.zhulong.main.application.MainModuleInit";
+    private static final String MAIN_INIT = "com.zhulong.main.application.MainModuleInit";
 
-    /**
-     * 用户组件初始化
-     */
-    private static final String USER_INIT = "com.zhulong.user.UserModuleInit";
 
-    public static String[] initModuleNames = {BASE_INIT, MAIN_INIT, USER_INIT};
+    public static String[] initModuleNames = {BASE_INIT, MAIN_INIT};
 }

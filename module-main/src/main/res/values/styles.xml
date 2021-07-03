@@ -6,4 +6,14 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="main_bottom_normal_text">
+        <item name="android:textColor">#eeeeee</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!--选中的样式-->
+    <style name="main_bottom_selected_text">
+        <item name="android:textColor">#ee2e2e</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

@@ -20,30 +20,40 @@ public class RouterFragmentPath
         
     }
     
-    /** 社区组件 */
-    public static class Community
+    /** 课程 */
+    public static class Lesson
     {
-        private static final String COMMUNITY = "/community";
+        private static final String LESSON = "/class";
         
-        /** 社区页 */
-        public static final String PAGER_COMMUNITY = COMMUNITY + "/Community";
+        /** 课程页 */
+        public static final String PAGER_LESSON = LESSON + "/Class";
     }
     
-    /** 更多组件 */
-    public static class More
+    /** Vip */
+    public static class Vip
     {
-        private static final String MORE = "/more";
+        private static final String VIP = "/vip";
         
-        /** 更多页面 */
-        public static final String PAGER_MORE = MORE + "/More";
+        /** Vip页面 */
+        public static final String PAGER_VIP = VIP + "/Vip";
+    }
+
+    /** 资料 */
+    public static class Data
+    {
+        private static final String DATA = "/data";
+        
+        /** 资料页面 */
+        public static final String PAGER_DATA = DATA + "/Data";
     }
     
-    public static class User
+    /** 我的*/
+    public static class Mine
     {
-        private static final String USER = "/user";
-        
+        private static final String MINE = "/mineCenter";
+
         /** 个人中心 */
-        public static final String PAGER_USER = USER + "/User";
+        public static final String PAGER_MINE = MINE + "/MineCenter";
     }
-    
+
 }

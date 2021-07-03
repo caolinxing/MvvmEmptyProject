@@ -1,6 +1,11 @@
+rootProject.name = "MvvmEmptyProject"
 include ':library-network'
 include ':library-common'
 include ':library-base'
 include ':app'
-rootProject.name = "MvvmEmptyProject"
 include ':module-main'
+include ':module-home'
+include ':module-lesson'
+include ':module-vip'
+include ':module-data'
+include ':module-mine'
