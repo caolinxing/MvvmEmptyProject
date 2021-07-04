@@ -3,22 +3,22 @@
     <item
         android:id="@+id/id_main"
         android:checked="true"
-        android:icon="@drawable/main_bottom_nav_view_color"
+        android:icon="@drawable/main_bottom_nav_home"
         android:title="主页" />
     <item
         android:id="@+id/id_lesson"
-        android:icon="@drawable/main_bottom_nav_view_color"
+        android:icon="@drawable/main_bottom_nav_lesson"
         android:title="课程" />
     <item
         android:id="@+id/id_vip"
-        android:icon="@drawable/main_bottom_nav_view_color"
+        android:icon="@drawable/main_bottom_nav_vip"
         android:title="VIP" />
     <item
         android:id="@+id/id_data"
-        android:icon="@drawable/main_bottom_nav_view_color"
+        android:icon="@drawable/main_bottom_nav_data"
         android:title="资料" />
     <item
         android:id="@+id/id_mine"
-        android:icon="@drawable/main_bottom_nav_view_color"
+        android:icon="@drawable/main_bottom_nav_user"
         android:title="我的" />
 </menu>

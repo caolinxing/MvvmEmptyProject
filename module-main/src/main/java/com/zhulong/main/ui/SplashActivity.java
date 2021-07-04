@@ -24,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
                     MainActivity.start(this);
                 }*/
                 MainActivity.start(SplashActivity.this);
+                finish();
 
             }
         },1000);
