@@ -1,12 +1,4 @@
-package com.zhulong.main.application;/**
- * 应用模块: MainModuleInit
- * <p>
- * 类描述:
- * <p>
- *
- * @author zhulong
- * @since 2021/7/3
- */
+package com.zhulong.main.application;
 
 import com.blankj.utilcode.util.Utils;
 import com.kingja.loadsir.core.LoadSir;
@@ -23,7 +15,7 @@ import com.zhulong.network.cache.converter.GsonDiskConverter;
 import com.zhulong.network.cache.model.CacheMode;
 
 /**
- * /**
+ *
  * 应用模块:
  * <p>
  * 类描述:

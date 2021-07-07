@@ -3,16 +3,12 @@ package com.zhulong.main.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.library_base.activity.MvvmBaseActivity;
-import com.zhulong.library_base.storage.MmkvHelper;
+import com.zhulong.common.utils.MmkvHelper;
 import com.zhulong.library_base.viewmodel.IMvvmBaseViewModel;
 import com.zhulong.main.R;
 import com.zhulong.main.adapter.MainPageAdapter;
@@ -20,11 +16,8 @@ import com.zhulong.main.databinding.MainActivityMainBinding;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 public class MainActivity extends MvvmBaseActivity<MainActivityMainBinding, IMvvmBaseViewModel> {
 
@@ -37,22 +30,25 @@ public class MainActivity extends MvvmBaseActivity<MainActivityMainBinding, IMvv
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ScreenAutoAdapter.match(this, 375.0f);
-        super.onCreate(savedInstanceState);
-        initView();
+    public void initPageData() {
         initFragment();
-       // initEvent();
+        mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(),
+                FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
+        viewDataBinding.viewPager.setOffscreenPageLimit(1);
+        viewDataBinding.viewPager.setAdapter(mainPageAdapter);
+        viewDataBinding.bottomView.enableItemShiftingMode(false);
+        viewDataBinding.bottomView.enableAnimation(false);
+        viewDataBinding.bottomView.enableShiftingMode(false);
+        viewDataBinding.bottomView.setItemIconTintList(null);
 
+        viewDataBinding.bottomView.setItemTextAppearanceActive(R.style.main_bottom_selected_text);
+        viewDataBinding.bottomView.setItemTextAppearanceInactive(R.style.main_bottom_normal_text);
+        viewDataBinding.bottomView.setupWithViewPager(viewDataBinding.viewPager);
     }
 
-    private void initEvent() {
-        viewDataBinding.bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return true;
-            }
-        });
+    @Override
+    public void initEvent() {
+        viewDataBinding.bottomView.setOnNavigationItemSelectedListener(item -> true);
     }
 
     private void initFragment() {
@@ -91,18 +87,11 @@ public class MainActivity extends MvvmBaseActivity<MainActivityMainBinding, IMvv
 
     }
 
-    private void initView() {
-        mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
-        viewDataBinding.viewPager.setOffscreenPageLimit(1);
-        viewDataBinding.viewPager.setAdapter(mainPageAdapter);
-        viewDataBinding.bottomView.enableItemShiftingMode(false);
-        viewDataBinding.bottomView.enableAnimation(false);
-        viewDataBinding.bottomView.enableShiftingMode(false);
-        viewDataBinding.bottomView.setItemIconTintList(null);
-
-        viewDataBinding.bottomView.setItemTextAppearanceActive(R.style.main_bottom_selected_text);
-        viewDataBinding.bottomView.setItemTextAppearanceInactive(R.style.main_bottom_normal_text);
-        viewDataBinding.bottomView.setupWithViewPager(viewDataBinding.viewPager);
+    @Override
+    protected void setScreenAuto() {
+        ScreenAutoAdapter.match(this, 375.0f);
     }
+
+
+
 }

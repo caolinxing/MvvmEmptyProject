@@ -41,6 +41,8 @@ public abstract class MvvmBaseActivity<V extends ViewDataBinding, VM extends IMv
         super.onCreate(savedInstanceState);
         initViewModel();
         performDataBinding();
+        initPageData();
+        initEvent();
     }
 
     @Override
@@ -52,6 +54,7 @@ public abstract class MvvmBaseActivity<V extends ViewDataBinding, VM extends IMv
     }
 
     private void performDataBinding() {
+        setScreenAuto();
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         this.viewModel = viewModel == null ? getViewModel() : viewModel;
         if (getBindingVariable() > 0) {
@@ -116,6 +119,15 @@ public abstract class MvvmBaseActivity<V extends ViewDataBinding, VM extends IMv
     }
 
     /**
+     * 获取页面数据
+     */
+    public abstract void initPageData();
+    /**
+     * 事件监听
+     */
+    public abstract void initEvent();
+
+    /**
      * 获取viewModel
      */
     protected abstract VM getViewModel();
@@ -132,5 +144,11 @@ public abstract class MvvmBaseActivity<V extends ViewDataBinding, VM extends IMv
      * 失败重试,重新加载事件
      */
     protected abstract void onRetryBtnClick();
+
+
+    /**
+     * 设置屏幕适配
+     */
+    protected abstract void setScreenAuto();
 
 }

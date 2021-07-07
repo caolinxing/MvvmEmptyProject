@@ -2,11 +2,9 @@ package com.zhulong.main.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.zhulong.library_base.storage.MmkvHelper;
 import com.zhulong.main.R;
 
 public class SplashActivity extends AppCompatActivity {

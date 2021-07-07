@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.service.SerializationService;
-import com.zhulong.library_base.utils.GsonUtils;
+import com.zhulong.network.util.GsonUtils;
 
 import java.lang.reflect.Type;
 

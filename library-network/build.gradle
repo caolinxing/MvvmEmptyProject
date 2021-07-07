@@ -57,7 +57,9 @@ dependencies {
     api rootProject.ext.dependencies["retrofit2-converter"]
     api rootProject.ext.dependencies["retrofit2-adapter"]
     api rootProject.ext.dependencies["okhttp-logging-interceptor"]
+    api rootProject.ext.dependencies["retrofitManager"]
     api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["mmkv"]
     //缓存
     api rootProject.ext.dependencies["disklrucache"]
 }

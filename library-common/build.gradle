@@ -58,4 +58,5 @@ dependencies {
     api rootProject.ext.dependencies["annotations"]
     api rootProject.ext.dependencies["utilcodex"]
     api rootProject.ext.dependencies["banner"]
+    api rootProject.ext.dependencies["dialog"]
 }

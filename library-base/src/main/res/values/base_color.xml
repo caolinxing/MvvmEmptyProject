@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- 白色 -->
+    <color name="base_white">#FFFFFF</color>
+    <!-- 白色 -->
+    <color name="base_pink">#F39494</color>
+    <!-- 灰色 -->
+    <color name="base_gray">#EEEEEE</color>
+    <!-- 字体黑色 -->
+    <color name="base_font_black">#333333</color>
+    <!-- 字体灰色 -->
+    <color name="base_font_gray">#999999</color>
+    <!-- 黄色 -->
+    <color name="base_yellow">#FFFF00</color>
+    <!-- 红色 -->
+    <color name="base_red">#EE2E2E</color>
+    <!-- 黑色 -->
+    <color name="base_black">#000000</color>
+    <!-- 透明色 -->
+    <color name="base_transparent">#00000000</color>
+    <!-- 半透明色 -->
+    <color name="base_transparent_half">#7f000000</color>
+    <color name="base_color_ea">#eaeaea</color>
+    <color name="base_color_f4">#F4F4F4</color>
+    <color name="base_color_f7">#F7F7F7</color>
+    <color name="base_color_f6">#F6F6F6</color>
+    <color name="base_color_line">#DDDDDD</color>
+</resources>

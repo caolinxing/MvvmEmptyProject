@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <AutoCompleteTextView
+            android:id="@+id/login_name"
+            android:layout_width="match_parent"
+            android:layout_height="44.5dp"
+            android:layout_centerVertical="true"
+            android:background="@color/base_color_f6"
+            android:hint="@string/mine_edi_login_account_hint"
+            android:imeOptions="actionNext"
+            android:paddingStart="20dp"
+            android:singleLine="true"
+            android:textColor="@color/base_font_black"
+            android:textColorHint="@color/base_font_gray"
+            android:textSize="15sp"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:id="@+id/iv_clear"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_delete"
+            android:padding="10dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/base_color_ea" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44.5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/base_color_f6"
+            android:hint="请输入密码"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="20dp"
+            android:textColor="@color/base_font_black"
+            android:textColorHint="@color/base_font_gray"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_show_eye"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/mine_selector_login_eye"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

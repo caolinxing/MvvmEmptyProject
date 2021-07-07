@@ -3,6 +3,7 @@ package com.zhulong.library_base.model;
 import android.os.Handler;
 import android.os.Looper;
 
+
 import com.zhulong.library_base.utils.GsonUtils;
 
 import java.lang.ref.Reference;
