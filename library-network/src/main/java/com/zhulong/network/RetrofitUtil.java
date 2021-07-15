@@ -8,12 +8,13 @@ import com.tencent.mmkv.MMKV;
 import com.zhulong.network.api.ApiService_Bbs_Api;
 import com.zhulong.network.api.ApiService_Edu_Api;
 import com.zhulong.network.api.ApiService_Passprot_Api;
-import com.zhulong.network.api.ApiUploadFile_Api;
 import com.zhulong.network.config.DeviceInfo;
 import com.zhulong.network.config.NetWorkKeyConfig;
 import com.zhulong.network.interceptor.PersistenceCookieJar;
 import com.zhulong.network.interceptor.TokenHeaderInterceptor;
+import com.zhulong.network.util.LogUtil;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import io.rx_cache2.internal.RxCache;
+import io.victoralbertos.jolyglot.GsonSpeaker;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.Cookie;
 import okhttp3.OkHttpClient;
@@ -30,14 +33,13 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.zhulong.network.ApiConfig.ApiUrl.BASE_EDU_URL;
+import static com.zhulong.network.config.ApiConfig.ApiUrl.BASE_EDU_URL;
 
 public class RetrofitUtil {
 
     private final ApiService_Edu_Api ApiServiceEduApi;
     private final ApiService_Passprot_Api ApiServicePassprotApi;
     private final ApiService_Bbs_Api ApiServiceBbsApi;
-    private final ApiUploadFile_Api ApiUploadFileApi;
     private String baseUrl = "";
     private final String TAG = "RetrofitUtil";
     private Retrofit mRetrofit;
@@ -46,6 +48,16 @@ public class RetrofitUtil {
     private static final int READ_TIMEOUT = 15;//读取超时时间,单位秒
     private static final int CONN_TIMEOUT = 15;//连接超时时间,单位秒
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+    private static File mCacheDir;
+
+    public static void init(File cacheDir){
+        mCacheDir = cacheDir;
+        if (mCacheDir==null){
+            LogUtil.e("PRETTY_LOGGER","RxCache初始化失败");
+        }else {
+            LogUtil.v("PRETTY_LOGGER","RxCache初始化成功");
+        }
+    }
 
     public RetrofitUtil() {
         //添加公参
@@ -102,16 +114,25 @@ public class RetrofitUtil {
                 .addInterceptor(httpLoggingInterceptor)
                 .cookieJar(new PersistenceCookieJar())
                 .build();
+        ApiServiceBbsApi = new RxCache.Builder()
+                .persistence(mCacheDir, new GsonSpeaker())
+                .using(ApiService_Bbs_Api.class);
+        ApiServiceEduApi = new RxCache.Builder()
+                .persistence(mCacheDir, new GsonSpeaker())
+                .using(ApiService_Edu_Api.class);
+        ApiServicePassprotApi = new RxCache.Builder()
+                .persistence(mCacheDir, new GsonSpeaker())
+                .using(ApiService_Passprot_Api.class);
         mRetrofit = new Retrofit.Builder()
                 .client(build)
                 .baseUrl(BASE_EDU_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
-        ApiServiceEduApi = mRetrofit.create(ApiService_Edu_Api.class);
+        /*ApiServiceEduApi = mRetrofit.create(ApiService_Edu_Api.class);
         ApiServicePassprotApi = mRetrofit.create(ApiService_Passprot_Api.class);
         ApiServiceBbsApi = mRetrofit.create(ApiService_Bbs_Api.class);
-        ApiUploadFileApi = mRetrofit.create(ApiUploadFile_Api.class);
+        ApiUploadFileApi = mRetrofit.create(ApiUploadFile_Api.class);*/
     }
 
     public ApiService_Edu_Api getEduApi() {
@@ -126,12 +147,9 @@ public class RetrofitUtil {
     public ApiService_Bbs_Api getBbsApi(){
         return ApiServiceBbsApi;
     }
-    public ApiUploadFile_Api getUploadFileApi(){
-        return ApiUploadFileApi;
-    }
 
 
-    public static RetrofitUtil getInstance() {
+    public static RetrofitUtil getInstance(){
         if (instance == null) {
             synchronized (RetrofitUtil.class) {
                 if (instance == null) {

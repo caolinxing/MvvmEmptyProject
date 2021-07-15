@@ -1,11 +1,27 @@
 package com.zhulong.common;
 
 
+import android.annotation.SuppressLint;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.tencent.mmkv.MMKV;
+import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.library_base.base.BaseApplication;
+import com.zhulong.network.RetrofitUtil;
+
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import androidx.annotation.Nullable;
 
@@ -32,16 +48,83 @@ public class CommonModuleInit implements IModuleInit {
             ARouter.openLog(); // 开启日志
             ARouter.openDebug(); // 使用InstantRun的时候，需要打开该开关，上线之后关闭，否则有安全风险
         }
+        ScreenAutoAdapter.setup(application);
+        RetrofitUtil.init(application.getFilesDir());
         ARouter.init(application);
         MMKV.initialize(application);
-        Logger.i("基础层初始化完毕 -- onInitAhead");
-
+        handleSSLHandshake1();
+        handleSSLHandshake();
+        Logger.v("基础层初始化完毕 -- onInitAhead");
         return false;
     }
 
     @Override
     public boolean onInitLow(BaseApplication application) {
         return false;
+    }
+
+
+    public static void handleSSLHandshake1() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
+
+            SSLContext sc = SSLContext.getInstance("TLS");
+            // trustAllCerts信任所有的证书
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+        } catch (Exception ignored) {
+        }
+    }
+    /**
+     * 忽略证书校验
+     */
+    public static SSLSocketFactory handleSSLHandshake() {
+        SSLSocketFactory sSLSocketFactory = null;
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, new TrustManager[]{new TrustAllManager()},
+                    new SecureRandom());
+            sSLSocketFactory = sc.getSocketFactory();
+        } catch (Exception ignored) {
+        }
+        return sSLSocketFactory;
+    }
+
+    public static class TrustAllManager implements X509TrustManager {
+        @SuppressLint("TrustAllX509TrustManager")
+        @Override
+        public void checkClientTrusted(X509Certificate[] chain, String authType)
+                throws CertificateException {
+        }
+
+        @SuppressLint("TrustAllX509TrustManager")
+        @Override
+        public void checkServerTrusted(X509Certificate[] chain, String authType)
+                throws CertificateException {
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return new X509Certificate[0];
+        }
     }
 
 }

@@ -3,7 +3,6 @@ package com.zhulong.home;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.home.databinding.HomeFragmentHomeBinding;
-import com.zhulong.library_base.fragment.MvvmLazyFragment;
 import com.zhulong.library_base.viewmodel.IMvvmBaseViewModel;
 
 /**

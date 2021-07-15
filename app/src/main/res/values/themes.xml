@@ -14,10 +14,10 @@
         <item name="android:colorPrimaryDark">@color/base_color_f7</item>
 
         <!--状态栏颜色,默认使用 colorPrimaryDark-->
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/base_white</item>
 
         <!--底部栏颜色-->
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/base_white</item>
 
         <!--窗口背景颜色,此处不允许直接赋值如 #FFFFFF，必须在color中定义使用-->
         <item name="android:windowBackground">@android:color/white</item>

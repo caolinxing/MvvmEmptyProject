@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
 }
 
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -51,8 +52,6 @@ android {
 
 dependencies {
     //第三方依赖库
-    api rootProject.ext.dependencies["rxjava3"]
-    api rootProject.ext.dependencies["rxjava_android"]
     api rootProject.ext.dependencies["retrofit2"]
     api rootProject.ext.dependencies["retrofit2-converter"]
     api rootProject.ext.dependencies["retrofit2-adapter"]
@@ -61,5 +60,9 @@ dependencies {
     api rootProject.ext.dependencies["okhttp"]
     api rootProject.ext.dependencies["mmkv"]
     //缓存
-    api rootProject.ext.dependencies["disklrucache"]
+    api rootProject.ext.dependencies["rxCache"]
+    api rootProject.ext.dependencies["rxCacheGson"]
+    //rxlifecycle
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycleComponents"]
 }

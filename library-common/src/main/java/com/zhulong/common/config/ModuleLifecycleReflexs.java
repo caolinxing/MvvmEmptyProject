@@ -20,8 +20,8 @@ public class ModuleLifecycleReflexs {
     /**
      * 用户组件库初始化
      */
-    private static final String MINE_INIT = "com.zhulong.mine.application.MainModuleInit";
+    private static final String MINE_INIT = "com.zhulong.mine.application.MineModuleInit";
 
 
-    public static String[] initModuleNames = {BASE_INIT, MAIN_INIT,MINE_INIT};
+    public static String[] initModuleNames = {BASE_INIT,MINE_INIT,};
 }

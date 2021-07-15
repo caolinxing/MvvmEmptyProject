@@ -7,7 +7,6 @@ import android.content.Intent;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.common.router.RouterFragmentPath;
-import com.zhulong.library_base.activity.MvvmBaseActivity;
 import com.zhulong.common.utils.MmkvHelper;
 import com.zhulong.library_base.viewmodel.IMvvmBaseViewModel;
 import com.zhulong.main.R;

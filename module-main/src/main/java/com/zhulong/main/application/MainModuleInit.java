@@ -10,9 +10,6 @@ import com.zhulong.library_base.loadsir.EmptyCallback;
 import com.zhulong.library_base.loadsir.ErrorCallback;
 import com.zhulong.library_base.loadsir.LoadingCallback;
 import com.zhulong.library_base.loadsir.TimeoutCallback;
-import com.zhulong.network.EasyHttp;
-import com.zhulong.network.cache.converter.GsonDiskConverter;
-import com.zhulong.network.cache.model.CacheMode;
 
 /**
  *
@@ -27,19 +24,6 @@ public class MainModuleInit implements IModuleInit {
     @Override
     public boolean onInitAhead(BaseApplication application) {
         ScreenAutoAdapter.setup(application);
-        EasyHttp.init(application);
-        if (application.issDebug())
-        {
-            EasyHttp.getInstance().debug("easyhttp", true);
-        }
-        EasyHttp.getInstance()
-                .setBaseUrl("http://baobab.kaiyanapp.com")
-                .setReadTimeOut(15 * 1000)
-                .setWriteTimeOut(15 * 1000)
-                .setConnectTimeout(15 * 1000)
-                .setRetryCount(3)
-                .setCacheDiskConverter(new GsonDiskConverter())
-                .setCacheMode(CacheMode.FIRSTREMOTE);
         LoadSir.beginBuilder()
                 .addCallback(new ErrorCallback())
                 .addCallback(new LoadingCallback())
