@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="com.zhulong.mine.view.login.LoginViewModel"/>
         <variable
             name="loginViewModel"
-            type="LoginViewModel" />
+            type="com.zhulong.mine.view.login.LoginViewModel" />
     </data>
     <RelativeLayout
         tools:context=".view.login.LoginActivity"
@@ -37,11 +35,11 @@
                 android:id="@+id/login_tab"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                app:tabTextAppearance="@style/TabLayoutTextStyle"
-                app:tabBackground="@android:color/transparent"
-                app:tabRippleColor="@android:color/transparent"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorColor="@color/base_red">
+                binding:tabTextAppearance="@style/TabLayoutTextStyle"
+                binding:tabBackground="@android:color/transparent"
+                binding:tabRippleColor="@android:color/transparent"
+                binding:tabIndicatorFullWidth="false"
+                binding:tabIndicatorColor="@color/base_red">
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -76,7 +74,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/base_selector_red_pink"
-                android:enabled="false"
+                binding:onClickCommand="@{loginViewModel.loginOnClickCommand}"
                 android:text="登录"
                 android:textColor="@color/base_white"
                 android:textSize="16dp" />

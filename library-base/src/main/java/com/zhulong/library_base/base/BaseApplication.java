@@ -6,6 +6,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.zhulong.library_base.utils.Utils;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ public class BaseApplication extends Application
     public void onCreate()
     {
         super.onCreate();
+        Utils.init(this);
         setApplication(this);
     }
     
@@ -28,6 +31,7 @@ public class BaseApplication extends Application
     private void setApplication(@NonNull BaseApplication application)
     {
         sInstance = application;
+
         application
             .registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks()
             {

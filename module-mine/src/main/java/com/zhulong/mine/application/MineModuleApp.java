@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.common.config.ModuleLifecycleConfig;
 import com.zhulong.library_base.BuildConfig;
 import com.zhulong.library_base.base.BaseApplication;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -21,6 +24,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * /**

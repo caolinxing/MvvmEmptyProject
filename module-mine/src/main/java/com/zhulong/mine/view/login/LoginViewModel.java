@@ -4,6 +4,7 @@ import android.app.Application;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.orhanobut.logger.Logger;
 import com.zhulong.common.utils.RsaUtil;
 import com.zhulong.library_base.binding.command.BindingAction;
 import com.zhulong.library_base.binding.command.BindingCommand;
@@ -47,6 +48,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel> {
     public UIChangeObservable uc = new UIChangeObservable();
     private LoginModel loginModel;
 
+    public String a = "登录";
     public LoginViewModel(@NonNull @NotNull Application application) {
         super(application);
     }
@@ -91,6 +93,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel> {
     public BindingCommand loginOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
+            Logger.i("点击了");
             Map<String,String> requestMap = new HashMap<>();
             //验证码功能去除传空字符
             requestMap.put("ZLSessionID", "");

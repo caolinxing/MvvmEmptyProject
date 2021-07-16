@@ -73,7 +73,8 @@ ext {
             "rxlifecycleComponents"        : "com.trello.rxlifecycle4:rxlifecycle-components:4.0.2",
             "rxCache"                      : "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x",
             "rxCacheGson"                  : "com.github.VictorAlbertos.Jolyglot:gson:0.0.4",
-
+            "bindingcollectionadapter"              : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.1.1",
+            "bindingcollectionadapter-recyclerview" : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.1.1",
     ]
 
 

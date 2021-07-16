@@ -75,5 +75,7 @@ dependencies {
     //dialog
     api rootProject.ext.dependencies["dialog"]
     api rootProject.ext.dependencies["dialog_commons"]
+    api rootProject.ext.dependencies["bindingcollectionadapter"]
+    api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
 
 }

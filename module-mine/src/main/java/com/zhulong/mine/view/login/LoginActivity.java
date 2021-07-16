@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.zhulong.library_base.mvvm.base_view.BaseActivity;
 import com.zhulong.mine.BR;
 import com.zhulong.mine.R;
+import com.zhulong.mine.application.AppViewModelFactory;
 import com.zhulong.mine.databinding.MineActivityLoginBinding;
 
 import androidx.lifecycle.Observer;
@@ -23,11 +24,6 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
     }
 
 
-    @Override
-    public LoginViewModel initViewModel() {
-        //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用LoginViewModel(@NonNull Application application)构造方法
-        return new ViewModelProvider(this).get(LoginViewModel.class);
-    }
 
     @Override
     public int initVariableId() {
