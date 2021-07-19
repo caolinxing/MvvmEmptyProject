@@ -13,6 +13,8 @@ import com.zhulong.library_base.bus.event.SingleLiveEvent;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
 import com.zhulong.library_base.utils.ToastUtils;
 import com.zhulong.network.ApiCallBack;
+import com.zhulong.network.ApiCallBack2;
+import com.zhulong.network.BaseResponse;
 import com.zhulong.network.bean.mine.login.ZlLoginBean;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,10 +25,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.subjects.Subject;
+import io.rx_cache2.Reply;
 
 /**
  * 应用模块:
@@ -46,15 +45,11 @@ public class LoginViewModel extends BaseViewModel<LoginModel> {
     public ObservableInt clearBtnVisibility = new ObservableInt();
     //封装一个界面发生改变的观察者
     public UIChangeObservable uc = new UIChangeObservable();
-    private LoginModel loginModel;
 
     public String a = "登录";
-    public LoginViewModel(@NonNull @NotNull Application application) {
-        super(application);
-    }
-    public LoginViewModel(@NonNull @NotNull Application application, LoginModel model) {
-        super(application, model);
-        loginModel = model;
+    public LoginViewModel(@NonNull @NotNull Application application,LoginModel model) {
+        super(application,model);
+        this.model = model;
     }
 
     public class UIChangeObservable {
@@ -93,7 +88,6 @@ public class LoginViewModel extends BaseViewModel<LoginModel> {
     public BindingCommand loginOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            Logger.i("点击了");
             Map<String,String> requestMap = new HashMap<>();
             //验证码功能去除传空字符
             requestMap.put("ZLSessionID", "");
@@ -119,16 +113,45 @@ public class LoginViewModel extends BaseViewModel<LoginModel> {
             ToastUtils.showShort("请输入密码！");
             return;
         }
-        //RaJava登录
-        loginModel.onLogin(params).subscribe(new ApiCallBack<ZlLoginBean>() {
+       /* //RaJava登录
+        model.onLogin(params).subscribe(new ApiCallBack<BaseResponse<ZlLoginBean>>() {
 
             @Override
-            public void onSuccess(ZlLoginBean result) {
+            public void onSuccess(BaseResponse<ZlLoginBean> result) {
+                Logger.i(result.getMessage());
             }
 
             @Override
             public void onFail(int code, String wrongMsg, String result) {
+                Logger.i(wrongMsg);
 
+            }
+        });*/
+       /* //RaJava登录
+        model.onLogin2(params).subscribe(new ApiCallBack<BaseResponse<ZlLoginBean>>() {
+
+            @Override
+            public void onSuccess(BaseResponse<ZlLoginBean> result) {
+                Logger.i(result.getMessage());
+            }
+
+            @Override
+            public void onFail(int code, String wrongMsg, String result) {
+                Logger.i(wrongMsg);
+
+            }
+        });*/
+        //RaJava登录
+        model.onLogin2(params).subscribe(new ApiCallBack2<Reply<BaseResponse<ZlLoginBean>>>() {
+
+            @Override
+            public void onSuccess(Reply<BaseResponse<ZlLoginBean>> result) {
+                Logger.i(result.getData().getMessage());
+            }
+
+            @Override
+            public void onFail(int code, String wrongMsg, String result) {
+                Logger.i(wrongMsg);
             }
         });
     }

@@ -50,6 +50,7 @@
                     android:text="验证码登录"/>
             </com.google.android.material.tabs.TabLayout>
             <LinearLayout
+                android:id="@+id/lin_account_login"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:padding="3dp"
@@ -57,14 +58,173 @@
                 android:background="@drawable/mine_shape_bg_grey_stroke_line_bg"
                 android:orientation="vertical">
 
-                <include
-                    android:id="@+id/login_lin_account_view"
-                    layout="@layout/mine_login_account_layout" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp">
+                        <AutoCompleteTextView
+                            android:id="@+id/login_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="44.5dp"
+                            android:layout_centerVertical="true"
+                            android:background="@color/base_color_f6"
+                            android:hint="@string/mine_edi_login_account_hint"
+                            android:imeOptions="actionNext"
+                            android:paddingStart="20dp"
+                            android:singleLine="true"
+                            android:text="@={loginViewModel.userName}"
+                            android:textColor="@color/base_font_black"
+                            android:textColorHint="@color/base_font_gray"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
 
-                <include
-                    android:id="@+id/login_lin_code_view"
+                        <ImageView
+                            android:id="@+id/iv_clear"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/mine_ic_delete"
+                            android:padding="10dp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/base_color_ea" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="44.5dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/login_password"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:background="@color/base_color_f6"
+                            android:hint="请输入密码"
+                            android:text="@={loginViewModel.password}"
+                            android:imeOptions="actionDone"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:paddingLeft="20dp"
+                            android:textColor="@color/base_font_black"
+                            android:textColorHint="@color/base_font_gray"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_show_eye"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_vertical"
+                            android:padding="10dp"
+                            android:src="@drawable/mine_selector_login_eye"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_code_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:focusable="true"
                     android:visibility="gone"
-                    layout="@layout/mine_loging_code_layout"/>
+                    android:focusableInTouchMode="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:orientation="horizontal" >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/et_area_code"
+                            android:layout_width="80dp"
+                            android:layout_height="45dp"
+                            android:background="@null"
+                            android:padding="10dp"
+                            android:hint="区号"
+                            android:inputType="phone"
+                            android:maxLength="5"
+                            android:imeOptions="actionNext"
+                            android:text="+86"
+                            android:singleLine="true"
+                            android:gravity="center"
+                            android:textColor="@color/base_font_black"
+                            android:textColorHint="@color/base_font_gray"
+                            android:textSize="15sp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/base_color_line" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/et_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@null"
+                            android:hint="请输入手机号"
+                            android:inputType="phone"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/base_font_black"
+                            android:textColorHint="@color/base_font_gray"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/base_color_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_check_num"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="请输入验证码"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingLeft="20dp"
+                            android:textColor="@color/base_font_black"
+                            android:textColorHint="@color/base_font_gray"
+                            android:textSize="15sp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/base_color_line" />
+
+                        <android.widget.TextView
+                            android:id="@+id/btn_send_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="获取验证码"
+                            android:textColor="@color/base_red"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
             <Button
                 android:id="@+id/login_btn_login"

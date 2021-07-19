@@ -23,7 +23,11 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
         return R.layout.mine_activity_login;
     }
 
-
+    @Override
+    public LoginViewModel initViewModel() {
+        //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用LoginViewModel(@NonNull Application application)构造方法
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        return new ViewModelProvider(this, factory).get(LoginViewModel.class);    }
 
     @Override
     public int initVariableId() {
@@ -32,8 +36,6 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
 
     @Override
     public void initViewObservable() {
-        View loginLinCodeView = binding.loginLinAccountView;
-        ImageView iv_show_psw = loginLinCodeView.findViewById(R.id.iv_show_eye);
         viewModel.uc.pSwitchEvent.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
@@ -41,9 +43,9 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
                 if (viewModel.uc.pSwitchEvent.getValue()) {
                     //密码可见
                     //在xml中定义id后,使用binding可以直接拿到这个view的引用,不再需要findViewById去找控件了
-                    iv_show_psw.setSelected(true);
+                    binding.ivShowEye.setSelected(true);
                 } else {
-                    iv_show_psw.setSelected(false);
+                    binding.ivShowEye.setSelected(false);
                 }
             }
         });

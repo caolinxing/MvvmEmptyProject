@@ -5,16 +5,26 @@ package com.zhulong.network;
  * 该类仅供参考，实际业务返回的固定字段, 根据需求来定义，
  */
 public class BaseResponse<T> {
-    private int code;
-    private String message;
+    private int errNo;
+    private int exeTime;
+
+    private String msg;
     private T result;
 
-    public int getCode() {
-        return code;
+    public int getExeTime() {
+        return exeTime;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setExeTime(int exeTime) {
+        this.exeTime = exeTime;
+    }
+
+    public int getCode() {
+        return errNo;
+    }
+
+    public void setCode(int errNo) {
+        this.errNo = errNo;
     }
 
     public T getResult() {
@@ -26,14 +36,14 @@ public class BaseResponse<T> {
     }
 
     public boolean isOk() {
-        return code == 0;
+        return errNo == 0;
     }
 
     public String getMessage() {
-        return message;
+        return msg;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.msg = message;
     }
 }

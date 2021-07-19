@@ -13,50 +13,6 @@ import java.io.Serializable;
  */
 public class ZlLoginBean implements Serializable {
 
-    /**
-     * errNo : 0
-     * result : {"uid":"12319288","username":"李杜2018","is_corp":"0","zlid":"3c118PE2TCXtEIqyeW52bcC6xNwykGpTExoHFpXpzS9WvNq-pqVfnkBhY37I80Pa","pcid":"12319288","returnpra":""}
-     * exeTime : 0
-     */
-
-    private int errNo;
-    private String msg;
-    private ResultBean result;
-    private int exeTime;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getErrNo() {
-        return errNo;
-    }
-
-    public void setErrNo(int errNo) {
-        this.errNo = errNo;
-    }
-
-    public ResultBean getResult() {
-        return result;
-    }
-
-    public void setResult(ResultBean result) {
-        this.result = result;
-    }
-
-    public int getExeTime() {
-        return exeTime;
-    }
-
-    public void setExeTime(int exeTime) {
-        this.exeTime = exeTime;
-    }
-
-    public static class ResultBean implements Serializable{
         /**
          * uid : 12319288
          * username : 李杜2018
@@ -120,5 +76,4 @@ public class ZlLoginBean implements Serializable {
         public void setReturnpra(String returnpra) {
             this.returnpra = returnpra;
         }
-    }
 }

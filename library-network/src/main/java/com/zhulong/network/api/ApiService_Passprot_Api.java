@@ -7,7 +7,7 @@ import com.zhulong.network.config.ApiConfig;
 
 import java.util.Map;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;

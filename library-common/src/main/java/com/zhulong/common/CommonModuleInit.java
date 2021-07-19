@@ -10,6 +10,7 @@ import com.tencent.mmkv.MMKV;
 import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.library_base.base.BaseApplication;
 import com.zhulong.network.RetrofitUtil;
+import com.zhulong.network.RetrofitUtil2;
 
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -50,6 +51,7 @@ public class CommonModuleInit implements IModuleInit {
         }
         ScreenAutoAdapter.setup(application);
         RetrofitUtil.init(application.getFilesDir());
+        RetrofitUtil2.init(application.getFilesDir());
         ARouter.init(application);
         MMKV.initialize(application);
         handleSSLHandshake1();

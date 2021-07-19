@@ -26,9 +26,11 @@ public class NetWorkUtil {
     public NetWorkUtil() {
     }
     public static NetWorkUtil getInstance(){
-        if (mInstance!=null){
+        if (mInstance==null){
             synchronized (NetWorkUtil.class){
-                mInstance = new NetWorkUtil();
+                if (mInstance==null){
+                    mInstance = new NetWorkUtil();
+                }
             }
         }
         return mInstance;
@@ -44,7 +46,7 @@ public class NetWorkUtil {
             CookieBean cookieBean = new Gson().fromJson(json,CookieBean.class);
             return cookieBean;
         }
-        return null;
+        return new CookieBean();
     }
 
     public static long getCurrentTime() {
