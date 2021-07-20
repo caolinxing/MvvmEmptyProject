@@ -6,7 +6,9 @@ import com.zhulong.network.bean.mine.login.ZlLoginBean;
 
 import java.util.Map;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.Observable;
+import io.rx_cache2.Reply;
+
 
 /**
  * /**
@@ -23,6 +25,6 @@ public interface ILoginContractView {
     interface ILoginView extends IBaseView {
     }
     interface IModel{
-        Observable<BaseResponse<ZlLoginBean>> onLogin(Map<String,String> params);
+        Observable<Reply<BaseResponse<ZlLoginBean>>> onLogin(Map<String,String> params);
     }
 }

@@ -10,7 +10,7 @@ import com.tencent.mmkv.MMKV;
 import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.library_base.base.BaseApplication;
 import com.zhulong.network.RetrofitUtil;
-import com.zhulong.network.RetrofitUtil2;
+import com.zhulong.network.config.ApiConfig;
 
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -25,6 +25,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import androidx.annotation.Nullable;
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 /**
  * 应用模块:
@@ -51,13 +52,23 @@ public class CommonModuleInit implements IModuleInit {
         }
         ScreenAutoAdapter.setup(application);
         RetrofitUtil.init(application.getFilesDir());
-        RetrofitUtil2.init(application.getFilesDir());
+        RetrofitUtil.init(application.getFilesDir());
         ARouter.init(application);
         MMKV.initialize(application);
         handleSSLHandshake1();
         handleSSLHandshake();
         Logger.v("基础层初始化完毕 -- onInitAhead");
+        initBaseUrl();
         return false;
+    }
+
+    public void initBaseUrl() {
+        RetrofitUrlManager.getInstance().clearAllDomain();
+        RetrofitUrlManager.getInstance().putDomain(ApiConfig.ApiName.BASE_URL_EDU_NAME, ApiConfig.ApiUrl.BASE_EDU_URL);
+        RetrofitUrlManager.getInstance().putDomain(ApiConfig.ApiName.BASE_URL_PASSPORT_NAME, ApiConfig.ApiUrl.BASE_PASS_PORT);
+        RetrofitUrlManager.getInstance().putDomain(ApiConfig.ApiName.BASE_URL_BBS_NAME, ApiConfig.ApiUrl.BASE_BBS_URL);
+        RetrofitUrlManager.getInstance().putDomain(ApiConfig.ApiName.BASE_URL_THIRD_LOGIN_WX, ApiConfig.ApiUrl.BASE_LOGIN_WX);
+        RetrofitUrlManager.getInstance().putDomain(ApiConfig.ApiName.BASE_URL_F_NAME, ApiConfig.ApiUrl.BASE_F_URL);
     }
 
     @Override

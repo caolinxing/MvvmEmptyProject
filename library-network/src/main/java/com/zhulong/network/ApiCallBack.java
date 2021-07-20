@@ -1,7 +1,6 @@
 package com.zhulong.network;
 
 
-
 import com.zhulong.network.interceptor.ApiException;
 import com.zhulong.network.util.GsonUtils;
 import com.zhulong.network.util.LogUtil;
@@ -12,8 +11,8 @@ import org.json.JSONObject;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
 public abstract class ApiCallBack<M> implements Observer<M> {
@@ -35,12 +34,14 @@ public abstract class ApiCallBack<M> implements Observer<M> {
         String json = GsonUtils.toJson(modelBean);
         try {
             JSONObject jsonObject = new JSONObject(JSONTokener(json));
-            if (jsonObject.getInt("errNo") != 0) {
+            JSONObject data = jsonObject.getJSONObject("data");
+            int errNo = data.getInt("errNo");
+            if ( errNo != 0) {
                 String msg = "没有msg字段";
-                if (jsonObject.has("msg")) {
-                    msg = jsonObject.getString("msg");
+                if (data.has("msg")) {
+                    msg = data.getString("msg");
                 }
-                onFail(jsonObject.getInt("errNo"), msg, json);
+                onFail(errNo, msg, json);
                 return;
             }
         } catch (JSONException e) {

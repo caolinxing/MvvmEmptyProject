@@ -2,12 +2,11 @@ package com.zhulong.network;
 
 import android.util.Log;
 
-
 import com.google.gson.Gson;
 import com.tencent.mmkv.MMKV;
-import com.zhulong.network.api.ApiService_Bbs_Api;
-import com.zhulong.network.api.ApiService_Edu_Api;
 import com.zhulong.network.api.ApiService_Passprot_Api;
+import com.zhulong.network.bean.mine.login.ZlLoginBean;
+import com.zhulong.network.cache.CacheProvider;
 import com.zhulong.network.config.DeviceInfo;
 import com.zhulong.network.config.NetWorkKeyConfig;
 import com.zhulong.network.interceptor.PersistenceCookieJar;
@@ -17,12 +16,16 @@ import com.zhulong.network.util.LogUtil;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import io.reactivex.Observable;
+import io.rx_cache2.EvictProvider;
+import io.rx_cache2.Reply;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
@@ -30,7 +33,7 @@ import okhttp3.Cookie;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.zhulong.network.config.ApiConfig.ApiUrl.BASE_EDU_URL;
@@ -49,6 +52,7 @@ public class RetrofitUtil {
     private static final int CONN_TIMEOUT = 15;//连接超时时间,单位秒
     private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
     private static File mCacheDir;
+    private final CacheProvider mCacheProvider;
 
     public static void init(File cacheDir){
         mCacheDir = cacheDir;
@@ -127,12 +131,18 @@ public class RetrofitUtil {
                 .client(build)
                 .baseUrl(BASE_EDU_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         //ApiServiceEduApi = mRetrofit.create(ApiService_Edu_Api.class);
-        ApiServicePassprotApi = mRetrofit.create(ApiService_Passprot_Api.class);
+        //ApiServicePassprotApi = mRetrofit.create(ApiService_Passprot_Api.class);
+        mCacheProvider = new RxCache.Builder()
+                .persistence(mCacheDir, new GsonSpeaker())
+                .using(CacheProvider.class);
         //ApiServiceBbsApi = mRetrofit.create(ApiService_Bbs_Api.class);
+        ApiServicePassprotApi = mRetrofit.create(ApiService_Passprot_Api.class);
+
     }
+
 /*
     public ApiService_Edu_Api getEduApi() {
         return ApiServiceEduApi;
@@ -183,6 +193,12 @@ public class RetrofitUtil {
             return appDeviceInfo;
         }
         return null;
+    }
+
+    /**---------------接口请求----------------------------接口请求--------------------------------------接口请求--------------------------------------------**/
+    //真正进行数据请求和缓存的接口
+    public Observable<Reply<BaseResponse<ZlLoginBean>>> loginZl(Map<String,String> params) {
+        return mCacheProvider.loginZl(ApiServicePassprotApi.loginZl(params,NetWorkKeyConfig.PASSPORT_SECRECT_KEY),new EvictProvider(true));
     }
 
 }

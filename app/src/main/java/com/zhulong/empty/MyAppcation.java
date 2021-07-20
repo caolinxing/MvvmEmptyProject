@@ -2,11 +2,9 @@ package com.zhulong.empty;
 
 
 import com.orhanobut.logger.Logger;
-import com.youth.banner.util.LogUtils;
 import com.zhulong.common.config.ModuleLifecycleConfig;
 import com.zhulong.library_base.BuildConfig;
 import com.zhulong.library_base.base.BaseApplication;
-import com.zhulong.network.RetrofitUtil;
 
 /**
  * /**
