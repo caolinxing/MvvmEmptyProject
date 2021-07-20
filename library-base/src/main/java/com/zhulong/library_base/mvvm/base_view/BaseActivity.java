@@ -259,9 +259,8 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     @Override
-    public void initData() {
+    public abstract void initData() ;
 
-    }
 
     @Override
     public void initViewObservable() {

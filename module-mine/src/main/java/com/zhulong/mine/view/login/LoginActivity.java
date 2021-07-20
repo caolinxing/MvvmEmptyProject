@@ -30,6 +30,11 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
         return new ViewModelProvider(this, factory).get(LoginViewModel.class);    }
 
     @Override
+    public void initData() {
+
+    }
+
+    @Override
     public int initVariableId() {
         return BR.loginViewModel;
     }

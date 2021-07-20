@@ -17,6 +17,7 @@ import com.zhulong.main.databinding.MainActivityMainBinding;
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 public class MainActivity extends BaseActivity<MainActivityMainBinding, BaseViewModel> {
 
@@ -42,7 +43,6 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, BaseView
         fragments.add(dataFragment);
         fragments.add(mineFragment);
         mainPageAdapter.setData(fragments);
-
     }
 
 
@@ -51,21 +51,24 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, BaseView
         return R.layout.main_activity_main;
     }
 
-    /* initFragment();
-        mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
-        viewDataBinding.viewPager.setOffscreenPageLimit(1);
-        viewDataBinding.viewPager.setAdapter(mainPageAdapter);
-        viewDataBinding.bottomView.enableItemShiftingMode(false);
-        viewDataBinding.bottomView.enableAnimation(false);
-        viewDataBinding.bottomView.enableShiftingMode(false);
-        viewDataBinding.bottomView.setItemIconTintList(null);
 
-        viewDataBinding.bottomView.setItemTextAppearanceActive(R.style.main_bottom_selected_text);
-        viewDataBinding.bottomView.setItemTextAppearanceInactive(R.style.main_bottom_normal_text);
-        viewDataBinding.bottomView.setupWithViewPager(viewDataBinding.viewPager);*/
     @Override
     public int initVariableId() {
         return 0;
+    }
+
+    @Override
+    public void initData() {
+        mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
+        binding.viewPager.setOffscreenPageLimit(1);
+        binding.viewPager.setAdapter(mainPageAdapter);
+        binding.bottomView.enableItemShiftingMode(false);
+        binding.bottomView.enableAnimation(false);
+        binding.bottomView.enableShiftingMode(false);
+        binding.bottomView.setItemIconTintList(null);
+        binding.bottomView.setItemTextAppearanceActive(R.style.main_bottom_selected_text);
+        binding.bottomView.setItemTextAppearanceInactive(R.style.main_bottom_normal_text);
+        binding.bottomView.setupWithViewPager(binding.viewPager);
+        initFragment();
     }
 }
