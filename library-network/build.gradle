@@ -55,7 +55,6 @@ dependencies {
     api rootProject.ext.dependencies["retrofit2"]
     api rootProject.ext.dependencies["retrofit2-converter"]
     api rootProject.ext.dependencies["retrofit2-adapter"]
-    api rootProject.ext.dependencies["retrofit2-adapter2"]
     api rootProject.ext.dependencies["okhttp-logging-interceptor"]
     api rootProject.ext.dependencies["retrofitManager"]
     api rootProject.ext.dependencies["okhttp"]
