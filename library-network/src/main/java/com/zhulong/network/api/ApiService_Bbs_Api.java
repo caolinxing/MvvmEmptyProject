@@ -5,7 +5,7 @@ import com.zhulong.network.config.ApiConfig;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.Observable;
 import io.rx_cache2.LifeCache;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;

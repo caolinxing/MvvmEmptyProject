@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.trello.rxlifecycle4.components.support.RxFragment;
+import com.trello.rxlifecycle3.components.support.RxFragment;
 import com.zhulong.library_base.ContainerActivity;
 import com.zhulong.library_base.bus.Messenger;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;

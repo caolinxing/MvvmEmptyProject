@@ -3,7 +3,7 @@ package com.zhulong.library_base.mvvm.view_model;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.trello.rxlifecycle4.LifecycleProvider;
+import com.trello.rxlifecycle3.LifecycleProvider;
 import com.zhulong.library_base.bus.event.SingleLiveEvent;
 import com.zhulong.library_base.mvvm.model.BaseModel;
 
@@ -16,9 +16,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by goldze on 2017/6/15.

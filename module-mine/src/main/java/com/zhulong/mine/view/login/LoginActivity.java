@@ -13,7 +13,7 @@ import com.zhulong.mine.databinding.MineActivityLoginBinding;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import io.reactivex.rxjava3.annotations.Nullable;
+import io.reactivex.annotations.Nullable;
 
 public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginViewModel> {
 

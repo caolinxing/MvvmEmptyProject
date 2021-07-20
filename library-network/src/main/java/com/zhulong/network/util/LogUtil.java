@@ -4,8 +4,8 @@ import android.text.TextUtils;
 
 import com.zhulong.network.BuildConfig;
 
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.annotations.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 public class LogUtil {

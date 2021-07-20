@@ -1,8 +1,8 @@
 ext {
     //android 开发版本
     android = [
-            compileSdkVersion: 28,
-            buildToolsVersion: '29.0.2',
+            compileSdkVersion: 30,
+            buildToolsVersion: "29.0.2",
             minSdkVersion    : 21,
             targetSdkVersion : 28,
             applicationId    : "com.zhulong.empty",
@@ -17,12 +17,24 @@ ext {
 
     //androidx支持库配置
     androidx = [
+            "androidx-activity"                   : "androidx.activity:activity:1.1.0",
+            "androidx-lifecycle-common"           : "androidx.lifecycle:lifecycle-common:2.3.1",
+            "androidx-livedata-core"              : "androidx.lifecycle:lifecycle-livedata-core:2.3.1",
+            "androidx-lifecycle-runtime"          : "androidx.lifecycle:lifecycle-runtime:2.3.1",
+            "androidx-lifecycle-viewmodel"        : "androidx.lifecycle:lifecycle-viewmodel:2.3.1",
+            "androidx-savedstate"                 : "androidx.savedstate:savedstate:1.1.0",
+            "androidx-versionedparcelable"        : "androidx.versionedparcelable:versionedparcelable:1.1.1",
+            "androidx-core"                       : "androidx.core:core:1.6.0",
+            "androidx-customview"                 : "androidx.customview:customview:1.1.0",
+            "androidx-drawerlayout"               : "androidx.drawerlayout:drawerlayout:1.1.1",
+            "androidx-fragment"                   : "androidx.fragment:fragment:1.3.5",
             "androidx-appcompat"                  : "androidx.appcompat:appcompat:1.3.0",
+            "androidx-appcompat-resources"        : "androidx.appcompat:appcompat-resources:1.3.0",
             "androidx.lifecycle"                  : "androidx.lifecycle:lifecycle-viewmodel:2.2.0",
             "androidx.recyclerview"               : "androidx.recyclerview:recyclerview:1.2.1",
             "androidx.constraintlayout"           : "androidx.constraintlayout:constraintlayout:1.1.3",
             "androidx.cardview"                   : "androidx.cardview:cardview:1.0.0",
-            "android.material"                    : "com.google.android.material:material:1.3.0",
+            "androidx.material"                    : "com.google.android.material:material:1.3.0",
             "androidx.navigation-fragment"        : "androidx.navigation:navigation-fragment:2.3.5",
             "androidx.navigation-ui"              : "androidx.navigation:navigation-ui:2.3.5",
             "junit"                               : "junit:junit:4.12",
@@ -65,9 +77,9 @@ ext {
             "dialog"                                : "com.afollestad.material-dialogs:core:0.9.4.5",
             "dialog_commons"                        : "com.afollestad.material-dialogs:commons:0.9.4.5",
             "retrofitManager"                       : "me.jessyan:retrofit-url-manager:1.4.0",
-            "rxbinding"                             : "com.jakewharton.rxbinding3:rxbinding:3.1.0",
-            "rxlifecycle"                           : "com.trello.rxlifecycle4:rxlifecycle:3.1.0",
-            "rxlifecycleComponents"                 : "com.trello.rxlifecycle4:rxlifecycle-components:3.1.0",
+            "rxBinding"                             : "com.jakewharton.rxbinding3:rxbinding:3.1.0",
+            "rxlifecycle"                           : "com.trello.rxlifecycle3:rxlifecycle:3.1.0",
+            "rxlifecycleComponents"                 : "com.trello.rxlifecycle3:rxlifecycle-components:3.1.0",
             "kotlin-stdlib"                         : "org.jetbrains.kotlin:kotlin-stdlib:1.5.21",
             "kotlin-stdlib-common"                  : "org.jetbrains.kotlin:kotlin-stdlib-common:1.5.21",
             "rxCache"                               : "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x",
@@ -75,7 +87,7 @@ ext {
             "bindingcollectionadapter"              : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.1.1",
             "bindingcollectionadapter-recyclerview" : "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.1.1",
             "rxAndroid"                             : "io.reactivex.rxjava2:rxandroid:2.1.1",
-            "reactive-streams"                             : "org.reactivestreams:reactive-streams:1.0.31",
+            "reactive-streams"                      : "org.reactivestreams:reactive-streams:1.0.3",
     ]
 
 

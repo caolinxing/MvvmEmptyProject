@@ -14,7 +14,7 @@ import android.os.Bundle;
 
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.zhulong.library_base.ContainerActivity;
 import com.zhulong.library_base.bus.Messenger;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;

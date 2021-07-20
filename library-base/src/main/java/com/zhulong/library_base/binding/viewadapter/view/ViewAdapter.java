@@ -1,14 +1,9 @@
 package com.zhulong.library_base.binding.viewadapter.view;
 
-import android.annotation.SuppressLint;
 import android.view.View;
-
-
-import com.zhulong.library_base.binding.command.BindingCommand;
 import com.jakewharton.rxbinding3.view.RxView;
-
+import com.zhulong.library_base.binding.command.BindingCommand;
 import java.util.concurrent.TimeUnit;
-
 import androidx.databinding.BindingAdapter;
 import io.reactivex.functions.Consumer;
 

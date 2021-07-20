@@ -51,12 +51,24 @@ android {
 
 dependencies {
     api project(':library-network')
+    api rootProject.ext.androidx["androidx-core"]
+    api rootProject.ext.androidx["androidx-customview"]
+    api rootProject.ext.androidx["androidx-lifecycle-common"]
+    api rootProject.ext.androidx["androidx-drawerlayout"]
+    api rootProject.ext.androidx["androidx-fragment"]
+    api rootProject.ext.androidx["androidx-livedata-core"]
+    api rootProject.ext.androidx["androidx-lifecycle-runtime"]
+    api rootProject.ext.androidx["androidx-lifecycle-viewmodel"]
+    api rootProject.ext.androidx["androidx-savedstate"]
+    api rootProject.ext.androidx["androidx-versionedparcelable"]
+    api rootProject.ext.androidx["androidx-activity"]
     api rootProject.ext.androidx["androidx-appcompat"]
+    api rootProject.ext.androidx["androidx-appcompat-resources"]
     api rootProject.ext.androidx["androidx.lifecycle"]
     api rootProject.ext.androidx["androidx.recyclerview"]
     api rootProject.ext.androidx["androidx.constraintlayout"]
     api rootProject.ext.androidx["androidx.cardview"]
-    api rootProject.ext.androidx["android.material"]
+    api rootProject.ext.androidx["androidx.material"]
     api rootProject.ext.androidx["androidx.navigation-fragment"]
     api rootProject.ext.androidx["androidx.navigation-ui"]
     api rootProject.ext.androidx["transition"]
@@ -70,7 +82,11 @@ dependencies {
     api rootProject.ext.dependencies["kotlin-stdlib"]
     api rootProject.ext.dependencies["kotlin-stdlib-common"]
     api rootProject.ext.dependencies["gson"]
-    //rxBind
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["bindingcollectionadapter"]
+    api rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
+    //rxBinding
+    api rootProject.ext.dependencies["rxBinding"]
     api rootProject.ext.dependencies["dialog_commons"]
 
 }
