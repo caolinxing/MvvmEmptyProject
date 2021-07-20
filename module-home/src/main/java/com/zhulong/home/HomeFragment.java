@@ -1,9 +1,17 @@
 package com.zhulong.home;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.home.databinding.HomeFragmentHomeBinding;
-import com.zhulong.library_base.viewmodel.IMvvmBaseViewModel;
+import com.zhulong.library_base.mvvm.base_view.BaseActivity;
+import com.zhulong.library_base.mvvm.base_view.BaseFragment;
+import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
+
+import androidx.annotation.Nullable;
 
 /**
  * 应用模块: home
@@ -15,35 +23,15 @@ import com.zhulong.library_base.viewmodel.IMvvmBaseViewModel;
  * @since 2021-07-03
  */
 @Route(path = RouterFragmentPath.Home.PAGER_HOME)
-public class HomeFragment extends MvvmLazyFragment<HomeFragmentHomeBinding, IMvvmBaseViewModel> {
+public class HomeFragment extends BaseFragment<HomeFragmentHomeBinding, BaseViewModel> {
 
     @Override
-    public int getLayoutId() {
+    public int initContentView(LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         return R.layout.home_fragment_home;
     }
 
     @Override
-    protected void onFragmentFirstVisible() {
-        super.onFragmentFirstVisible();
-        initView();
-    }
-
-    private void initView() {
-
-    }
-
-    @Override
-    public int getBindingVariable() {
+    public int initVariableId() {
         return 0;
-    }
-
-    @Override
-    protected IMvvmBaseViewModel getViewModel() {
-        return null;
-    }
-
-    @Override
-    protected void onRetryBtnClick() {
-
     }
 }

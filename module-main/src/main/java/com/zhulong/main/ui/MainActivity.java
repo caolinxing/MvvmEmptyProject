@@ -3,12 +3,13 @@ package com.zhulong.main.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.common.utils.MmkvHelper;
-import com.zhulong.library_base.viewmodel.IMvvmBaseViewModel;
+import com.zhulong.library_base.mvvm.base_view.BaseActivity;
+import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
 import com.zhulong.main.R;
 import com.zhulong.main.adapter.MainPageAdapter;
 import com.zhulong.main.databinding.MainActivityMainBinding;
@@ -16,39 +17,17 @@ import com.zhulong.main.databinding.MainActivityMainBinding;
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 
-public class MainActivity extends MvvmBaseActivity<MainActivityMainBinding, IMvvmBaseViewModel> {
+public class MainActivity extends BaseActivity<MainActivityMainBinding, BaseViewModel> {
 
     private ArrayList<Fragment> fragments;
     private MainPageAdapter mainPageAdapter;
 
-    public static void start(Context context){
-        MmkvHelper.getInstance().getMmkv().encode("first",false);
-        context.startActivity(new Intent(context,MainActivity.class));
+    public static void start(Context context) {
+        MmkvHelper.getInstance().getMmkv().encode("first", false);
+        context.startActivity(new Intent(context, MainActivity.class));
     }
 
-    @Override
-    public void initPageData() {
-        initFragment();
-        mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
-        viewDataBinding.viewPager.setOffscreenPageLimit(1);
-        viewDataBinding.viewPager.setAdapter(mainPageAdapter);
-        viewDataBinding.bottomView.enableItemShiftingMode(false);
-        viewDataBinding.bottomView.enableAnimation(false);
-        viewDataBinding.bottomView.enableShiftingMode(false);
-        viewDataBinding.bottomView.setItemIconTintList(null);
-
-        viewDataBinding.bottomView.setItemTextAppearanceActive(R.style.main_bottom_selected_text);
-        viewDataBinding.bottomView.setItemTextAppearanceInactive(R.style.main_bottom_normal_text);
-        viewDataBinding.bottomView.setupWithViewPager(viewDataBinding.viewPager);
-    }
-
-    @Override
-    public void initEvent() {
-        viewDataBinding.bottomView.setOnNavigationItemSelectedListener(item -> true);
-    }
 
     private void initFragment() {
         Fragment homeFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Home.PAGER_HOME).navigation();
@@ -66,31 +45,27 @@ public class MainActivity extends MvvmBaseActivity<MainActivityMainBinding, IMvv
 
     }
 
-    @Override
-    protected IMvvmBaseViewModel getViewModel() {
-        return null;
-    }
 
     @Override
-    protected int getBindingVariable() {
-        return 0;
-    }
-
-    @Override
-    protected int getLayoutId() {
+    public int initContentView(Bundle savedInstanceState) {
         return R.layout.main_activity_main;
     }
 
+    /* initFragment();
+        mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(),
+                FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
+        viewDataBinding.viewPager.setOffscreenPageLimit(1);
+        viewDataBinding.viewPager.setAdapter(mainPageAdapter);
+        viewDataBinding.bottomView.enableItemShiftingMode(false);
+        viewDataBinding.bottomView.enableAnimation(false);
+        viewDataBinding.bottomView.enableShiftingMode(false);
+        viewDataBinding.bottomView.setItemIconTintList(null);
+
+        viewDataBinding.bottomView.setItemTextAppearanceActive(R.style.main_bottom_selected_text);
+        viewDataBinding.bottomView.setItemTextAppearanceInactive(R.style.main_bottom_normal_text);
+        viewDataBinding.bottomView.setupWithViewPager(viewDataBinding.viewPager);*/
     @Override
-    protected void onRetryBtnClick() {
-
+    public int initVariableId() {
+        return 0;
     }
-
-    @Override
-    protected void setScreenAuto() {
-        ScreenAutoAdapter.match(this, 375.0f);
-    }
-
-
-
 }
