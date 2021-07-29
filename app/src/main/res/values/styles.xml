@@ -1,0 +1,57 @@
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--StartActivity Style 冷启动效果-->
+    <style name="MvvmEmptyProject" tools:ignore="ResourceName" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="colorAccent">@color/base_red</item>
+        <item name="android:typeface">monospace</item>
+        <!--应用的主要文字颜色,actionBar的标题文字默认使用该颜色-->
+        <item name="android:textColorPrimary">@color/base_font_black</item>
+
+        <!--辅助的文字颜色，一般比textColorPrimary的颜色弱一点，用于一些弱化的表示-->
+        <item name="android:textColorSecondary">@color/base_font_gray</item>
+
+        <!--应用的主要色调,actionBar默认使用该颜色，Toolbar导航栏的底色-->
+        <item name="android:colorPrimary">@color/base_color_f7</item>
+
+        <!--应用的主要暗色调,statusBarColor 默认使用该颜色-->
+        <item name="android:colorPrimaryDark">@color/base_color_f7</item>
+
+        <!--状态栏颜色,默认使用 colorPrimaryDark-->
+        <item name="android:statusBarColor">@color/base_white</item>
+
+        <!--底部栏颜色-->
+        <item name="android:navigationBarColor">@color/base_white</item>
+
+        <!--窗口背景颜色,此处不允许直接赋值如 #FFFFFF，必须在color中定义使用-->
+        <item name="android:windowBackground">@color/base_white</item>
+
+        <!--控件选中时的颜色,默认使用colorAccent-->
+        <item name="android:colorControlActivated">@color/base_red</item>
+
+        <!--控件按压时的色调-->
+        <item name="android:colorControlHighlight">@color/base_pink</item>
+
+        <!--CheckBox,RadioButton,SwitchCompat等默认状态的颜色-->
+        <item name="android:colorControlNormal">@color/base_gray</item>
+
+        <!--默认按钮的背景颜色-->
+        <item name="android:colorButtonNormal">@color/base_red</item>
+
+        <!--一般控件的选中效果默认采用该颜色,如 CheckBox,RadioButton,SwitchCompat，ProcessBar等-->
+        <item name="android:colorAccent">@color/base_red</item>
+
+        <!--默认 EditView 输入框字体的颜色-->
+        <item name="android:editTextColor">@color/base_font_black</item>
+
+        <!--默认 Button,TextView的文字颜色-->
+        <item name="android:textColor">@color/base_font_black</item>
+
+        <!--RadioButton checkbox等控件的文字-->
+        <item name="android:textColorPrimaryDisableOnly">@color/base_font_black</item>
+    </style>
+    <style name="TabLayoutTextStyle" tools:ignore="ResourceName">
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

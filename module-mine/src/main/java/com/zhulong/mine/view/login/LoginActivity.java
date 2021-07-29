@@ -5,8 +5,10 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
 import com.tencent.mmkv.MMKV;
+import com.zhulong.common.router.RouterActivityPath;
 import com.zhulong.common.utils.AppInfoUtil;
 import com.zhulong.library_base.bean.AppDeviceInfo;
 import com.zhulong.library_base.mvvm.base_view.BaseActivity;
@@ -19,7 +21,7 @@ import com.zhulong.mine.databinding.MineActivityLoginBinding;
 
 import androidx.lifecycle.ViewModelProvider;
 
-
+@Route(path = RouterActivityPath.Mine.PAGER_MINE_LOGIN)
 public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginViewModel> {
 
 

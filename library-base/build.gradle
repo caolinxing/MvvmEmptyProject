@@ -76,7 +76,6 @@ dependencies {
     api rootProject.ext.androidx["transition"]
     api rootProject.ext.androidx["core-runtime"]
     api rootProject.ext.androidx["kotlin-stdlib-jdk7"]
-    api rootProject.ext.androidx["kotlin-reflect"]
     api rootProject.ext.dependencies["reactive-streams"]
     api rootProject.ext.dependencies["loadsir"]
     api rootProject.ext.dependencies["rxpermissions"]

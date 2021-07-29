@@ -7,12 +7,11 @@ package com.zhulong.common.router;
  * <p>
  *
  */
-public class RouterFragmentPath
-{
+public class RouterFragmentPath {
     
     /** 首页组件 */
-    public static class Home
-    {
+    public static class Home {
+
         private static final String HOME = "/home";
         
         /** 首页 */
@@ -21,8 +20,8 @@ public class RouterFragmentPath
     }
     
     /** 课程 */
-    public static class Lesson
-    {
+    public static class Lesson {
+
         private static final String LESSON = "/class";
         
         /** 课程页 */
@@ -30,8 +29,8 @@ public class RouterFragmentPath
     }
     
     /** Vip */
-    public static class Vip
-    {
+    public static class Vip {
+
         private static final String VIP = "/vip";
         
         /** Vip页面 */
@@ -39,8 +38,8 @@ public class RouterFragmentPath
     }
 
     /** 资料 */
-    public static class Data
-    {
+    public static class Data {
+
         private static final String DATA = "/data";
         
         /** 资料页面 */
@@ -48,8 +47,8 @@ public class RouterFragmentPath
     }
     
     /** 我的*/
-    public static class Mine
-    {
+    public static class Mine {
+
         private static final String MINE = "/mineCenter";
 
         /** 个人中心 */

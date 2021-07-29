@@ -7,39 +7,42 @@ package com.zhulong.common.router;
  * <p>
  *
  */
-public class RouterActivityPath
-{
-    /**
-     * main组件
-     */
-    public static class Main
-    {
-        private static final String MAIN = "/main";
-        
-        /** 主页面 */
-        public static final String PAGER_MAIN = MAIN + "/Main";
+public class RouterActivityPath {
+
+    /** 首页组件 */
+    public static class Home {
+
+        private static final String HOME = "/home";
+
+
     }
-    
-    /**
-     * 视频播放(video)组件
-     */
-    public static class Video
-    {
-        private static final String VIDEO = "/video";
-        
-        /* 视频播放界面 */
-        public static final String PAGER_VIDEO = VIDEO + "/Video";
-        
+
+    /** 课程 */
+    public static class Lesson {
+
+        private static final String LESSON = "/class";
+
     }
-    
-    public static class User
-    {
-        private static final String USER = "/user";
-        
-        /** 登录界面 */
-        public static final String PAGER_LOGIN = USER + "/Login";
-        
-        /** 关注页面 */
-        public static final String PAGER_ATTENTION = USER + "/attention";
+
+    /** Vip */
+    public static class Vip {
+
+        private static final String VIP = "/vip";
+
+    }
+
+    /** 资料 */
+    public static class Data {
+
+        private static final String DATA = "/data";
+    }
+
+    /** 我的*/
+    public static class Mine {
+
+        private static final String MINE = "/mineCenter";
+
+        /** 登录页 */
+        public static final String PAGER_MINE_LOGIN = MINE + "/Login";
     }
 }

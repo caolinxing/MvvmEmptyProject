@@ -1,4 +1,4 @@
-package com.zhulong.mine.view;
+package com.zhulong.mine.view.mine;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import com.zhulong.mine.R;
 import com.zhulong.mine.databinding.MineFragmentMineBinding;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * 应用模块: Mine
@@ -27,6 +28,12 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         return R.layout.mine_fragment_mine;
+    }
+
+    @Override
+    public MineViewModel initViewModel() {
+        //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用LoginViewModel(@NonNull Application application)构造方法
+        return new MineViewModel(requireActivity().getApplication(), new MineModel());
     }
 
     @Override

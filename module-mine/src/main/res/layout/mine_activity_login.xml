@@ -40,6 +40,8 @@
                 binding:tabBackground="@android:color/transparent"
                 binding:tabRippleColor="@android:color/transparent"
                 binding:tabIndicatorFullWidth="false"
+                binding:tabSelectedTextColor="@color/base_red"
+                binding:tabTextColor="@color/base_font_gray"
                 binding:tabIndicatorColor="@color/base_red">
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"

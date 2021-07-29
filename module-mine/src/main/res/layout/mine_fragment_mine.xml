@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.MineFragment">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.mine.MineFragment">
     <data>
-        <import type="com.zhulong.mine.view.MineViewModel"/>
         <variable
             name="mineViewModel"
-            type="MineViewModel" />
+            type="com.zhulong.mine.view.mine.MineViewModel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,6 +17,18 @@
             android:layout_centerInParent="true"
             android:textSize="16sp"
             android:text="用户中心"/>
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="56dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textSize="16sp"
+            binding:onClickCommand="@{mineViewModel.goLogin}"
+            android:background="@color/base_pink"
+            android:text="登录"/>
+
     </RelativeLayout>
 
 </layout>

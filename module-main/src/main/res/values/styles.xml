@@ -8,7 +8,7 @@
     </style>
 
     <style name="main_bottom_normal_text">
-        <item name="android:textColor">#eeeeee</item>
+        <item name="android:textColor">@color/base_font_gray</item>
         <item name="android:textSize">14sp</item>
     </style>
     <!--选中的样式-->
