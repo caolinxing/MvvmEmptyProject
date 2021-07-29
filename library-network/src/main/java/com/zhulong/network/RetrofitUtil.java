@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.tencent.mmkv.MMKV;
 import com.zhulong.network.api.ApiService_Passprot_Api;
+import com.zhulong.network.bean.mine.login.PersonHeaderBean;
 import com.zhulong.network.bean.mine.login.ZlLoginBean;
 import com.zhulong.network.cache.CacheProvider;
 import com.zhulong.network.config.DeviceInfo;
@@ -199,6 +200,10 @@ public class RetrofitUtil {
     //真正进行数据请求和缓存的接口
     public Observable<Reply<BaseResponse<ZlLoginBean>>> loginZl(Map<String,String> params) {
         return mCacheProvider.loginZl(ApiServicePassprotApi.loginZl(params,NetWorkKeyConfig.PASSPORT_SECRECT_KEY),new EvictProvider(true));
+    }
+    //真正进行数据请求和缓存的接口
+    public Observable<Reply<BaseResponse<PersonHeaderBean>>> getUserHeader(Map<String,String> params) {
+        return mCacheProvider.getUserHeaderForMobile(ApiServicePassprotApi.getUserHeaderForMobile(params,NetWorkKeyConfig.PASSPORT_SECRECT_KEY),new EvictProvider(true));
     }
 
 }

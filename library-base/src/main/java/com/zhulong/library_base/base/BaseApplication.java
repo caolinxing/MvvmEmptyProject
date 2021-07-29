@@ -95,12 +95,12 @@ public class BaseApplication extends Application
         return sInstance;
     }
     
-    public void setsDebug(boolean isDebug)
+    public void setDebug(boolean isDebug)
     {
         sDebug = isDebug;
     }
 
-    public boolean issDebug(){
+    public boolean isDebug(){
         return sDebug;
     }
 

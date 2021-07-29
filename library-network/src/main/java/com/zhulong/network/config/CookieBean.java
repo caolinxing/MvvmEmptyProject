@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 应用模块:
  * <p>
- * 类描述:
+ * 类描述: 公参和Cookie
  * <p>
  *
  * @since: clx

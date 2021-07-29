@@ -2,10 +2,17 @@ package com.zhulong.library_base.mvvm.view_model;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.os.Message;
+import android.text.TextUtils;
 
+import com.tencent.mmkv.MMKV;
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.zhulong.library_base.bus.event.SingleLiveEvent;
+import com.zhulong.library_base.config.BaseConfig;
 import com.zhulong.library_base.mvvm.model.BaseModel;
+import com.zhulong.library_base.utils.GsonUtils;
+import com.zhulong.library_base.utils.ToastUtil;
+import com.zhulong.network.bean.mine.login.UserInfoBean;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -68,9 +75,49 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         return uc;
     }
 
+    /**
+     * 默认吐司，显示警告样式
+     */
+    public void showToast(String msg) {
+        showToast(ToastUtil.WARNING, msg);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    public UserInfoBean getUserInfo() {
+        String json = MMKV.defaultMMKV().getString(BaseConfig.KeyConfig.KEY_USER_INFO,null);
+        if (TextUtils.isEmpty(json)){
+            return new UserInfoBean();
+        }
+
+        return GsonUtils.fromLocalJson(json, UserInfoBean.class);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    public void saveUserInfo(UserInfoBean userInfoBean) {
+        if (userInfoBean!=null){
+            String json = GsonUtils.toJson(userInfoBean);
+            MMKV.defaultMMKV().putString(BaseConfig.KeyConfig.KEY_USER_INFO,json);
+        }
+    }
+
+    /**
+     * 展示吐司
+     */
+    public void showToast(@ToastUtil.ToastType int type, String msg) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("type",type);
+        params.put("content",msg);
+        uc.showToast.postValue(params);
+    }
+
     public void showDialog() {
         showDialog("请稍后...");
     }
+
 
     public void showDialog(String title) {
         uc.showDialogEvent.postValue(title);
@@ -197,6 +244,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     public final class UIChangeLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
+        private SingleLiveEvent<Map<String,Object>> showToast;
         private SingleLiveEvent<Void> dismissDialogEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startContainerActivityEvent;
@@ -205,6 +253,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
         public SingleLiveEvent<String> getShowDialogEvent() {
             return showDialogEvent = createLiveData(showDialogEvent);
+        }
+
+        public SingleLiveEvent<Map<String,Object>> getShowToast() {
+            return showToast = createLiveData(showToast);
         }
 
         public SingleLiveEvent<Void> getDismissDialogEvent() {

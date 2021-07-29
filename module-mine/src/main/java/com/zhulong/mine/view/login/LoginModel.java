@@ -4,6 +4,7 @@ import com.zhulong.library_base.mvvm.model.BaseModel;
 import com.zhulong.network.BaseResponse;
 import com.zhulong.network.RetrofitUtil;
 import com.zhulong.network.RxTransformer;
+import com.zhulong.network.bean.mine.login.PersonHeaderBean;
 import com.zhulong.network.bean.mine.login.ZlLoginBean;
 
 import java.util.Map;
@@ -28,7 +29,15 @@ public class LoginModel<T> extends BaseModel implements ILoginContractView.IMode
         return RetrofitUtil
                 .getInstance()
                 .loginZl(params)
-                .compose(RxTransformer.<Reply<BaseResponse<ZlLoginBean>>>transformer());
+                .compose(RxTransformer.transformer());
 
+    }
+
+    @Override
+    public Observable<Reply<BaseResponse<PersonHeaderBean>>> getUserHeader(Map<String, String> params) {
+        return RetrofitUtil
+                .getInstance()
+                .getUserHeader(params)
+                .compose(RxTransformer.transformer());
     }
 }

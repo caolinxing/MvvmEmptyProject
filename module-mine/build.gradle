@@ -1,6 +1,4 @@
 apply from: "../module.build.gradle"
-
-
 android {
     defaultConfig {
         if (isBuildModule.toBoolean()){

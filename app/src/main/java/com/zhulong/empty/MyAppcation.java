@@ -24,7 +24,7 @@ public class MyAppcation extends BaseApplication {
         super.onCreate();
         myAppcation = this;
         Logger.v("MyAppcation");
-        setsDebug(BuildConfig.DEBUG);
+        setDebug(BuildConfig.DEBUG);
         // 初始化需要初始化的组件
         ModuleLifecycleConfig.getInstance().initModuleAhead(this);
     }

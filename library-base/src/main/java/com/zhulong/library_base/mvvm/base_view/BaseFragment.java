@@ -13,6 +13,7 @@ import com.zhulong.library_base.bus.Messenger;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel.ParameterField;
 import com.zhulong.library_base.utils.MaterialDialogUtils;
+import com.zhulong.library_base.utils.ToastUtil;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -112,6 +113,15 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
      **/
     //注册ViewModel与View的契约UI回调事件
     protected void registorUIChangeLiveDataCallBack() {
+        //Toast提示
+        viewModel.getUC().getShowToast().observe(this, new Observer<Map<String,Object>>() {
+            @Override
+            public void onChanged(@Nullable Map<String,Object> params) {
+                int type = (int) params.get("type");
+                String content = (String) params.get("content");
+                ToastUtil.showToastByType(getActivity(), type, content);
+            }
+        });
         //加载对话框显示
         viewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
             @Override

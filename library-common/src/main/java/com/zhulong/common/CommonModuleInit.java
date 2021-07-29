@@ -43,10 +43,10 @@ public class CommonModuleInit implements IModuleInit {
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
             public boolean isLoggable(int priority, @Nullable String tag) {
-                return application.issDebug();
+                return application.isDebug();
             }
         });
-        if (application.issDebug()) {
+        if (application.isDebug()) {
             ARouter.openLog(); // 开启日志
             ARouter.openDebug(); // 使用InstantRun的时候，需要打开该开关，上线之后关闭，否则有安全风险
         }

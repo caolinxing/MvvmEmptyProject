@@ -17,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:src="@drawable/ic_close_gray" />
+            binding:onClickCommand="@{loginViewModel.close}"
+            android:src="@drawable/base_ic_close_gray" />
         <LinearLayout
             android:layout_below="@id/login_iv_close"
             android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/ic_logo_shadow" />
+                android:src="@drawable/base_ic_logo_shadow" />
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/login_tab"
                 android:layout_width="match_parent"
@@ -50,7 +51,6 @@
                     android:text="验证码登录"/>
             </com.google.android.material.tabs.TabLayout>
             <LinearLayout
-                android:id="@+id/lin_account_login"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:padding="3dp"
@@ -59,6 +59,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/lin_account_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -74,6 +75,7 @@
                             android:hint="@string/mine_edi_login_account_hint"
                             android:imeOptions="actionNext"
                             android:paddingStart="20dp"
+                            binding:textChanged="@{loginViewModel.accountEdiChangeListener}"
                             android:singleLine="true"
                             android:text="@={loginViewModel.userName}"
                             android:textColor="@color/base_font_black"
@@ -88,8 +90,9 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/mine_ic_delete"
-                            android:padding="10dp"
-                            android:visibility="gone" />
+                            android:visibility="@{loginViewModel.clearBtnVisibility}"
+                            binding:onClickCommand="@{loginViewModel.clearAccountOnClickCommand}"
+                            android:padding="10dp"/>
                     </RelativeLayout>
                     <View
                         android:layout_width="match_parent"
@@ -103,18 +106,19 @@
                         <EditText
                             android:id="@+id/login_password"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@color/base_color_f6"
                             android:hint="请输入密码"
-                            android:text="@={loginViewModel.password}"
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:maxLines="1"
-                            android:paddingLeft="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@={loginViewModel.password}"
                             android:textColor="@color/base_font_black"
                             android:textColorHint="@color/base_font_gray"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            binding:textChanged="@{loginViewModel.pwdEdiChangeListener}" />
 
                         <ImageView
                             android:id="@+id/iv_show_eye"
@@ -122,8 +126,10 @@
                             android:layout_height="35dp"
                             android:layout_gravity="center_vertical"
                             android:padding="10dp"
-                            android:src="@drawable/mine_selector_login_eye"
-                            android:visibility="gone" />
+                            binding:onClickCommand="@{loginViewModel.passwordShowSwitchOnClickCommand}"
+                            android:visibility="@{loginViewModel.pwdVisibility}"
+                            binding:isThrottleFirst="@{true}"
+                            android:src="@drawable/mine_selector_login_eye" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -170,14 +176,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
-                            android:hint="请输入手机号"
+                            android:hint="@string/mine_str_tip_input_mob"
                             android:inputType="phone"
                             android:imeOptions="actionNext"
-                            android:paddingLeft="20dp"
+                            android:paddingStart="20dp"
                             android:singleLine="true"
                             android:textColor="@color/base_font_black"
                             android:textColorHint="@color/base_font_gray"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
 
                     </LinearLayout>
 
@@ -197,14 +204,16 @@
                             android:layout_height="40dp"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:hint="请输入验证码"
+                            android:hint="@string/mine_str_tip_input_code"
                             android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLines="1"
-                            android:paddingLeft="20dp"
+                            android:paddingStart="20dp"
                             android:textColor="@color/base_font_black"
                             android:textColorHint="@color/base_font_gray"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:importantForAutofill="no"
+                            tools:ignore="RtlSymmetry" />
 
                         <View
                             android:layout_width="1dp"
@@ -219,7 +228,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:padding="10dp"
-                            android:text="获取验证码"
+                            android:text="@string/mine_str_get_code"
                             android:textColor="@color/base_red"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -235,9 +244,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/base_selector_red_pink"
                 binding:onClickCommand="@{loginViewModel.loginOnClickCommand}"
-                android:text="登录"
+                android:text="@string/mine_str_login"
                 android:textColor="@color/base_white"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,6 +264,7 @@
                     android:paddingTop="5dp"
                     android:text="注册新账号"
                     android:textColor="@color/base_font_gray"
+                    binding:onClickCommand="@{loginViewModel.registerAccount}"
                     android:textSize="14sp" />
 
                 <android.widget.TextView
@@ -267,6 +277,7 @@
                     android:paddingLeft="20dp"
                     android:paddingTop="5dp"
                     android:text="忘记密码"
+                    binding:onClickCommand="@{loginViewModel.forgetPwd}"
                     android:textColor="@color/base_font_gray"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -318,6 +329,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="5dp"
+                    binding:onClickCommand="@{loginViewModel.qqLoginClick}"
                     android:src="@drawable/mine_ic_qq_login" />
 
                 <ImageView
@@ -325,6 +337,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    binding:onClickCommand="@{loginViewModel.wxLoginClick}"
                     android:padding="5dp"
                     android:src="@drawable/mine_ic_wx_login" />
             </LinearLayout>
@@ -339,17 +352,19 @@
                     android:id="@+id/login_iv_check_box_privacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
                     android:padding="5dp"
+                    binding:onClickCommand="@{loginViewModel.checkedAgreementOnClickCommand}"
+                    binding:isThrottleFirst="@{true}"
                     android:src="@drawable/mine_selector_login_pravicy" />
 
                 <TextView
                     android:id="@+id/login_iv_privacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    binding:onClickCommand="@{loginViewModel.startAgreementPage}"
                     android:text="@string/mine_tv_login_privacy"
                     android:textColor="@color/base_font_gray"
-                    android:textSize="11sp" />
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 

@@ -25,4 +25,5 @@
     <color name="base_color_f7">#F7F7F7</color>
     <color name="base_color_f6">#F6F6F6</color>
     <color name="base_color_line">#DDDDDD</color>
+    <color name="base_transparent_8C">#8C000000</color>
 </resources>

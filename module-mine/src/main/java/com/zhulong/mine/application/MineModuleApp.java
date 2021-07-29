@@ -46,9 +46,8 @@ public class MineModuleApp extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         mineModuleApp = this;
-        setsDebug(BuildConfig.DEBUG);
+        setDebug(BuildConfig.DEBUG);
         ModuleLifecycleConfig.getInstance().initModuleAhead(this);
-        Logger.addLogAdapter(new AndroidLogAdapter());
         Logger.v("MineModuleApp");
 
     }

@@ -2,5 +2,9 @@
     <string name="mine_name">用户模块</string>
     <string name="mine_edi_login_account_hint">用户名/手机/邮箱</string>
     <string name="mine_tv_login_privacy">已阅读并同意<u>服务协议和隐私政策</u></string>
+    <string name="mine_str_login">登录</string>
+    <string name="mine_str_get_code">获取验证码</string>
+    <string name="mine_str_tip_input_code">请输入验证码</string>
+    <string name="mine_str_tip_input_mob">请输入手机号</string>
 
 </resources>

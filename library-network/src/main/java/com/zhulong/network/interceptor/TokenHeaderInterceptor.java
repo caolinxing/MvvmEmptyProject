@@ -1,8 +1,13 @@
 package com.zhulong.network.interceptor;
 
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.tencent.mmkv.MMKV;
+import com.zhulong.network.bean.mine.login.UserInfoBean;
 import com.zhulong.network.config.CookieBean;
+import com.zhulong.network.util.GsonUtils;
+import com.zhulong.network.util.LogUtil;
 import com.zhulong.network.util.Md5Util;
 import com.zhulong.network.util.NetWorkUtil;
 
@@ -27,11 +32,21 @@ public class TokenHeaderInterceptor implements Interceptor {
     public TokenHeaderInterceptor(Map<String, String> paramMap) {
         this.paramMap = paramMap;
     }
+    /**
+     * 获取用户信息
+     */
+    public UserInfoBean getUserInfo() {
+        String json = MMKV.defaultMMKV().getString("key_user_info",null);
+        if (TextUtils.isEmpty(json)){
+            return new UserInfoBean();
+        }
 
+        return GsonUtils.fromLocalJson(json, UserInfoBean.class);
+    }
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
-        CookieBean cookieInfo = NetWorkUtil.getInstance().getCookieInfo();
+        UserInfoBean userInfo = getUserInfo();
         //拿到原来的request
         Request oldRequest = chain.request();
         Request.Builder requestBuilder = oldRequest.newBuilder();
@@ -47,10 +62,10 @@ public class TokenHeaderInterceptor implements Interceptor {
                 for (Map.Entry<String, String> entry : paramMap.entrySet()) {
                     urlBuilder.append("&" + entry.getKey() + "=" + entry.getValue());
                 }
-                if (TextUtils.isEmpty(cookieInfo.getUid())) {
+                if (TextUtils.isEmpty(userInfo.getUid())) {
                     urlBuilder.append("&uid" + "=" + "0");
                 } else {
-                    urlBuilder.append("&uid" + "=" + cookieInfo.getUid());
+                    urlBuilder.append("&uid" + "=" + userInfo.getUid());
                 }
                 String time = String.valueOf(NetWorkUtil.getCurrentTime());
                 urlBuilder.append("&time" + "=" + time);
@@ -93,18 +108,14 @@ public class TokenHeaderInterceptor implements Interceptor {
                             }
                         }
                         String functionName = url.substring(url.lastIndexOf("/")).replace("/", "");
-                        String replace = functionName.replace("\"", "");
-                        if (TextUtils.isEmpty(cookieInfo.getUid())) {
+                        if (TextUtils.isEmpty(userInfo.getUid())) {
                             builder.add("uid", "0");
                         } else {
-                            builder.add("uid", cookieInfo.getUid());
+                            builder.add("uid", userInfo.getUid());
                         }
                         String time = String.valueOf(NetWorkUtil.getCurrentTime());
                         builder.add("time", time);
                         builder.add("token", getToken(apiSecret, functionName, time));
-
-                        //LogUtil.v("functionName: " + functionName);
-
                         FormBody newFormBody = builder.build();
                         //依据原来的request构造一个新的request,
                         Request newRequest = requestBuilder
@@ -149,10 +160,10 @@ public class TokenHeaderInterceptor implements Interceptor {
 
                         String functionName = url.substring(url.lastIndexOf("/")).replace("/", "");
 
-                        if (TextUtils.isEmpty(cookieInfo.getUid())) {
+                        if (TextUtils.isEmpty(userInfo.getUid())) {
                             builder.addFormDataPart("uid", "0");
                         } else {
-                            builder.addFormDataPart("uid",cookieInfo.getUid());
+                            builder.addFormDataPart("uid",userInfo.getUid());
                         }
                         String time = String.valueOf(NetWorkUtil.getCurrentTime());
                         builder.addFormDataPart("time", time);
@@ -172,7 +183,6 @@ public class TokenHeaderInterceptor implements Interceptor {
     }
 
     public String getToken(String secrectKey, String functionName, String time) {
-        String token = Md5Util.getStringMd5(new StringBuilder().append(paramMap.get("appid")).append(secrectKey).append(time).append(functionName).append(NetWorkUtil.getInstance().getCookieInfo().getUid()).toString());
-        return token;
+        return Md5Util.getStringMd5(paramMap.get("appid") + secrectKey + time + functionName + getUserInfo().getUid());
     }
 }
