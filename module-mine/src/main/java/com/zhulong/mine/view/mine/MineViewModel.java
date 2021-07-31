@@ -8,6 +8,7 @@ import com.zhulong.library_base.binding.command.BindingAction;
 import com.zhulong.library_base.binding.command.BindingCommand;
 import com.zhulong.library_base.mvvm.model.BaseModel;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
+import com.zhulong.mine.view.login.LoginModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,11 +26,14 @@ import androidx.annotation.NonNull;
  * @since: clx
  * @date: 2021/7/15
  */
-public class MineViewModel extends BaseViewModel<MineModel> {
+public class MineViewModel extends BaseViewModel<MineModel<BaseModel>> {
     //接口请求参数
     Map<String, String> requestMap = new HashMap<>();
     public MineViewModel(@NonNull Application application,MineModel model) {
         super(application,model);
+    }
+    public MineViewModel(Application model) {
+        super(model);
     }
 
     public BindingCommand<Void> goLogin = new BindingCommand<Void>(new BindingAction() {

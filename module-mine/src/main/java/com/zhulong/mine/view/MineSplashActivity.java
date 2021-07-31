@@ -1,9 +1,12 @@
 package com.zhulong.mine.view;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.zhulong.library_base.mvvm.base_view.BaseActivity;
+import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
 import com.zhulong.mine.R;
+import com.zhulong.mine.databinding.MineActivitySplashBinding;
 import com.zhulong.mine.view.mine.MineFragment;
 
 /**
@@ -15,7 +18,7 @@ import com.zhulong.mine.view.mine.MineFragment;
  * @since: clx
  * @date: 2021/7/29
  */
-public class MineSplashActivity extends BaseActivity {
+public class MineSplashActivity extends BaseActivity<MineActivitySplashBinding, BaseViewModel> {
 
 
     @Override
@@ -31,5 +34,6 @@ public class MineSplashActivity extends BaseActivity {
     @Override
     public void initData() {
         startContainerActivity(MineFragment.class.getCanonicalName());
+        binding.btnGoCenter.setOnClickListener(v -> startContainerActivity(MineFragment.class.getCanonicalName()));
     }
 }

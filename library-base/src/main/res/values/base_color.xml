@@ -20,10 +20,15 @@
     <color name="base_transparent">#00000000</color>
     <!-- 半透明色 -->
     <color name="base_transparent_half">#7f000000</color>
+
+    <!--other-->
     <color name="base_color_ea">#eaeaea</color>
     <color name="base_color_f4">#F4F4F4</color>
     <color name="base_color_f7">#F7F7F7</color>
     <color name="base_color_f6">#F6F6F6</color>
     <color name="base_color_line">#DDDDDD</color>
-    <color name="base_transparent_8C">#8C000000</color>
+    <color name="base_color_transparent_8c">#8C000000</color>
+    <color name="base_color_2a292e">#2A292E</color>
+    <color name="base_color_vip_yellow">#ebc28b</color>
+
 </resources>

@@ -11,5 +11,5 @@ import com.zhulong.library_base.mvvm.model.BaseModel;
  * @since: clx
  * @date: 2021/7/29
  */
-public class MineModel extends BaseModel implements IMineContractView.IModel {
+public class MineModel<T> extends BaseModel implements IMineContractView.IModel {
 }

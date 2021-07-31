@@ -10,6 +10,7 @@ import com.zhulong.library_base.mvvm.base_view.BaseFragment;
 import com.zhulong.mine.BR;
 import com.zhulong.mine.R;
 import com.zhulong.mine.databinding.MineFragmentMineBinding;
+import com.zhulong.mine.view.login.LoginViewModel;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,9 +32,15 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     }
 
     @Override
+    public void initData() {
+        super.initData();
+    }
+
+    @Override
     public MineViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用LoginViewModel(@NonNull Application application)构造方法
-        return new MineViewModel(requireActivity().getApplication(), new MineModel());
+        return new ViewModelProvider(this).get(MineViewModel.class);
+
     }
 
     @Override

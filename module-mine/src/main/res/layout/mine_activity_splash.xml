@@ -6,7 +6,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@color/base_white">
+            <Button
+                android:id="@+id/btn_go_center"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_centerInParent="true"
+                android:text="个人中心"/>
     </RelativeLayout>
 </layout>
