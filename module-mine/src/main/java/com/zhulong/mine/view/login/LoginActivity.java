@@ -20,7 +20,15 @@ import com.zhulong.mine.config.MineConfig;
 import com.zhulong.mine.databinding.MineActivityLoginBinding;
 
 import androidx.lifecycle.ViewModelProvider;
-
+/**
+ * 应用模块:
+ * <p>
+ * 类描述: 登录
+ * <p>
+ *
+ * @since: clx
+ * @date: 2021/7/29
+ */
 @Route(path = RouterActivityPath.Mine.PAGER_MINE_LOGIN)
 public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginViewModel> {
 
