@@ -23,7 +23,6 @@ import android.util.Xml
 import android.view.Surface
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
-import com.gyf.immersionbar.ImmersionBar.getStatusBarHeight
 import com.zhulong.network.util.LogUtil
 import org.json.JSONObject
 import java.io.*
@@ -1043,10 +1042,9 @@ object RxDeviceTool {
         view.isDrawingCacheEnabled = true
         view.buildDrawingCache()
         val bmp = view.drawingCache
-        val statusBarHeight = getStatusBarHeight(activity)
         val width = getScreenWidth(activity)
         val height = getScreenHeight(activity)
-        val ret = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height - statusBarHeight)
+        val ret = Bitmap.createBitmap(bmp, 0, 0, width, height - 0)
         view.destroyDrawingCache()
         return ret
     }

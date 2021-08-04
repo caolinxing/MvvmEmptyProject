@@ -17,8 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            binding:onClickCommand="@{loginViewModel.close}"
-            android:src="@drawable/base_ic_close_gray" />
+            android:tag="close"
+            binding:onClickCommand="@{loginViewModel.otherClick}"
+            android:src="@drawable/base_ic_close_gray"
+            tools:ignore="ContentDescription" />
         <LinearLayout
             android:layout_below="@id/login_iv_close"
             android:layout_width="match_parent"
@@ -31,7 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/base_ic_logo_shadow" />
+                android:src="@drawable/base_ic_logo_shadow"
+                tools:ignore="ContentDescription" />
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/login_tab"
                 android:layout_width="match_parent"
@@ -46,11 +49,11 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 账号登录 "/>
+                    android:text="@string/mine_str_account_login"/>
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="验证码登录"/>
+                    android:text="@string/mine_code_login"/>
             </com.google.android.material.tabs.TabLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,8 +96,10 @@
                             android:layout_centerVertical="true"
                             android:src="@drawable/mine_ic_delete"
                             android:visibility="@{loginViewModel.clearBtnVisibility}"
-                            binding:onClickCommand="@{loginViewModel.clearAccountOnClickCommand}"
-                            android:padding="10dp"/>
+                            android:tag="clearAccountOnClickCommand"
+                            binding:onClickCommand="@{loginViewModel.otherClick}"
+                            android:padding="10dp"
+                            tools:ignore="ContentDescription" />
                     </RelativeLayout>
                     <View
                         android:layout_width="match_parent"
@@ -111,7 +116,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@color/base_color_f6"
-                            android:hint="请输入密码"
+                            android:hint="@string/mine_str_please_input_pwd"
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:maxLines="1"
@@ -120,7 +125,9 @@
                             android:textColor="@color/base_font_black"
                             android:textColorHint="@color/base_font_gray"
                             android:textSize="15sp"
-                            binding:textChanged="@{loginViewModel.pwdEdiChangeListener}" />
+                            binding:textChanged="@{loginViewModel.pwdEdiChangeListener}"
+                            tools:ignore="RtlSymmetry"
+                            android:importantForAutofill="no" />
 
                         <ImageView
                             android:id="@+id/iv_show_eye"
@@ -128,10 +135,12 @@
                             android:layout_height="35dp"
                             android:layout_gravity="center_vertical"
                             android:padding="10dp"
-                            binding:onClickCommand="@{loginViewModel.passwordShowSwitchOnClickCommand}"
+                            android:tag="passwordShowSwitchOnClickCommand"
+                            binding:onClickCommand="@{loginViewModel.otherClick}"
                             android:visibility="@{loginViewModel.pwdVisibility}"
                             binding:isThrottleFirst="@{true}"
-                            android:src="@drawable/mine_selector_login_eye" />
+                            android:src="@drawable/mine_selector_login_eye"
+                            tools:ignore="ContentDescription" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -155,7 +164,7 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:padding="10dp"
-                            android:hint="区号"
+                            android:hint="@string/mine_str_qu_hao"
                             android:inputType="phone"
                             android:maxLength="5"
                             android:imeOptions="actionNext"
@@ -164,7 +173,8 @@
                             android:gravity="center"
                             android:textColor="@color/base_font_black"
                             android:textColorHint="@color/base_font_gray"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            tools:ignore="HardcodedText" />
 
                         <View
                             android:layout_width="1dp"
@@ -245,8 +255,8 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/base_selector_red_pink"
-                binding:onClickCommand="@{loginViewModel.loginOnClickCommand}"
-                android:text="@string/mine_str_login"
+                android:tag="ZLLogin"
+                binding:onClickCommand="@{loginViewModel.clickLogin}"                android:text="@string/mine_str_login"
                 android:textColor="@color/base_white"
                 android:textSize="16sp" />
             <LinearLayout
@@ -262,12 +272,14 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:paddingBottom="5dp"
-                    android:paddingRight="20dp"
+                    android:paddingEnd="20dp"
                     android:paddingTop="5dp"
-                    android:text="注册新账号"
+                    android:text="@string/mine_str_register_account"
                     android:textColor="@color/base_font_gray"
-                    binding:onClickCommand="@{loginViewModel.registerAccount}"
-                    android:textSize="14sp" />
+                    android:tag="registerAccount"
+                    binding:onClickCommand="@{loginViewModel.clickLogin}"
+                    android:textSize="14sp"
+                    tools:ignore="RtlSymmetry" />
 
                 <android.widget.TextView
                     android:id="@+id/login_tv_forget_pwd"
@@ -278,10 +290,12 @@
                     android:paddingBottom="5dp"
                     android:paddingLeft="20dp"
                     android:paddingTop="5dp"
-                    android:text="忘记密码"
-                    binding:onClickCommand="@{loginViewModel.forgetPwd}"
+                    android:text="@string/mine_str_forget_pwf"
+                    android:tag="forgetPwd"
+                    binding:onClickCommand="@{loginViewModel.clickLogin}"
                     android:textColor="@color/base_font_gray"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -308,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="第三方账号登录"
+                    android:text="@string/mine_third_login"
                     android:textColor="@color/base_font_gray"
                     android:textSize="12sp" />
 
@@ -331,39 +345,47 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="5dp"
-                    binding:onClickCommand="@{loginViewModel.qqLoginClick}"
-                    android:src="@drawable/mine_ic_qq_login" />
+                    android:tag="QQLogin"
+                    binding:onClickCommand="@{loginViewModel.clickLogin}"
+                    android:src="@drawable/mine_ic_qq_login"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/login_iv_wx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    binding:onClickCommand="@{loginViewModel.wxLoginClick}"
+                    android:tag="WeChatLogin"
+                    binding:onClickCommand="@{loginViewModel.clickLogin}"
                     android:padding="5dp"
-                    android:src="@drawable/mine_ic_wx_login" />
+                    android:src="@drawable/mine_ic_wx_login"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/login_iv_check_box_privacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    binding:onClickCommand="@{loginViewModel.checkedAgreementOnClickCommand}"
+                    android:tag="checkedAgreementOnClickCommand"
+                    binding:onClickCommand="@{loginViewModel.otherClick}"
                     binding:isThrottleFirst="@{true}"
-                    android:src="@drawable/mine_selector_login_pravicy" />
+                    android:src="@drawable/mine_selector_login_pravicy"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/login_iv_privacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    binding:onClickCommand="@{loginViewModel.startAgreementPage}"
+                    android:tag="startAgreementPage"
+                    binding:onClickCommand="@{loginViewModel.otherClick}"
                     android:text="@string/mine_tv_login_privacy"
                     android:textColor="@color/base_font_gray"
                     android:textSize="12sp"/>

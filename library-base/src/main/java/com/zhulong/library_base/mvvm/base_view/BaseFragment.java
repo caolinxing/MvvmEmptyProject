@@ -114,9 +114,9 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     //注册ViewModel与View的契约UI回调事件
     protected void registorUIChangeLiveDataCallBack() {
         //Toast提示
-        viewModel.getUC().getShowToast().observe(this, new Observer<Map<String,Object>>() {
+        viewModel.getUC().getShowToast().observe(this, new Observer<Map<String, Object>>() {
             @Override
-            public void onChanged(@Nullable Map<String,Object> params) {
+            public void onChanged(@Nullable Map<String, Object> params) {
                 int type = (int) params.get("type");
                 String content = (String) params.get("content");
                 ToastUtil.showToastByType(getActivity(), type, content);
@@ -296,4 +296,5 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     public <T extends ViewModel> T createViewModel(Fragment fragment, Class<T> cls) {
         return new ViewModelProvider(fragment).get(cls);
     }
+
 }

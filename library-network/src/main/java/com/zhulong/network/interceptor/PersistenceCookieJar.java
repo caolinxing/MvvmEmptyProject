@@ -24,7 +24,6 @@ public class PersistenceCookieJar implements CookieJar {
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
         //内存中缓存Cookie
-        cache.put(NetWorkKeyConfig.KEY_COOKIE, new ArrayList<Cookie>(cookies));
     }
 
     //Http发送请求前回调，Request中设置Cookie
@@ -47,7 +46,7 @@ public class PersistenceCookieJar implements CookieJar {
                 }
             }
         }
-        CookieBean cookieBean =NetWorkUtil.getInstance().getCookieInfo();
+        CookieBean cookieBean = NetWorkUtil.getInstance().getCookieInfo();
 
         if (cookieBean != null) {
             for (int i = 0; i < 7; i++) {

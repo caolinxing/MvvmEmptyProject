@@ -115,5 +115,4 @@ dependencies {
         //用户模块
         implementation project(':module-mine')
     }
-    // debugImplementation rootProject.ext.dependencies["leakcanary"]
 }

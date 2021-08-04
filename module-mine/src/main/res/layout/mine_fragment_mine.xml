@@ -12,7 +12,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/base_white">
+        android:fitsSystemWindows="true"
+        android:background="@color/base_color_f7">
 
         <ScrollView
             android:id="@+id/scroll_container"
@@ -29,8 +30,6 @@
                     android:id="@+id/rl_userinfo_container"
                     android:layout_width="match_parent"
                     android:layout_height="265dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
                     android:background="@color/base_color_2a292e">
                     <TextView
                         android:id="@+id/tv_setting"
@@ -38,10 +37,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
                         android:clipChildren="false"
                         android:clipToPadding="false"
                         android:drawablePadding="5dp"
+                        android:layout_marginEnd="15dp"
                         android:text="@string/mine_str_setting"
                         android:textColor="@color/base_white"
                         android:textSize="14sp"
@@ -50,26 +49,633 @@
                     <LinearLayout
                         android:layout_below="@id/tv_setting"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:gravity="center_vertical">
                         <RelativeLayout
-                            android:layout_width="84dp"
-                            android:layout_height="94dp">
+                            android:layout_width="100dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_height="120dp">
+                            <com.zhulong.common.views.CircleImageView
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:layout_marginTop="16dp"
+                                binding:civ_border_color="@color/base_color_vip_yellow"
+                                binding:civ_border_width="2dp"
+                                binding:url = "@{mineViewModel.data.avatar}"
+                                binding:placeholderRes ="@{R.drawable.mine_ic_avatar}"/>
                             <ImageView
-                                android:layout_width="280dp"
-                                android:layout_height="140dp"
-                                binding:borderColor="@{R.color.base_color_vip_yellow}"
-                                binding:imgUrl="@{R.drawable.mine_ic_avatar}"/>
-
-                            <!--<ImageView
-                                android:id="@+id/avatar"
-                                android:layout_width="83dp"
-                                android:layout_height="93dp"
-                                android:layout_centerVertical="true"
-                                binding:imgUrl="@{R.drawable.mine_ic_avatar}"
-                                binding:borderColor="@{R.color.base_white}" />-->
+                                android:id="@+id/iv_crowon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/mine_ic_crowon"
+                                android:visibility="visible" />
+                            <TextView
+                                android:id="@+id/tv_bianji"
+                                android:layout_width="35dp"
+                                android:background="@drawable/mine_shape_black_radius_8bg"
+                                android:layout_height="16dp"
+                                android:text="@string/mine_str_edi_avatar"
+                                android:paddingRight="5dp"
+                                android:paddingLeft="5dp"
+                                android:textColor="@color/base_white"
+                                android:gravity="center"
+                                android:textSize="10sp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="8dp"
+                                android:layout_alignParentEnd="true" />
                         </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal">
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="8dp"
+                                    android:ellipsize="end"
+                                    android:maxEms="7"
+                                    android:maxLines="1"
+                                    android:text="@{mineViewModel.data.username}"
+                                    android:textColor="@color/base_color_f2f2f2"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="16dp"
+                                    android:background="@drawable/base_shape_vip_radius_10dp_bg"
+                                    android:gravity="center"
+                                    android:textColor="@color/base_font_black"
+                                    android:maxLines="2"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:text="@string/mine_str_user_level_tag"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="10dp"
+                                    android:src="@drawable/mine_ic_vip" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal">
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:text="@string/mine_str_honor_score"
+                                    android:textColor="@color/base_color_7c7c7d"
+                                    android:textSize="14sp" />
+
+                                <android.widget.TextView
+                                    android:id="@+id/tv_rongyufen"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@{mineViewModel.data.credit}"
+                                    android:textColor="@color/base_color_d9ba8e"
+                                    android:textSize="16sp" />
+
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginStart="30dp"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/mine_str_zhulong_coin"
+                                    android:textColor="@color/base_color_7c7c7d"
+                                    android:textSize="14sp" />
+
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@{mineViewModel.data.balance}"
+                                    android:textColor="@color/base_color_d9ba8e"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal">
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/mine_str_study_time"
+                                    android:textColor="@color/base_color_7c7c7d"
+                                    android:textSize="14sp" />
+
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@{mineViewModel.data.lessonTime+@string/mine_str_min}"
+                                    android:textColor="@color/base_color_d9ba8e"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal">
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/mine_str_send_posts_num"
+                                    android:textColor="@color/base_color_7c7c7d"
+                                    android:textSize="14sp" />
+
+                                <android.widget.TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@{mineViewModel.data.threadnum}"
+                                    android:textColor="@color/base_color_d9ba8e"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iv_vip_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="6dp"
+                        android:src="@drawable/mine_ic_vip_upgrade_card"
+                        android:visibility="visible" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/mine_ic_mycenter_arc"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="35dp"
+                        android:visibility="visible">
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_shequn"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_she_qun"
+                            android:tag="goSheQun"
+                            binding:onClickCommand="@{mineViewModel.clickGroup1}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_shequn"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_ping_ce"
+                            android:tag="goPingCe"
+                            binding:onClickCommand="@{mineViewModel.clickGroup1}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_youhuiquan"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:tag="goYouHuiJuan"
+                            binding:onClickCommand="@{mineViewModel.clickGroup1}"
+                            android:text="@string/mine_str_you_hui_juan"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_fankui"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:tag="goFanKui"
+                            binding:onClickCommand="@{mineViewModel.clickGroup1}"
+                            android:text="@string/mine_str_fan_kui"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_kuaidi"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_express"
+                            android:tag="goKuaiDi"
+                            binding:onClickCommand="@{mineViewModel.clickGroup1}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/base_white"
+                        android:padding="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="16dp"
+                            android:background="@color/base_red" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/mine_str_my_lesson"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:background="@color/base_white"
+                        android:layout_marginTop="1dp">
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_already_buy_class"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_already_buy_class"
+                            android:tag="goYiGouKeCheng"
+                            binding:onClickCommand="@{mineViewModel.clickGroup2}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_daifukuan"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_dai_fu_kuan"
+                            android:tag="goDaiFuKuan"
+                            binding:onClickCommand="@{mineViewModel.clickGroup2}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_watch_history"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_watch_history"
+                            android:tag="goGuanKanJiLu"
+                            binding:onClickCommand="@{mineViewModel.clickGroup2}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_shoucang"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_lesson_shou_cang"
+                            android:tag="goKeChengShouCang"
+                            binding:onClickCommand="@{mineViewModel.clickGroup2}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_huancun"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_huan_cun"
+                            android:tag="goHuanCun"
+                            binding:onClickCommand="@{mineViewModel.clickGroup2}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/base_white"
+                        android:padding="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="16dp"
+                            android:background="@color/base_red" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/mine_str_my_data"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:weightSum="5"
+                        android:background="@color/base_white"
+                        android:layout_marginTop="1dp">
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_shang_chuan"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_shang_chuan"
+                            android:tag="goShangChuan"
+                            binding:onClickCommand="@{mineViewModel.clickGroup3}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_xia_zai"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_xia_zai"
+                            android:tag="goXiaZai"
+                            binding:onClickCommand="@{mineViewModel.clickGroup3}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_shoucang"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_data_collection"
+                            android:tag="goZiLiaoShouCang"
+                            binding:onClickCommand="@{mineViewModel.clickGroup3}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/e_vip"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_evip"
+                            android:tag="goEVip"
+                            binding:onClickCommand="@{mineViewModel.clickGroup3}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/base_white"
+                        android:padding="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="16dp"
+                            android:background="@color/base_red" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/mine_str_my_she_qu"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:background="@color/base_white"
+                        android:layout_marginTop="1dp">
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_my_send_posts"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_my_posts"
+                            android:tag="goWoDeFaTie"
+                            binding:onClickCommand="@{mineViewModel.clickGroup4}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_wode_huifu"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_wo_de_hui_fu"
+                            android:tag="goWoDeHuiFu"
+                            binding:onClickCommand="@{mineViewModel.clickGroup4}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_guanzhu_xiaozu"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_guan_zhu_xiao_zu"
+                            android:tag="goGuanZhuXiaoZu"
+                            binding:onClickCommand="@{mineViewModel.clickGroup4}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:drawableTop="@drawable/mine_ic_guanzhu_longyou"
+                            android:text="@string/mine_str_guan_zhu_long_you"
+                            android:tag="goGuanZhuLongYou"
+                            binding:onClickCommand="@{mineViewModel.clickGroup4}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                        <android.widget.TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableTop="@drawable/mine_ic_liulan_jilu"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="@string/mine_str_liu_lan_ji_lu"
+                            android:tag="goLiuLanJiLu"
+                            binding:onClickCommand="@{mineViewModel.clickGroup4}"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/base_white"
+                        android:padding="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="16dp"
+                            android:background="@color/base_red" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/mine_str_li_pin_dui_huan"
+                            android:textColor="@color/base_font_black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:paddingStart="30dp"
+                        android:paddingEnd="30dp"
+                        android:background="@color/base_white"
+                        android:layout_marginTop="1dp">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:tag="0"
+                            android:background="@color/base_white"
+                            binding:onClickCommand="@{mineViewModel.goGiftDetail}"
+                            binding:url="@{mineViewModel.data.gifts.get(0).img}" />
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:tag="1"
+                            binding:onClickCommand="@{mineViewModel.goGiftDetail}"
+                            binding:url = "@{mineViewModel.data.gifts.get(1).img}"
+                            android:background="@color/base_white" />
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:tag="2"
+                            binding:onClickCommand="@{mineViewModel.goGiftDetail}"
+                            binding:url = "@{mineViewModel.data.gifts.get(2).img}"
+                            android:background="@color/base_white" />
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            android:tag="3"
+                            binding:onClickCommand="@{mineViewModel.goGiftDetail}"
+                            binding:url = "@{mineViewModel.data.gifts.get(3).img}"
+                            android:background="@color/base_white" />
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="70dp">
+                    <android.widget.TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/mine_ic_zixun"
+                        android:text="@string/mine_str_zi_xun"
+                        android:textColor="@color/base_color_2a292d" />
+
+                    <android.widget.TextView
+                        android:id="@+id/tv_kefu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_phone"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:drawableLeft="@drawable/mine_ic_lianxikefu"
+                        android:drawablePadding="10dp"
+                        android:text="@string/mine_str_online_kefu"
+                        android:textColor="@color/base_color_2a292d" />
+
+                    <android.widget.TextView
+                        android:id="@+id/tv_vision_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_kefu"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/mine_str_apk_version"
+                        android:textColor="@color/base_font_gray"
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>

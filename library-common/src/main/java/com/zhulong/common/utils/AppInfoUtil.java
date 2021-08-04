@@ -4,6 +4,7 @@ import com.tencent.mmkv.MMKV;
 import com.zhulong.library_base.bean.AppDeviceInfo;
 import com.zhulong.library_base.config.BaseConfig;
 import com.zhulong.library_base.utils.GsonUtils;
+import com.zhulong.network.config.NetWorkKeyConfig;
 
 /**
  * 应用模块:
@@ -34,7 +35,7 @@ public class AppInfoUtil {
      * @return
      */
     public AppDeviceInfo getDevice() {
-        String json = MMKV.defaultMMKV().getString(BaseConfig.KeyConfig.KEY_DEVICE_INFO,null);
+        String json = MMKV.defaultMMKV().getString(NetWorkKeyConfig.KEY_DEVICE_INFO,null);
         if (json!=null){
             AppDeviceInfo appDeviceInfo = GsonUtils.fromLocalJson(json, AppDeviceInfo.class);
             return appDeviceInfo;
@@ -43,7 +44,7 @@ public class AppInfoUtil {
     }
     public void setDevice(AppDeviceInfo device) {
         String json_app_info = GsonUtils.toJson(device);
-        MMKV.defaultMMKV().putString(BaseConfig.KeyConfig.KEY_DEVICE_INFO,json_app_info);
+        MMKV.defaultMMKV().putString(NetWorkKeyConfig.KEY_DEVICE_INFO,json_app_info);
     }
 
 }

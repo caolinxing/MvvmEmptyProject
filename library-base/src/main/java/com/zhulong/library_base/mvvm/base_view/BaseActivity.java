@@ -9,13 +9,20 @@ package com.zhulong.library_base.mvvm.base_view;
  * @since: clx
  * @date: 2021/7/12
  */
-import android.content.Intent;
-import android.os.Bundle;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.jaeger.library.StatusBarUtil;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.zhulong.library_base.ContainerActivity;
+import com.zhulong.library_base.R;
 import com.zhulong.library_base.bus.Messenger;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
 import com.zhulong.library_base.utils.MaterialDialogUtils;
@@ -47,6 +54,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.base_color_2a292e),0);
         //页面接受的参数方法
         initParam();
         //私有的初始化Databinding和ViewModel方法
@@ -69,7 +77,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (viewModel != null) {
             viewModel.removeRxBus();
         }
-        if(binding != null){
+        if (binding != null) {
             binding.unbind();
         }
     }
@@ -117,9 +125,9 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     //注册ViewModel与View的契约UI回调事件
     protected void registorUIChangeLiveDataCallBack() {
         //Toast提示
-        viewModel.getUC().getShowToast().observe(this, new Observer<Map<String,Object>>() {
+        viewModel.getUC().getShowToast().observe(this, new Observer<Map<String, Object>>() {
             @Override
-            public void onChanged(@Nullable Map<String,Object> params) {
+            public void onChanged(@Nullable Map<String, Object> params) {
                 int type = (int) params.get("type");
                 String content = (String) params.get("content");
                 ToastUtil.showToastByType(BaseActivity.this, type, content);
@@ -268,7 +276,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     @Override
-    public abstract void initData() ;
+    public abstract void initData();
 
 
     @Override

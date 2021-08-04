@@ -19,6 +19,8 @@ import com.zhulong.network.BaseResponse;
 import com.zhulong.network.bean.mine.login.PersonHeaderBean;
 import com.zhulong.network.bean.mine.login.UserInfoBean;
 import com.zhulong.network.bean.mine.login.ZlLoginBean;
+import com.zhulong.network.config.CookieBean;
+import com.zhulong.network.util.NetWorkUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -68,40 +70,6 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
 
 
     /**
-     * 密码显示开关
-     */
-    public BindingCommand<Void> passwordShowSwitchOnClickCommand = new BindingCommand<>(() -> {
-        //让观察者的数据改变,逻辑从ViewModel层转到View层，在View层的监听则会被调用
-        UIChangeObservable.pSwitchEvent.setValue(UIChangeObservable.pSwitchEvent.getValue() == null || !UIChangeObservable.pSwitchEvent.getValue());
-    });
-    /**
-     * 协议勾选
-     */
-    public BindingCommand<Void> checkedAgreementOnClickCommand = new BindingCommand<>(() -> UIChangeObservable.checkedAgreementSwitchEvent.setValue(true));
-    /**
-     * 清除账号
-     */
-    public BindingCommand<Void> clearAccountOnClickCommand = new BindingCommand<>(() -> userName.set(""));
-
-    /**
-     * 筑龙点击
-     */
-    public BindingCommand<Void> loginOnClickCommand = new BindingCommand<>(() -> {
-        boolean isAgree = MMKV.defaultMMKV().getBoolean(MineConfig.KeyConfig.KEY_IS_AGREE_AGREEMENT, false);
-        if (!isAgree){
-            showToast("请先同意服务协议和隐私政策");
-            return;
-        }
-        //验证码功能去除传空字符
-        requestMap.clear();
-        requestMap.put("loginName", userName.get());
-        requestMap.put("passwd", RsaUtil.encryptByPublic(password.get()));
-        requestMap.put("fromUrl", "android");
-        requestMap.put("ignoreMobile", "0");
-        login(requestMap);
-    });
-
-    /**
      * 账号输入框监听
      */
     public BindingCommand<String> accountEdiChangeListener = new BindingCommand<>(str -> {
@@ -125,48 +93,88 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
 
 
     /**
-     * QQ登录
+     * 登录相关点击
      */
-    public BindingCommand<Void> qqLoginClick = new BindingCommand<>(() -> {
-        showToast("QQ登录");
+    public BindingCommand<View> clickLogin = new BindingCommand<>((view) -> {
+        switch (view.getTag().toString()){
+            case "QQLogin":
+                //QQ登录
+                showToast("QQ登录");
+                break;
+            case "WeChatLogin":
+                //微信登录
+                showToast("微信登录");
+                break;
+            case "ZLLogin":
+                //筑龙登录和手机号登录
+                doAccountLogin();
+                break;
+            case "registerAccount":
+                //注册账号
+                showToast("注册账号");
+                break;
+            case "forgetPwd":
+                //忘记密码
+                showToast("忘记密码");
+                break;
+            default:
+                break;
+        }
     });
 
     /**
-     * 微信登录
+     * 页面其他点击
      */
-    public BindingCommand<Void> wxLoginClick = new BindingCommand<>(() -> {
-        showToast("微信登录");
-    });
-    /**
-     * 注册账号
-     */
-    public BindingCommand<Void> registerAccount = new BindingCommand<>(() -> {
-        showToast("注册账号");
-
-    });
-    /**
-     * 忘记密码
-     */
-    public BindingCommand<Void> forgetPwd= new BindingCommand<>(() -> {
-        showToast("忘记密码");
-    });
-
-    /**
-     * 关闭页面
-     */
-    public BindingCommand<Void> close = new BindingCommand<>(() -> {
-        showToast("关闭页面");
-    });
-    /**
-     * 跳转协议页
-     */
-    public BindingCommand<Void> startAgreementPage = new BindingCommand<>(() -> {
-        showToast("跳转协议页");
+    public BindingCommand<View> otherClick = new BindingCommand<>((view) -> {
+        switch (view.getTag().toString()){
+            case "close":
+                //关闭页面
+                showToast("关闭页面");
+                break;
+            case "startAgreementPage":
+                //跳转协议页
+                showToast("跳转协议页");
+                break;
+            case "passwordShowSwitchOnClickCommand":
+                //密码显示开关
+                //让观察者的数据改变,逻辑从ViewModel层转到View层，在View层的监听则会被调用
+                UIChangeObservable.pSwitchEvent.setValue(UIChangeObservable.pSwitchEvent.getValue() == null || !UIChangeObservable.pSwitchEvent.getValue());
+                break;
+            case "checkedAgreementOnClickCommand":
+                //协议勾选
+                UIChangeObservable.checkedAgreementSwitchEvent.setValue(true);
+                break;
+            case "clearAccountOnClickCommand":
+                //清除账号
+                userName.set("");
+            break;
+            default:
+                break;
+        }
     });
 
 
+
     /**
-     * 筑龙登陆
+     * 账号登录
+     */
+    private void doAccountLogin() {
+        boolean isAgree = MMKV.defaultMMKV().getBoolean(MineConfig.KeyConfig.KEY_IS_AGREE_AGREEMENT, false);
+        if (!isAgree){
+            showToast("请先同意服务协议和隐私政策");
+            return;
+        }
+        //验证码功能去除传空字符
+        requestMap.clear();
+        requestMap.put("loginName", userName.get());
+        requestMap.put("passwd", RsaUtil.encryptByPublic(password.get()));
+        requestMap.put("fromUrl", "android");
+        requestMap.put("ignoreMobile", "0");
+        login(requestMap);
+    }
+
+    /**
+     * 账号登陆
      */
     private void login(Map<String, String> params) {
         if (TextUtils.isEmpty(userName.get())) {
@@ -189,29 +197,39 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
                 userInfo.setUname(loginBean.getUsername());
                 saveUserInfo(userInfo);
                 getUserHeader(loginBean.getUid());
-            }
-
-            private void getUserHeader(String uid) {
-                requestMap.clear();
-                requestMap.put("zuid", uid);
-                model.getUserHeader(params).subscribe(new ApiCallBack<Reply<BaseResponse<PersonHeaderBean>>>() {
-                    @Override
-                    public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
-                        PersonHeaderBean personHeaderBean = result.getData().getResult();
-                        showToast(ToastUtil.SUCCESS,personHeaderBean.getUsername()+"登入成功");
-                    }
-
-                    @Override
-                    public void onFail(int code, String wrongMsg, String result) {
-                        showToast(wrongMsg);
-
-                    }
-                });
+                CookieBean cookieBean = new CookieBean();
+                cookieBean.setIs_corp(loginBean.getIs_corp());
+                cookieBean.setPcid(loginBean.getPcid());
+                cookieBean.setZlid(loginBean.getZlid());
+                cookieBean.setUsername(loginBean.getUsername());
+                cookieBean.setUid(loginBean.getUid());
+                NetWorkUtil.getInstance().setCookieInfo(cookieBean);
             }
 
             @Override
             public void onFail(int code, String wrongMsg, String result) {
                 showToast(wrongMsg);
+            }
+        });
+    }
+
+    /**
+     * 用户头信息
+     */
+    private void getUserHeader(String uid) {
+        requestMap.clear();
+        requestMap.put("zuid", uid);
+        model.getUserHeader(requestMap).subscribe(new ApiCallBack<Reply<BaseResponse<PersonHeaderBean>>>() {
+            @Override
+            public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
+                PersonHeaderBean personHeaderBean = result.getData().getResult();
+                showToast(ToastUtil.SUCCESS,personHeaderBean.getUsername()+"登入成功");
+            }
+
+            @Override
+            public void onFail(int code, String wrongMsg, String result) {
+                showToast(wrongMsg);
+
             }
         });
     }

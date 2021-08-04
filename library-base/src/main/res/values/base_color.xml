@@ -29,6 +29,13 @@
     <color name="base_color_line">#DDDDDD</color>
     <color name="base_color_transparent_8c">#8C000000</color>
     <color name="base_color_2a292e">#2A292E</color>
+    <color name="base_color_2a292d">#2A292D</color>
     <color name="base_color_vip_yellow">#ebc28b</color>
+    <color name="base_color_7e6b5a">#7E6B5A</color>
+    <color name="base_color_f2f2f2">#F2F2F2</color>
+    <color name="base_color_d9ba8e">#D9BA8E</color>
+    <color name="base_color_7c7c7d">#7C7C7D</color>
+
+
 
 </resources>

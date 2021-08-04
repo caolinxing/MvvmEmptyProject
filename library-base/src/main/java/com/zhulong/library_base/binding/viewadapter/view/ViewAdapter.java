@@ -1,5 +1,6 @@
 package com.zhulong.library_base.binding.viewadapter.view;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.zhulong.library_base.binding.command.BindingCommand;
@@ -21,27 +22,46 @@ public class ViewAdapter {
      * onClickCommand 绑定的命令,
      * isThrottleFirst 是否开启防止过快点击
      */
-    @BindingAdapter(value = {"onClickCommand", "isThrottleFirst"}, requireAll = false)
-    public static void onClickCommand(View view, final BindingCommand clickCommand, final boolean isThrottleFirst) {
+    @SuppressLint("CheckResult")
+    @BindingAdapter(value = {"onClickCommandSimple", "isThrottleFirst"}, requireAll = false)
+    public static void onClickCommandSimple(View view, final BindingCommand clickCommand, final boolean isThrottleFirst) {
         if (isThrottleFirst) {
             RxView.clicks(view)
-                    .subscribe(new Consumer<Object>() {
-                        @Override
-                        public void accept(Object object) throws Exception {
-                            if (clickCommand != null) {
-                                clickCommand.execute();
-                            }
+                    .subscribe((Consumer<Object>) object -> {
+                        if (clickCommand != null) {
+                            clickCommand.execute();
                         }
                     });
         } else {
             RxView.clicks(view)
                     .throttleFirst(CLICK_INTERVAL, TimeUnit.SECONDS)//1秒钟内只允许点击1次
-                    .subscribe(new Consumer<Object>() {
-                        @Override
-                        public void accept(Object object) throws Exception {
-                            if (clickCommand != null) {
-                                clickCommand.execute();
-                            }
+                    .subscribe((Consumer<Object>) object -> {
+                        if (clickCommand != null) {
+                            clickCommand.execute();
+                        }
+                    });
+        }
+    }
+
+    /**
+     * 回传View
+     */
+    @SuppressLint("CheckResult")
+    @BindingAdapter(value = {"onClickCommand", "isThrottleFirst"}, requireAll = false)
+    public static void onClickCommand(View view, final BindingCommand clickCommand, final boolean isThrottleFirst) {
+        if (isThrottleFirst) {
+            RxView.clicks(view)
+                    .subscribe((Consumer<Object>) object -> {
+                        if (clickCommand != null) {
+                            clickCommand.execute(view);
+                        }
+                    });
+        } else {
+            RxView.clicks(view)
+                    .throttleFirst(CLICK_INTERVAL, TimeUnit.SECONDS)//1秒钟内只允许点击1次
+                    .subscribe((Consumer<Object>) object -> {
+                        if (clickCommand != null) {
+                            clickCommand.execute(view);
                         }
                     });
         }

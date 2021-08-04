@@ -48,6 +48,9 @@ public class NetWorkUtil {
         }
         return new CookieBean();
     }
+    public void setCookieInfo(CookieBean data) {
+        MMKV.defaultMMKV().putString(NetWorkKeyConfig.KEY_COOKIE,GsonUtils.toJson(data));
+    }
 
     public static long getCurrentTime() {
         return System.currentTimeMillis() / 1000;

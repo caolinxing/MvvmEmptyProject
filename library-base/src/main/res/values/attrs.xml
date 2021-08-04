@@ -16,6 +16,7 @@
 
     <!-- require BindingCommand {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view click event. -->
     <attr name="onClickCommand" format="reference" />
+    <attr name="onClickCommandSimple" format="reference" />
     <attr name="onLongClickCommand" format="reference" />
     <!-- require BindingCommand<Boolean> {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view focus change event.
      BindingCommand would has params which means if view hasFocus.-->

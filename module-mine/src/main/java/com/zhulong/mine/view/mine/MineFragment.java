@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.jaeger.library.StatusBarUtil;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.library_base.mvvm.base_view.BaseFragment;
 import com.zhulong.mine.BR;
 import com.zhulong.mine.R;
+import com.zhulong.mine.application.AppViewModelFactory;
 import com.zhulong.mine.databinding.MineFragmentMineBinding;
-import com.zhulong.mine.view.login.LoginViewModel;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,14 +33,28 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.base_color_2a292e),0);
+    }
+
+    @Override
     public void initData() {
         super.initData();
+        viewModel.getUserHeader();
     }
 
     @Override
     public MineViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用LoginViewModel(@NonNull Application application)构造方法
-        return new ViewModelProvider(this).get(MineViewModel.class);
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication(), new MineModel<>());
+        return new ViewModelProvider(this,factory).get(MineViewModel.class);
 
     }
 

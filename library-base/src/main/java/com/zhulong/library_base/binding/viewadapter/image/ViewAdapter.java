@@ -20,6 +20,11 @@ public final class ViewAdapter {
                     .load(url)
                     .apply(new RequestOptions().placeholder(placeholderRes))
                     .into(imageView);
+        }else{
+            Glide.with(imageView.getContext())
+                    .load(placeholderRes)
+                    .apply(new RequestOptions().placeholder(placeholderRes))
+                    .into(imageView);
         }
     }
 }

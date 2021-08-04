@@ -79,7 +79,6 @@ dependencies {
     api rootProject.ext.dependencies["reactive-streams"]
     api rootProject.ext.dependencies["loadsir"]
     api rootProject.ext.dependencies["rxpermissions"]
-    api rootProject.ext.dependencies["immersionbar"]
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     api rootProject.ext.dependencies["kotlin-stdlib"]
     api rootProject.ext.dependencies["kotlin-stdlib-common"]
@@ -90,5 +89,8 @@ dependencies {
     //rxBinding
     api rootProject.ext.dependencies["rxBinding"]
     api rootProject.ext.dependencies["dialog_commons"]
+    api rootProject.ext.dependencies["statusBar"]
+    //leakcanary内存泄露检测
+    debugImplementation rootProject.ext.dependencies["leakcanary"]
 
 }

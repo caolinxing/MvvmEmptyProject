@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
     @Override
     public LoginViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用LoginViewModel(@NonNull Application application)构造方法
-        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication(),new LoginModel<>());
         return new ViewModelProvider(this, factory).get(LoginViewModel.class);
     }
 
