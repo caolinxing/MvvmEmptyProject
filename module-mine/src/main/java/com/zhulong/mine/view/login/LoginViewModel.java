@@ -20,6 +20,7 @@ import com.zhulong.network.bean.mine.login.PersonHeaderBean;
 import com.zhulong.network.bean.mine.login.UserInfoBean;
 import com.zhulong.network.bean.mine.login.ZlLoginBean;
 import com.zhulong.network.config.CookieBean;
+import com.zhulong.network.util.GsonUtils;
 import com.zhulong.network.util.NetWorkUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -129,7 +130,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
         switch (view.getTag().toString()){
             case "close":
                 //关闭页面
-                showToast("关闭页面");
+                finish();
                 break;
             case "startAgreementPage":
                 //跳转协议页
@@ -223,7 +224,9 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
             @Override
             public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
                 PersonHeaderBean personHeaderBean = result.getData().getResult();
+                MMKV.defaultMMKV().putString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, GsonUtils.toJson(personHeaderBean));
                 showToast(ToastUtil.SUCCESS,personHeaderBean.getUsername()+"登入成功");
+                finish();
             }
 
             @Override

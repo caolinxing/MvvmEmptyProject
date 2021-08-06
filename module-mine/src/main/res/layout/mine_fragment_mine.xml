@@ -5,6 +5,8 @@
     tools:context=".view.mine.MineFragment">
     <data>
         <import type="com.zhulong.mine.R" />
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils" />
         <variable
             name="mineViewModel"
             type="com.zhulong.mine.view.mine.MineViewModel" />
@@ -29,8 +31,8 @@
                 <RelativeLayout
                     android:id="@+id/rl_userinfo_container"
                     android:layout_width="match_parent"
-                    android:layout_height="265dp"
-                    android:background="@color/base_color_2a292e">
+                    android:layout_height="276dp"
+                    android:background="@{mineViewModel.isVip == 1 ? @color/base_color_7e6b5a : @color/base_color_2a292e }">
                     <TextView
                         android:id="@+id/tv_setting"
                         android:layout_width="wrap_content"
@@ -42,8 +44,10 @@
                         android:drawablePadding="5dp"
                         android:layout_marginEnd="15dp"
                         android:text="@string/mine_str_setting"
+                        android:tag="goSetting"
+                        binding:onClickCommand="@{mineViewModel.otherClick}"
                         android:textColor="@color/base_white"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:visibility="visible"
                         binding:drawableEndCompat="@drawable/mine_ic_setting" />
                     <LinearLayout
@@ -56,12 +60,14 @@
                         <RelativeLayout
                             android:layout_width="100dp"
                             android:layout_marginEnd="10dp"
-                            android:layout_height="120dp">
-                            <com.zhulong.common.views.CircleImageView
+                            android:layout_height="120dp"
+                            android:tag="ediAvatar"
+                            binding:onClickCommand="@{mineViewModel.otherClick}">
+                            <com.zhulong.library_base.view.CircleImageView
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
                                 android:layout_marginTop="16dp"
-                                binding:civ_border_color="@color/base_color_vip_yellow"
+                                binding:civ_border_color="@{mineViewModel.isVip == 0 ? R.color.base_white : (mineViewModel.isVip == 1 ? R.color.base_color_vip_yellow : R.color.base_color_vip_yin_se)}"
                                 binding:civ_border_width="2dp"
                                 binding:url = "@{mineViewModel.data.avatar}"
                                 binding:placeholderRes ="@{R.drawable.mine_ic_avatar}"/>
@@ -72,8 +78,8 @@
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginTop="5dp"
-                                android:src="@drawable/mine_ic_crowon"
-                                android:visibility="visible" />
+                                android:visibility="@{mineViewModel.isVip == 0 ?  View.GONE : View.VISIBLE }"
+                                android:src="@{mineViewModel.isVip == 1 ? @drawable/mine_ic_crowon : @drawable/mine_ic_evip_crown }" />
                             <TextView
                                 android:id="@+id/tv_bianji"
                                 android:layout_width="35dp"
@@ -81,6 +87,7 @@
                                 android:layout_height="16dp"
                                 android:text="@string/mine_str_edi_avatar"
                                 android:paddingRight="5dp"
+                                android:visibility="@{mineViewModel.data != null ? View.VISIBLE : View.GONE }"
                                 android:paddingLeft="5dp"
                                 android:textColor="@color/base_white"
                                 android:gravity="center"
@@ -90,8 +97,28 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_alignParentEnd="true" />
                         </RelativeLayout>
+                        <!--登录 注册-->
+                        <android.widget.TextView
+                                android:id="@+id/tv_login"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/mine_shape_login_btn_bg"
+                                android:paddingLeft="12dp"
+                                android:paddingTop="4dp"
+                                tools:visibility="gone"
+                                android:paddingRight="12dp"
+                                android:paddingBottom="4dp"
+                                android:tag="goLogin"
+                                binding:onClickCommand="@{mineViewModel.otherClick}"
+                                android:visibility="@{mineViewModel.data != null ? View.GONE : View.VISIBLE }"
+                                android:text="@string/mine_str_login_register"
+                                android:textColor="@color/base_white"
+                                android:textSize="14sp" />
+
+
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:visibility="@{mineViewModel.data == null ? View.GONE : View.VISIBLE }"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <LinearLayout
@@ -108,7 +135,7 @@
                                     android:maxLines="1"
                                     android:text="@{mineViewModel.data.username}"
                                     android:textColor="@color/base_color_f2f2f2"
-                                    android:textSize="16sp" />
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -127,7 +154,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="10dp"
-                                    android:src="@drawable/mine_ic_vip" />
+                                    android:visibility="@{mineViewModel.isVip == 0 ?  View.GONE : View.VISIBLE }"
+                                    android:src="@{mineViewModel.isVip == 1 ? @drawable/mine_ic_vip : @drawable/mine_ic_evip_sign }"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -137,11 +165,10 @@
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginEnd="8dp"
                                     android:text="@string/mine_str_honor_score"
-                                    android:textColor="@color/base_color_7c7c7d"
-                                    android:textSize="14sp" />
-
+                                    android:textColor="@{mineViewModel.isVip == 1 ? @color/base_color_d1cac4 : @color/base_color_7c7c7d }"
+                                    android:textSize="13sp" />
                                 <android.widget.TextView
                                     android:id="@+id/tv_rongyufen"
                                     android:layout_width="wrap_content"
@@ -149,17 +176,17 @@
                                     android:gravity="center_vertical"
                                     android:text="@{mineViewModel.data.credit}"
                                     android:textColor="@color/base_color_d9ba8e"
-                                    android:textSize="16sp" />
+                                    android:textSize="14sp" />
 
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginEnd="8dp"
                                     android:layout_marginStart="30dp"
                                     android:gravity="center_vertical"
                                     android:text="@string/mine_str_zhulong_coin"
-                                    android:textColor="@color/base_color_7c7c7d"
-                                    android:textSize="14sp" />
+                                    android:textColor="@{mineViewModel.isVip == 1 ? @color/base_color_d1cac4 : @color/base_color_7c7c7d }"
+                                    android:textSize="13sp" />
 
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
@@ -167,7 +194,7 @@
                                     android:gravity="center_vertical"
                                     android:text="@{mineViewModel.data.balance}"
                                     android:textColor="@color/base_color_d9ba8e"
-                                    android:textSize="16sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -177,11 +204,11 @@
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginEnd="8dp"
                                     android:gravity="center_vertical"
                                     android:text="@string/mine_str_study_time"
-                                    android:textColor="@color/base_color_7c7c7d"
-                                    android:textSize="14sp" />
+                                    android:textColor="@{mineViewModel.isVip == 1 ? @color/base_color_d1cac4 : @color/base_color_7c7c7d }"
+                                    android:textSize="13sp" />
 
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
@@ -189,7 +216,7 @@
                                     android:gravity="center_vertical"
                                     android:text="@{mineViewModel.data.lessonTime+@string/mine_str_min}"
                                     android:textColor="@color/base_color_d9ba8e"
-                                    android:textSize="16sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -199,19 +226,19 @@
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginEnd="8dp"
                                     android:gravity="center_vertical"
                                     android:text="@string/mine_str_send_posts_num"
-                                    android:textColor="@color/base_color_7c7c7d"
-                                    android:textSize="14sp" />
+                                    android:textColor="@{mineViewModel.isVip == 1 ? @color/base_color_d1cac4 : @color/base_color_7c7c7d }"
+                                    android:textSize="13sp" />
 
                                 <android.widget.TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_vertical"
-                                    android:text="@{mineViewModel.data.threadnum}"
+                                    android:text="@{mineViewModel.data.threadnum + '个'}"
                                     android:textColor="@color/base_color_d9ba8e"
-                                    android:textSize="16sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -221,9 +248,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
+                        android:tag="goBuyVip"
+                        binding:onClickCommand="@{mineViewModel.otherClick}"
                         android:layout_marginBottom="6dp"
-                        android:src="@drawable/mine_ic_vip_upgrade_card"
-                        android:visibility="visible" />
+                        binding:animatorTime="@{600}"
+                        android:visibility="@{mineViewModel.data != null ? View.VISIBLE : View.GONE }"
+                        android:src="@{mineViewModel.isVip == 1 ? @drawable/mine_ic_vip_upgrade_card_light : @drawable/mine_ic_vip_upgrade_card }" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -234,65 +264,36 @@
                         android:paddingTop="35dp"
                         android:visibility="visible">
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_shequn"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_she_qun"
                             android:tag="goSheQun"
                             binding:onClickCommand="@{mineViewModel.clickGroup1}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_shequn"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_ping_ce"
                             android:tag="goPingCe"
                             binding:onClickCommand="@{mineViewModel.clickGroup1}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_youhuiquan"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:tag="goYouHuiJuan"
                             binding:onClickCommand="@{mineViewModel.clickGroup1}"
                             android:text="@string/mine_str_you_hui_juan"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_fankui"
-                            android:drawablePadding="10dp"
                             android:gravity="center"
                             android:tag="goFanKui"
                             binding:onClickCommand="@{mineViewModel.clickGroup1}"
                             android:text="@string/mine_str_fan_kui"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_kuaidi"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_express"
                             android:tag="goKuaiDi"
                             binding:onClickCommand="@{mineViewModel.clickGroup1}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                     </LinearLayout>
                 </RelativeLayout>
                 <LinearLayout
@@ -300,13 +301,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/base_white"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    <LinearLayout style="@style/mine_my_center_group_title">
                         <View
                             android:layout_width="2dp"
                             android:layout_height="16dp"
@@ -317,76 +312,39 @@
                             android:layout_marginStart="10dp"
                             android:text="@string/mine_str_my_lesson"
                             android:textColor="@color/base_font_black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
-                        android:background="@color/base_white"
-                        android:layout_marginTop="1dp">
+                    <LinearLayout style="@style/mine_my_center_lin">
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_already_buy_class"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_already_buy_class"
                             android:tag="goYiGouKeCheng"
                             binding:onClickCommand="@{mineViewModel.clickGroup2}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_daifukuan"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_dai_fu_kuan"
                             android:tag="goDaiFuKuan"
                             binding:onClickCommand="@{mineViewModel.clickGroup2}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_watch_history"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_watch_history"
                             android:tag="goGuanKanJiLu"
                             binding:onClickCommand="@{mineViewModel.clickGroup2}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_shoucang"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_lesson_shou_cang"
                             android:tag="goKeChengShouCang"
                             binding:onClickCommand="@{mineViewModel.clickGroup2}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_huancun"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_huan_cun"
                             android:tag="goHuanCun"
                             binding:onClickCommand="@{mineViewModel.clickGroup2}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -394,13 +352,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/base_white"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    <LinearLayout style="@style/mine_my_center_group_title">
                         <View
                             android:layout_width="2dp"
                             android:layout_height="16dp"
@@ -411,65 +363,35 @@
                             android:layout_marginStart="10dp"
                             android:text="@string/mine_str_my_data"
                             android:textColor="@color/base_font_black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
                         android:weightSum="5"
-                        android:background="@color/base_white"
-                        android:layout_marginTop="1dp">
+                        style="@style/mine_my_center_lin">
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableTop="@drawable/mine_ic_shang_chuan"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_shang_chuan"
+                            android:drawableTop="@drawable/mine_ic_shang_chuan"
                             android:tag="goShangChuan"
                             binding:onClickCommand="@{mineViewModel.clickGroup3}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_xia_zai"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_xia_zai"
                             android:tag="goXiaZai"
                             binding:onClickCommand="@{mineViewModel.clickGroup3}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_shoucang"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_data_collection"
                             android:tag="goZiLiaoShouCang"
                             binding:onClickCommand="@{mineViewModel.clickGroup3}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/e_vip"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_evip"
                             android:tag="goEVip"
                             binding:onClickCommand="@{mineViewModel.clickGroup3}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -477,13 +399,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/base_white"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    <LinearLayout style="@style/mine_my_center_group_title">
                         <View
                             android:layout_width="2dp"
                             android:layout_height="16dp"
@@ -494,76 +410,40 @@
                             android:layout_marginStart="10dp"
                             android:text="@string/mine_str_my_she_qu"
                             android:textColor="@color/base_font_black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
-                        android:background="@color/base_white"
-                        android:layout_marginTop="1dp">
+                        style="@style/mine_my_center_lin" >
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableTop="@drawable/mine_ic_my_send_posts"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_my_posts"
                             android:tag="goWoDeFaTie"
+                            android:drawableTop="@drawable/mine_ic_my_send_posts"
                             binding:onClickCommand="@{mineViewModel.clickGroup4}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableTop="@drawable/mine_ic_wode_huifu"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_wo_de_hui_fu"
                             android:tag="goWoDeHuiFu"
+                            android:drawableTop="@drawable/mine_ic_wode_huifu"
                             binding:onClickCommand="@{mineViewModel.clickGroup4}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableTop="@drawable/mine_ic_guanzhu_xiaozu"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_guan_zhu_xiao_zu"
                             android:tag="goGuanZhuXiaoZu"
+                            android:drawableTop="@drawable/mine_ic_guanzhu_xiaozu"
                             binding:onClickCommand="@{mineViewModel.clickGroup4}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:drawableTop="@drawable/mine_ic_guanzhu_longyou"
                             android:text="@string/mine_str_guan_zhu_long_you"
                             android:tag="goGuanZhuLongYou"
                             binding:onClickCommand="@{mineViewModel.clickGroup4}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                         <android.widget.TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:drawableTop="@drawable/mine_ic_liulan_jilu"
-                            android:drawablePadding="10dp"
-                            android:gravity="center"
                             android:text="@string/mine_str_liu_lan_ji_lu"
                             android:tag="goLiuLanJiLu"
                             binding:onClickCommand="@{mineViewModel.clickGroup4}"
-                            android:textColor="@color/base_font_black"
-                            android:textSize="13sp" />
+                            style="@style/mine_my_center_group_son" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -571,112 +451,101 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/base_white"
-                        android:padding="16dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    <LinearLayout style="@style/mine_my_center_group_title">
                         <View
                             android:layout_width="2dp"
                             android:layout_height="16dp"
                             android:background="@color/base_red" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="6"
                             android:layout_marginStart="10dp"
                             android:text="@string/mine_str_li_pin_dui_huan"
                             android:textColor="@color/base_font_black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/ll_zhulong_gift"
+                            android:layout_width="0dp"
+                            android:layout_weight="4"
+                            android:layout_height="18dp"
+                            android:gravity="end"
+                            android:tag="goGiftList"
+                            binding:onClickCommand="@{mineViewModel.otherClick}"
+                            android:text="@string/mine_str_more_gift"
+                            android:drawablePadding="12dp"
+                            android:textSize="13sp"
+                            android:textColor="@color/base_font_gray"
+                            binding:drawableEndCompat="@drawable/base_ic_back_white" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
+                        style="@style/mine_my_center_lin"
                         android:paddingStart="30dp"
-                        android:paddingEnd="30dp"
-                        android:background="@color/base_white"
-                        android:layout_marginTop="1dp">
+                        android:paddingEnd="30dp">
 
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
                             android:tag="0"
-                            android:background="@color/base_white"
                             binding:onClickCommand="@{mineViewModel.goGiftDetail}"
-                            binding:url="@{mineViewModel.data.gifts.get(0).img}" />
+                            binding:url="@{mineViewModel.data.gifts.get(0).img}"
+                            style="@style/mine_my_center_gift" />
 
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="8dp"
                             android:tag="1"
                             binding:onClickCommand="@{mineViewModel.goGiftDetail}"
-                            binding:url = "@{mineViewModel.data.gifts.get(1).img}"
-                            android:background="@color/base_white" />
+                            binding:url="@{mineViewModel.data.gifts.get(1).img}"
+                            style="@style/mine_my_center_gift" />
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="8dp"
                             android:tag="2"
                             binding:onClickCommand="@{mineViewModel.goGiftDetail}"
-                            binding:url = "@{mineViewModel.data.gifts.get(2).img}"
-                            android:background="@color/base_white" />
+                            binding:url="@{mineViewModel.data.gifts.get(2).img}"
+                            style="@style/mine_my_center_gift" />
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_weight="1"
                             android:tag="3"
                             binding:onClickCommand="@{mineViewModel.goGiftDetail}"
-                            binding:url = "@{mineViewModel.data.gifts.get(3).img}"
-                            android:background="@color/base_white" />
+                            binding:url="@{mineViewModel.data.gifts.get(3).img}"
+                            style="@style/mine_my_center_gift"/>
                     </LinearLayout>
                 </LinearLayout>
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
                     android:layout_marginBottom="70dp">
                     <android.widget.TextView
-                        android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:drawableLeft="@drawable/mine_ic_zixun"
                         android:text="@string/mine_str_zi_xun"
+                        android:tag="goCallPhone"
+                        binding:onClickCommand="@{mineViewModel.otherClick}"
+                        android:textSize="13sp"
                         android:textColor="@color/base_color_2a292d" />
 
                     <android.widget.TextView
                         android:id="@+id/tv_kefu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_phone"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         android:drawableLeft="@drawable/mine_ic_lianxikefu"
                         android:drawablePadding="10dp"
                         android:text="@string/mine_str_online_kefu"
+                        android:textSize="13sp"
+                        android:tag="goKeFu"
+                        binding:onClickCommand="@{mineViewModel.otherClick}"
                         android:textColor="@color/base_color_2a292d" />
 
                     <android.widget.TextView
                         android:id="@+id/tv_vision_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_kefu"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         android:text="@string/mine_str_apk_version"
                         android:textColor="@color/base_font_gray"
-                        android:textSize="13sp" />
-                </RelativeLayout>
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 

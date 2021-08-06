@@ -1,5 +1,6 @@
 package com.zhulong.mine.view.mine;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.zhulong.mine.application.AppViewModelFactory;
 import com.zhulong.mine.databinding.MineFragmentMineBinding;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
@@ -35,13 +37,12 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     @Override
     public void onStart() {
         super.onStart();
+        if ( viewModel.isVip.get() == 1){
+            StatusBarUtil.setColor(requireActivity(), ContextCompat.getColor(requireActivity(),R.color.base_color_7e6b5a),0);
+        }else {
+            StatusBarUtil.setColor(requireActivity(),  ContextCompat.getColor(requireActivity(),R.color.base_color_2a292e),0);
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.base_color_2a292e),0);
+        }
     }
 
     @Override

@@ -11,7 +11,8 @@
 
     <attr name="onScrollChangeCommand" format="reference" />
     <attr name="onScrollStateChangedCommand" format="reference" />
-    <attr name="url" format="string" />
+    <attr name="url" format="string|integer" />
+    <attr name="animatorTime" format="integer" />
     <attr name="onTouchCommand" format="reference" />
 
     <!-- require BindingCommand {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view click event. -->

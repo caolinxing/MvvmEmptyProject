@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+    <declare-styleable name="CircleImageView" tools:ignore="ResourceName">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="reference|color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <!-- {@deprecated Use civ_circlebackground_color instead.} -->
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+</resources>

@@ -24,6 +24,7 @@
     <!--other-->
     <color name="base_color_ea">#eaeaea</color>
     <color name="base_color_f4">#F4F4F4</color>
+    <!--主题色-->
     <color name="base_color_f7">#F7F7F7</color>
     <color name="base_color_f6">#F6F6F6</color>
     <color name="base_color_line">#DDDDDD</color>
@@ -31,7 +32,10 @@
     <color name="base_color_2a292e">#2A292E</color>
     <color name="base_color_2a292d">#2A292D</color>
     <color name="base_color_vip_yellow">#ebc28b</color>
+    <color name="base_color_vip_yin_se">#c9ddd8</color>
+
     <color name="base_color_7e6b5a">#7E6B5A</color>
+    <color name="base_color_d1cac4">#D1CAC4</color>
     <color name="base_color_f2f2f2">#F2F2F2</color>
     <color name="base_color_d9ba8e">#D9BA8E</color>
     <color name="base_color_7c7c7d">#7C7C7D</color>

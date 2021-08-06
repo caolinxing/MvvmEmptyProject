@@ -4,7 +4,6 @@ import com.blankj.utilcode.util.Utils;
 import com.kingja.loadsir.core.LoadSir;
 import com.orhanobut.logger.Logger;
 import com.zhulong.common.IModuleInit;
-import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.library_base.base.BaseApplication;
 import com.zhulong.library_base.loadsir.EmptyCallback;
 import com.zhulong.library_base.loadsir.ErrorCallback;
@@ -23,7 +22,6 @@ import com.zhulong.library_base.loadsir.TimeoutCallback;
 public class MainModuleInit implements IModuleInit {
     @Override
     public boolean onInitAhead(BaseApplication application) {
-        ScreenAutoAdapter.setup(application);
         LoadSir.beginBuilder()
                 .addCallback(new ErrorCallback())
                 .addCallback(new LoadingCallback())

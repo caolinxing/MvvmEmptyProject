@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
+import com.jaeger.library.StatusBarUtil;
 import com.tencent.mmkv.MMKV;
 import com.zhulong.common.router.RouterActivityPath;
 import com.zhulong.common.utils.AppInfoUtil;
@@ -19,6 +20,7 @@ import com.zhulong.mine.application.AppViewModelFactory;
 import com.zhulong.mine.config.MineConfig;
 import com.zhulong.mine.databinding.MineActivityLoginBinding;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 /**
  * 应用模块:
@@ -32,6 +34,12 @@ import androidx.lifecycle.ViewModelProvider;
 @Route(path = RouterActivityPath.Mine.PAGER_MINE_LOGIN)
 public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginViewModel> {
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        StatusBarUtil.setLightMode(this);
+        StatusBarUtil.setColor(this, ContextCompat.getColor(this,R.color.base_color_f4),0);
+    }
 
     @Override
     public int initContentView(Bundle savedInstanceState) {

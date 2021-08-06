@@ -1,14 +1,17 @@
 package com.zhulong.mine.view.mine;
 
 import android.app.Application;
+import android.text.TextUtils;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.zhulong.common.router.RouterActivityPath;
+import com.tencent.mmkv.MMKV;
 import com.zhulong.library_base.binding.command.BindingCommand;
 import com.zhulong.library_base.mvvm.model.BaseModel;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
+import com.zhulong.library_base.utils.GsonUtils;
 import com.zhulong.library_base.utils.ToastUtil;
+import com.zhulong.mine.config.MineConfig;
+import com.zhulong.mine.view.login.LoginActivity;
 import com.zhulong.network.ApiCallBack;
 import com.zhulong.network.BaseResponse;
 import com.zhulong.network.bean.mine.login.PersonHeaderBean;
@@ -18,6 +21,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import io.rx_cache2.Reply;
 
 /**
@@ -32,18 +36,51 @@ import io.rx_cache2.Reply;
 public class MineViewModel extends BaseViewModel<MineModel<BaseModel>> {
     //接口请求参数
     Map<String, String> requestMap = new HashMap<>();
-    public PersonHeaderBean personHeaderBean = new PersonHeaderBean();
     public ObservableField<PersonHeaderBean> data = new ObservableField<>();
-
+    public ObservableInt isVip = new ObservableInt(0);
+    private PersonHeaderBean mPersonHeaderBean;
 
     public MineViewModel(@NonNull Application application, MineModel<BaseModel> model) {
         super(application, model);
     }
 
-    //登录
-    public BindingCommand<Void> mgoLogin = new BindingCommand<>(() ->
-            ARouter.getInstance().build(RouterActivityPath.Mine.PAGER_MINE_LOGIN).navigation()
-    );
+    /**
+     * 其他点击
+     */
+    public BindingCommand<View> otherClick = new BindingCommand<>((view) -> {
+        switch (view.getTag().toString()) {
+            case "goLogin":
+                //去登陆
+                startActivity(LoginActivity.class);
+                break;
+            case "goSetting":
+                //去设置
+                showToast("去设置");
+                break;
+            case "ediAvatar":
+                //编辑头像
+                showToast("编辑头像");
+                break;
+            case "goBuyVip":
+                //购买VIP
+                showToast("购买VIP");
+                break;
+            case "goCallPhone":
+                //去打电话
+                showToast("去打电话");
+                break;
+            case "goKeFu":
+                //去联系客服
+                showToast("去联系客服");
+                break;
+            case "goGiftList":
+                //去更多礼品
+                showToast("去更多礼品");
+                break;
+            default:
+                break;
+        }
+    });
 
     /**
      * 栏目一点击
@@ -181,29 +218,42 @@ public class MineViewModel extends BaseViewModel<MineModel<BaseModel>> {
                 showToast("点击礼物4");
                 break;
             default:
-                showToast("点击礼物1");
                 break;
         }
     });
 
     //头信息
     public void getUserHeader() {
-        requestMap.clear();
-        requestMap.put("zuid", getUserInfo().getUid() + "");
-        model.getUserHeader(requestMap).subscribe(new ApiCallBack<Reply<BaseResponse<PersonHeaderBean>>>() {
-            @Override
-            public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
-                personHeaderBean = result.getData().getResult();
-                data.set(personHeaderBean);
-                showToast(ToastUtil.SUCCESS, personHeaderBean.getUsername() + "登入成功");
+        String json = MMKV.defaultMMKV().getString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, null);
+        if (json != null) {
+            mPersonHeaderBean = GsonUtils.fromLocalJson(json, PersonHeaderBean.class);
+            data.set(mPersonHeaderBean);
+            if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "4")) {
+                isVip.set(4);
+            } else if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "1")) {
+                isVip.set(1);
             }
+            requestMap.clear();
+            requestMap.put("zuid", getUserInfo().getUid() + "");
+            model.getUserHeader(requestMap).subscribe(new ApiCallBack<Reply<BaseResponse<PersonHeaderBean>>>() {
+                @Override
+                public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
+                    mPersonHeaderBean = result.getData().getResult();
+                    MMKV.defaultMMKV().putString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, GsonUtils.toJson(mPersonHeaderBean));
+                    data.set(mPersonHeaderBean);
+                    if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "4")) {
+                        isVip.set(4);
+                    } else if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "1")) {
+                        isVip.set(1);
+                    }
+                    showToast(ToastUtil.SUCCESS, mPersonHeaderBean.getUsername() + "登入成功");
+                }
 
-            @Override
-            public void onFail(int code, String wrongMsg, String result) {
-                showToast(wrongMsg);
-
-            }
-        });
+                @Override
+                public void onFail(int code, String wrongMsg, String result) {
+                    showToast(wrongMsg);
+                }
+            });
+        }
     }
-
 }

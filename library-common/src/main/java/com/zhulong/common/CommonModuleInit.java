@@ -2,16 +2,18 @@ package com.zhulong.common;
 
 
 import android.annotation.SuppressLint;
+import android.app.Application;
+import android.graphics.Typeface;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.tencent.mmkv.MMKV;
-import com.zhulong.common.adapter.ScreenAutoAdapter;
 import com.zhulong.library_base.base.BaseApplication;
 import com.zhulong.network.RetrofitUtil;
 import com.zhulong.network.config.ApiConfig;
 
+import java.lang.reflect.Field;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -39,6 +41,8 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 public class CommonModuleInit implements IModuleInit {
     @Override
     public boolean onInitAhead(BaseApplication application) {
+        //初始化字体
+        initTypeface(application);
         // 初始化日志
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
@@ -50,7 +54,6 @@ public class CommonModuleInit implements IModuleInit {
             ARouter.openLog(); // 开启日志
             ARouter.openDebug(); // 使用InstantRun的时候，需要打开该开关，上线之后关闭，否则有安全风险
         }
-        ScreenAutoAdapter.setup(application);
         RetrofitUtil.init(application.getFilesDir());
         RetrofitUtil.init(application.getFilesDir());
         ARouter.init(application);
@@ -140,4 +143,17 @@ public class CommonModuleInit implements IModuleInit {
         }
     }
 
+    //初始化字体
+    private void initTypeface(Application application) {
+        Typeface typeface = Typeface.createFromAsset(application.getAssets(), "fonts/font.ttf");
+        try {
+            Field field = Typeface.class.getDeclaredField("MONOSPACE");
+            field.setAccessible(true);
+            field.set("null", typeface);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, BaseView
     @Override
     public void initData() {
         mainPageAdapter = new MainPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT);
-        binding.viewPager.setOffscreenPageLimit(1);
+        binding.viewPager.setOffscreenPageLimit(0);
         binding.viewPager.setAdapter(mainPageAdapter);
         binding.bottomView.enableItemShiftingMode(false);
         binding.bottomView.enableAnimation(false);

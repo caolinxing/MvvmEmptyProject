@@ -32,11 +32,13 @@ import io.reactivex.functions.Consumer;
  */
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel, Consumer<Disposable> {
     protected M model;
+    protected Application mContext;
     private UIChangeLiveData uc;
     //弱引用持有
     private WeakReference<LifecycleProvider> lifecycle;
     //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
     private CompositeDisposable mCompositeDisposable;
+
 
     public BaseViewModel(@NonNull Application application) {
         this(application, null);
@@ -45,6 +47,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     public BaseViewModel(@NonNull Application application, M model) {
         super(application);
         this.model = model;
+        this.mContext = application;
         mCompositeDisposable = new CompositeDisposable();
     }
 

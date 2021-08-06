@@ -90,6 +90,7 @@ dependencies {
     api rootProject.ext.dependencies["rxBinding"]
     api rootProject.ext.dependencies["dialog_commons"]
     api rootProject.ext.dependencies["statusBar"]
+    api rootProject.ext.dependencies["autosize"]
     //leakcanary内存泄露检测
     debugImplementation rootProject.ext.dependencies["leakcanary"]
 

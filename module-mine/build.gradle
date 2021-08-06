@@ -18,4 +18,5 @@ dependencies {
     //组件中依赖阿里路由编译框架
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
 }
