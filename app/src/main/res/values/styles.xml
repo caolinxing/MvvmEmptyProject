@@ -46,6 +46,7 @@
 
         <!--RadioButton checkbox等控件的文字-->
         <item name="android:textColorPrimaryDisableOnly">@color/base_font_black</item>
+        <item name="android:typeface">monospace</item>
     </style>
     <style name="TabLayoutTextStyle" tools:ignore="ResourceName">
         <item name="android:textSize">18sp</item>

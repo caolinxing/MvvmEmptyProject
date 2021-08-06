@@ -1,10 +1,15 @@
 package com.zhulong.empty;
 
 
+import android.app.Application;
+import android.graphics.Typeface;
+
 import com.orhanobut.logger.Logger;
 import com.zhulong.common.config.ModuleLifecycleConfig;
 import com.zhulong.library_base.BuildConfig;
 import com.zhulong.library_base.base.BaseApplication;
+
+import java.lang.reflect.Field;
 
 /**
  * /**
@@ -23,13 +28,12 @@ public class MyAppcation extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         myAppcation = this;
-        Logger.v("MyAppcation");
         setDebug(BuildConfig.DEBUG);
         // 初始化需要初始化的组件
         ModuleLifecycleConfig.getInstance().initModuleAhead(this);
     }
     public static MyAppcation getInstance() {
+
         return myAppcation;
     }
-
 }

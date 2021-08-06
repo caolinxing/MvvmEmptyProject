@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.jaeger.library.StatusBarUtil;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.home.databinding.HomeFragmentHomeBinding;
 import com.zhulong.library_base.mvvm.base_view.BaseActivity;
@@ -12,6 +13,7 @@ import com.zhulong.library_base.mvvm.base_view.BaseFragment;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 /**
  * 应用模块: home
@@ -24,6 +26,7 @@ import androidx.annotation.Nullable;
  */
 @Route(path = RouterFragmentPath.Home.PAGER_HOME)
 public class HomeFragment extends BaseFragment<HomeFragmentHomeBinding, BaseViewModel> {
+
 
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
