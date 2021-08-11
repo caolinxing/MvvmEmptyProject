@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhulong.data">
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".application.DataModuleApp"
         android:allowBackup="true"
         android:icon="@mipmap/base_ic_launcher"
         android:label="@string/data_name"
@@ -11,6 +17,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:replace="android:label"
         android:theme="@style/common_AppThemeStart">
+        <activity android:name=".view.DataSplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

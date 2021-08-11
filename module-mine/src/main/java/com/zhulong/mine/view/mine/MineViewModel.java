@@ -33,7 +33,7 @@ import io.rx_cache2.Reply;
  * @since: clx
  * @date: 2021/7/15
  */
-public class MineViewModel extends BaseViewModel<MineModel<BaseModel>> {
+public class MineViewModel extends BaseViewModel<MineModel> {
     //接口请求参数
     Map<String, String> requestMap = new HashMap<>();
     public ObservableField<PersonHeaderBean> data = new ObservableField<>();

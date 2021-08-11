@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
     <data>
-
+        <import type="com.zhulong.data.R" />
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils" />
+        <variable
+            name="dataViewModel"
+            type="com.zhulong.data.view.data.DataViewModel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent"
+        android:background="@color/base_color_f4">
+
+        <com.flyco.tablayout.SegmentTabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            binding:addTabData="@{dataViewModel.mTabData}"
+            binding:layout_constraintRight_toRightOf="parent"
+            binding:layout_constraintTop_toTopOf="parent"
+            binding:tl_bar_color="@color/base_color_line"
+            binding:tl_bar_stroke_color="@color/base_color_line"
+            binding:tl_indicator_anim_enable="true"
+            binding:tl_indicator_bounce_enable="false"
+            binding:tl_indicator_color="@color/base_white"
+            binding:tl_indicator_corner_radius="11dp"
+            binding:tl_indicator_margin_bottom="1dp"
+            binding:tl_indicator_margin_left="1dp"
+            binding:tl_indicator_margin_right="1dp"
+            binding:tl_indicator_margin_top="1dp"
+            binding:tl_tab_padding="8dp"
+            binding:tl_textSelectColor="@color/base_font_black"
+            binding:tl_textUnselectColor="@color/base_font_gray"
+            binding:tl_textsize="10sp" />
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="16sp"
-            android:text="资料"/>
+            android:layout_marginBottom="50dp"
+            android:layout_below="@id/tab_layout"/>
     </RelativeLayout>
 </layout>

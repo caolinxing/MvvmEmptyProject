@@ -90,7 +90,11 @@ ext {
             //状态栏
             "statusBar"                             :'com.jaeger.statusbarutil:library:1.5.1',
             //头条适配
-            "autosize"                              :'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+            "autosize"                              :'com.github.JessYanCoding:AndroidAutoSize:v1.2.1',
+            //微信OpenSdk
+            //"wechatOpenSdk"                       :'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.0'
+            //TabLayout
+            "tab"                                   :'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     ]
 
 

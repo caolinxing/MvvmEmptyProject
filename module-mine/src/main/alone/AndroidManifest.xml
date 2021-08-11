@@ -10,7 +10,7 @@
         android:label="@string/mine_name"
         android:roundIcon="@mipmap/base_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeStart"
+        android:theme="@style/common_AppThemeStart"
         tools:replace="android:label">
         <activity android:name=".view.MineSplashActivity">
             <intent-filter>

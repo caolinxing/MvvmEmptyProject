@@ -11,25 +11,24 @@ import com.zhulong.mine.view.mine.MineModel;
 import com.zhulong.mine.view.mine.MineViewModel;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
  * Created by goldze on 2019/3/26.
  */
-public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+public class MineViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @SuppressLint("StaticFieldLeak")
-    private static volatile AppViewModelFactory INSTANCE;
+    private static volatile MineViewModelFactory INSTANCE;
     private final Application mApplication;
     private final BaseModel model;
 
-    public static AppViewModelFactory getInstance(Application application, BaseModel model) {
-        return new AppViewModelFactory(application,model);
+    public static MineViewModelFactory getInstance(Application application, BaseModel model) {
+        return new MineViewModelFactory(application,model);
     }
 
 
-    private AppViewModelFactory(Application application, BaseModel model) {
+    private MineViewModelFactory(Application application, BaseModel model) {
         this.mApplication = application;
         this.model = model;
     }

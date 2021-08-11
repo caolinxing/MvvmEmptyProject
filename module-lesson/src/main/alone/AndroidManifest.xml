@@ -3,6 +3,7 @@
     package="com.zhulong.lessonclass">
 
     <application
+        android:name=".application.LessonModuleApp"
         android:allowBackup="true"
         android:icon="@mipmap/base_ic_launcher"
         android:label="@string/lesson_name"

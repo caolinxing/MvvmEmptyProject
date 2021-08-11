@@ -3,6 +3,7 @@
     package="com.zhulong.home">
 
     <application
+        android:name=".application.HomeModuleApp"
         android:allowBackup="true"
         android:icon="@mipmap/base_ic_launcher"
         android:label="@string/home_name"

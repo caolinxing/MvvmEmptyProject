@@ -3,6 +3,7 @@
     package="com.zhulong.vip">
 
     <application
+        android:name=".view.application.VipModuleApp"
         android:allowBackup="true"
         android:icon="@mipmap/base_ic_launcher"
         android:label="@string/vip_name"

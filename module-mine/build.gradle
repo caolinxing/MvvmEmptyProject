@@ -2,7 +2,7 @@ apply from: "../module.build.gradle"
 android {
     defaultConfig {
         if (isBuildModule.toBoolean()){
-            applicationId "com.zhulong.mine"
+            applicationId "com.zhulong.eduvideo"
         }
         //统一资源前缀，规范资源引用
         resourcePrefix "mine_"
