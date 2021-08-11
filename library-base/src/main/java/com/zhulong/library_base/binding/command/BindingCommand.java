@@ -10,7 +10,7 @@ public class BindingCommand<T> {
     private BindingConsumer<T> consumer;
     private BindingFunction<Boolean> canExecute0;
 
-    public BindingCommand(BindingAction execute) {
+    public BindingCommand() {
         this.execute = execute;
     }
 

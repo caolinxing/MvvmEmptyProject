@@ -2,11 +2,10 @@ package com.zhulong.data.view;
 
 import android.os.Bundle;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.zhulong.common.utils.AppInfoUtil;
 import com.zhulong.data.R;
 import com.zhulong.data.databinding.DataSplashAcivityLayoutBinding;
-import com.zhulong.data.view.data.DataFragment;
+import com.zhulong.data.view.data_home.DataFragment;
 import com.zhulong.library_base.bean.AppDeviceInfo;
 import com.zhulong.library_base.mvvm.base_view.BaseActivity;
 import com.zhulong.library_base.mvvm.view_model.BaseViewModel;

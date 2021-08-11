@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="com.zhulong.data.R" />
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils" />
+        <variable
+            name="dataViewModel"
+            type="com.zhulong.data.view.data_group_new.DataGroupNewViewModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_color_f4">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最新精华"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</layout>

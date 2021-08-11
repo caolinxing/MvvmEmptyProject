@@ -44,6 +44,8 @@ public class RouterFragmentPath {
         
         /** 资料页面 */
         public static final String PAGER_DATA = DATA + "/Data";
+        public static final String PAGER_DATA_GroupNew = DATA + "/GroupNew";
+        public static final String PAGER_DATA_GroupData = DATA + "/GroupData";
     }
     
     /** 我的*/

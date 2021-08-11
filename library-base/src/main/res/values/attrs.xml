@@ -1,172 +1,178 @@
-<resources >
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- require boolean value to decide whether requestFocus for view. -->
-    <attr name="requestFocus" format="boolean"  />
+    <attr name="requestFocus" format="boolean" tools:ignore="ResourceName" />
     <!-- require ItemView {@link me.tatarka.bindingcollectionadapter.ItemView} or ItemViewSelector {{@link me.tatarka.bindingcollectionadapter.ItemViewSelector}.} -->
-    <attr name="itemView" format="reference" />
+    <attr name="itemView" format="reference" tools:ignore="ResourceName" />
     <!-- require List<ViewModel> bind to ItemView to presentation.-->
-    <attr name="items" format="reference" />
+    <attr name="items" format="reference" tools:ignore="ResourceName" />
     <!-- require a adapter which type of BindingRecyclerViewAdapter<T> to AdapterView-->
-    <attr name="adapter" format="reference" />
+    <attr name="adapter" format="reference" tools:ignore="ResourceName" />
 
-    <attr name="onScrollChangeCommand" format="reference" />
-    <attr name="onScrollStateChangedCommand" format="reference" />
-    <attr name="url" format="string|integer" />
-    <attr name="animatorTime" format="integer" />
-    <attr name="onTouchCommand" format="reference" />
+    <attr name="onScrollChangeCommand" format="reference" tools:ignore="ResourceName" />
+    <attr name="onScrollStateChangedCommand" format="reference" tools:ignore="ResourceName" />
+    <attr name="url" format="string|integer" tools:ignore="ResourceName" />
+    <attr name="animatorTime" format="integer" tools:ignore="ResourceName" />
+    <attr name="onTouchCommand" format="reference" tools:ignore="ResourceName" />
 
     <!-- require BindingCommand {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view click event. -->
-    <attr name="onClickCommand" format="reference" />
-    <attr name="onClickCommandSimple" format="reference" />
-    <attr name="onLongClickCommand" format="reference" />
+    <attr name="onClickCommand" format="reference" tools:ignore="ResourceName" />
+    <attr name="onClickCommandSimple" format="reference" tools:ignore="ResourceName" />
+    <attr name="onLongClickCommand" format="reference" tools:ignore="ResourceName" />
     <!-- require BindingCommand<Boolean> {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view focus change event.
      BindingCommand would has params which means if view hasFocus.-->
-    <attr name="onFocusChangeCommand" format="reference" />
-    <attr name="isThrottleFirst" format="boolean" />
-    <attr name="currentView" format="reference" />
-    <attr name="isVisible" format="boolean" />
+    <attr name="onFocusChangeCommand" format="reference" tools:ignore="ResourceName" />
+    <attr name="isThrottleFirst" format="boolean" tools:ignore="ResourceName" />
+    <attr name="currentView" format="reference" tools:ignore="ResourceName" />
+    <attr name="isVisible" format="boolean" tools:ignore="ResourceName" />
     <!-- require boolean value to decide whether requestFocus for view. -->
-    <declare-styleable name="View">
+    <declare-styleable name="View" tools:ignore="ResourceName">
         <!-- require BindingCommand {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view click event. -->
-        <attr name="onClickCommand" />
-        <attr name="onLongClickCommand" />
+        <attr name="onClickCommand" tools:ignore="ResourceName" />
+        <attr name="onLongClickCommand" tools:ignore="ResourceName" />
         <!-- require BindingCommand<Boolean> {@link com.kelin.mvvmlight.command.BindingCommand } to deal with view focus change event.
          BindingCommand would has params which means if view hasFocus.-->
-        <attr name="onFocusChangeCommand" />
+        <attr name="onFocusChangeCommand" tools:ignore="ResourceName" />
         <!-- require BindingCommand<MotionEvent> -->
-        <attr name="onTouchCommand" />
-        <attr name="isThrottleFirst" />
-        <attr name="currentView" />
+        <attr name="onTouchCommand" tools:ignore="ResourceName" />
+        <attr name="isThrottleFirst" tools:ignore="ResourceName" />
+        <attr name="currentView" tools:ignore="ResourceName" />
 
     </declare-styleable>
 
 
-    <declare-styleable name="AdapterView">
+    <declare-styleable name="AdapterView" tools:ignore="ResourceName">
         <!-- require ItemView {@link me.tatarka.bindingcollectionadapter.ItemView} or ItemViewSelector {{@link me.tatarka.bindingcollectionadapter.ItemViewSelector}.} -->
-        <attr name="itemView" />
+        <attr name="itemView" tools:ignore="ResourceName" />
         <!-- require List<ViewModel> bind to ItemView to presentation.-->
-        <attr name="items" />
+        <attr name="items" tools:ignore="ResourceName" />
         <!-- require a adapter which type of BindingRecyclerViewAdapter<T> to AdapterView-->
-        <attr name="adapter" />
-        <attr name="dropDownItemView" format="reference" />
-        <attr name="itemIds" format="reference" />
-        <attr name="itemIsEnabled" format="reference" />
+        <attr name="adapter" tools:ignore="ResourceName" />
+        <attr name="dropDownItemView" format="reference" tools:ignore="ResourceName" />
+        <attr name="itemIds" format="reference" tools:ignore="ResourceName" />
+        <attr name="itemIsEnabled" format="reference" tools:ignore="ResourceName" />
         <!-- require BindingCommand<Integer> -->
-        <attr name="onScrollStateChangedCommand" />
+        <attr name="onScrollStateChangedCommand" tools:ignore="ResourceName" />
         <!-- require BindingCommand<ListViewScrollDataWrapper> -->
-        <attr name="onScrollChangeCommand" />
+        <attr name="onScrollChangeCommand" tools:ignore="ResourceName" />
         <!-- require BindingCommand<Integer> count of list items-->
-        <attr name="onLoadMoreCommand" format="reference" />
+        <attr name="onLoadMoreCommand" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="TextView">
+    <declare-styleable name="TextView" tools:ignore="ResourceName">
         <!--require BindingCommand<TextChangeDataWrapper> -->
-        <attr name="beforeTextChangedCommand" format="reference" />
+        <attr name="beforeTextChangedCommand" format="reference" tools:ignore="ResourceName" />
         <!--require BindingCommand<TextChangeDataWrapper> -->
-        <attr name="onTextChangedCommand" format="reference" />
+        <attr name="onTextChangedCommand" format="reference" tools:ignore="ResourceName" />
         <!--require BindingCommand<String> -->
-        <attr name="afterTextChangedCommand" format="reference" />
-        <attr name="textChanged" format="reference" />
+        <attr name="afterTextChangedCommand" format="reference" tools:ignore="ResourceName" />
+        <attr name="textChanged" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
 
 
-    <declare-styleable name="ImageView">
+    <declare-styleable name="ImageView" tools:ignore="ResourceName">
         <!--  load bitmap from uri(string type) -->
-        <attr name="url" />
+        <attr name="url" tools:ignore="ResourceName" />
         <!--width for ResizeOptions (use Fresco to load bitmap). -->
-        <attr name="request_width" format="integer" />
+        <attr name="request_width" format="integer" tools:ignore="ResourceName" />
         <!--height for ResizeOptions (use Fresco to load bitmap). -->
-        <attr name="request_height" format="integer" />
-        <attr name="placeholderRes" format="reference|color" />
+        <attr name="request_height" format="integer" tools:ignore="ResourceName" />
+        <attr name="placeholderRes" format="reference|color" tools:ignore="ResourceName" />
         <!--  require BindingCommand<Bitmap> See {@link @link com.kelin.mvvmlight.command.BindingCommand} -->
-        <attr name="onSuccessCommand" format="reference" />
+        <attr name="onSuccessCommand" format="reference" tools:ignore="ResourceName" />
         <!--require BindingCommand<CloseableReference<CloseableImage>> See {@link com.kelin.mvvmlight.command.BindingCommand} -->
-        <attr name="onFailureCommand" format="reference" />
+        <attr name="onFailureCommand" format="reference" tools:ignore="ResourceName" />
 
     </declare-styleable>
 
 
-    <declare-styleable name="ViewGroup">
+    <declare-styleable name="ViewGroup" tools:ignore="ResourceName">
         <!-- require ItemView {@link me.tatarka.bindingcollectionadapter.ItemView} or ItemViewSelector {{@link me.tatarka.bindingcollectionadapter.ItemViewSelector}.} -->
-        <attr name="itemView" />
+        <attr name="itemView" tools:ignore="ResourceName" />
         <!-- require List<ViewModel> bind to ItemView to presentation.-->
-        <attr name="observableList" format="reference" />
+        <attr name="observableList" format="reference" tools:ignore="ResourceName" />
 
     </declare-styleable>
 
-    <declare-styleable name="RecyclerView" parent="AdapterView">
-        <attr name="lineManager" format="reference" />
-        <attr name="itemBinding" format="reference" />
-        <attr name="layoutManager" format="reference" />
-        <attr name="itemAnimator" format="reference" />
+    <declare-styleable name="RecyclerView" parent="AdapterView" tools:ignore="ResourceName">
+        <attr name="lineManager" format="reference" tools:ignore="ResourceName" />
+        <attr name="itemBinding" format="reference" tools:ignore="ResourceName" />
+        <attr name="layoutManager" format="reference" tools:ignore="ResourceName" />
+        <attr name="itemAnimator" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
-    <declare-styleable name="RadioGroup">
-        <attr name="onCheckedChangedCommand" format="reference" />
-    </declare-styleable>
-
-    <declare-styleable name="Spinner">
-        <attr name="itemDatas" format="reference" />
-        <attr name="valueReply" format="string" />
-        <attr name="resource" format="integer" />
-        <attr name="dropDownResource" format="integer" />
-        <attr name="onItemSelectedCommand" format="reference" />
+    <declare-styleable name="RadioGroup" tools:ignore="ResourceName">
+        <attr name="onCheckedChangedCommand" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="Switch">
-        <attr name="onCheckedChangeCommand" format="reference" />
-        <attr name="switchState" format="boolean" />
+    <declare-styleable name="Spinner" tools:ignore="ResourceName">
+        <attr name="itemDatas" format="reference" tools:ignore="ResourceName" />
+        <attr name="valueReply" format="string" tools:ignore="ResourceName" />
+        <attr name="resource" format="integer" tools:ignore="ResourceName" />
+        <attr name="dropDownResource" format="integer" tools:ignore="ResourceName" />
+        <attr name="onItemSelectedCommand" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="ListView" parent="AdapterView">
+    <declare-styleable name="Switch" tools:ignore="ResourceName">
+        <attr name="onCheckedChangeCommand" format="reference" tools:ignore="ResourceName" />
+        <attr name="switchState" format="boolean" tools:ignore="ResourceName" />
+    </declare-styleable>
+
+    <declare-styleable name="ListView" parent="AdapterView" tools:ignore="ResourceName">
         <!--require BindingCommand<Integer> integer mean to position where is clicked! -->
-        <attr name="onItemClickCommand" format="reference" />
+        <attr name="onItemClickCommand" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="ViewPager">
+    <declare-styleable name="ViewPager" tools:ignore="ResourceName">
         <!-- require ItemView {@link me.tatarka.bindingcollectionadapter.ItemView} or ItemViewSelector {{@link me.tatarka.bindingcollectionadapter.ItemViewSelector}.} -->
-        <attr name="itemView" />
+        <attr name="itemView" tools:ignore="DuplicateDefinition,ResourceName" />
         <!-- require List<ViewModel> bind to ItemView to presentation.-->
-        <attr name="items" />
+        <attr name="items" tools:ignore="ResourceName" />
         <!-- require a adapter which type of BindingRecyclerViewAdapter<T> to AdapterView-->
-        <attr name="adapter" />
+        <attr name="adapter" tools:ignore="ResourceName" />
         <!-- require PageTitles<T>-->
-        <attr name="pageTitles" format="reference" />
+        <attr name="pageTitles" format="reference" tools:ignore="ResourceName" />
         <!--require BindingCommand<ViewPagerDataWrapper> -->
-        <attr name="onPageScrolledCommand" format="reference" />
+        <attr name="onPageScrolledCommand" format="reference" tools:ignore="ResourceName" />
         <!--require BindingCommand<Integer> -->
-        <attr name="onPageSelectedCommand" format="reference" />
+        <attr name="onPageSelectedCommand" format="reference" tools:ignore="ResourceName" />
         <!--require BindingCommand<Integer> -->
-        <attr name="onPageScrollStateChangedCommand" format="reference" />
+        <attr name="onPageScrollStateChangedCommand" format="reference" tools:ignore="ResourceName" />
 
     </declare-styleable>
 
-    <declare-styleable name="NestedScrollView">
+    <declare-styleable name="NestedScrollView" tools:ignore="ResourceName">
         <!-- require BindingCommand<NestScrollDataWrapper> -->
-        <attr name="onScrollChangeCommand" />
+        <attr name="onScrollChangeCommand" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="SimpleDraweeView">
+    <declare-styleable name="SimpleDraweeView" tools:ignore="ResourceName">
         <!-- require String to load Image"-->
-        <attr name="url" />
+        <attr name="url" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="ScrollView">
+    <declare-styleable name="ScrollView" tools:ignore="ResourceName">
         <!-- require BindingCommand<ScrollDataWrapper> -->
-        <attr name="onScrollChangeCommand" />
+        <attr name="onScrollChangeCommand" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="SwipeRefreshLayout">
+    <declare-styleable name="SwipeRefreshLayout" tools:ignore="ResourceName">
         <!-- require BindingCommand -->
-        <attr name="onRefreshCommand" format="reference" />
-        <attr name="refreshing" format="boolean" />
+        <attr name="onRefreshCommand" format="reference" tools:ignore="ResourceName" />
+        <attr name="refreshing" format="boolean" tools:ignore="ResourceName" />
     </declare-styleable>
 
-    <declare-styleable name="WebView">
+    <declare-styleable name="WebView" tools:ignore="ResourceName">
         <!-- require String render to html show in webview-->
-        <attr name="render" format="string" />
+        <attr name="render" format="string" tools:ignore="ResourceName" />
     </declare-styleable>
     <!-- 自定义控制事件分发的LinearLayout -->
-    <declare-styleable name="ControlDistributeLinearLayout">
-        <attr name="distribute_event" format="boolean" />
+    <declare-styleable name="ControlDistributeLinearLayout" tools:ignore="ResourceName">
+        <attr name="distribute_event" format="boolean" tools:ignore="ResourceName" />
+    </declare-styleable>
+
+    <declare-styleable name="SegmentTabLayout" tools:ignore="ResourceName">
+        <attr name="addTabData" format="reference" tools:ignore="ResourceName" />
+        <attr name="addTabSelectListener" format="reference" tools:ignore="ResourceName" />
+        <attr name="addTabAdapter" format="reference" tools:ignore="ResourceName" />
     </declare-styleable>
 </resources>

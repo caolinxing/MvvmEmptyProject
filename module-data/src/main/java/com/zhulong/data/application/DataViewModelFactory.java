@@ -3,8 +3,11 @@ package com.zhulong.data.application;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
-import com.zhulong.data.view.data.DataModel;
-import com.zhulong.data.view.data.DataViewModel;
+import com.zhulong.data.view.data_group_data.DataGroupDataModel;
+import com.zhulong.data.view.data_group_data.DataGroupDataViewModel;
+import com.zhulong.data.view.data_group_new.DataGroupNewModel;
+import com.zhulong.data.view.data_group_new.DataGroupNewViewModel;
+import com.zhulong.data.view.data_home.DataViewModel;
 import com.zhulong.library_base.mvvm.model.BaseModel;
 
 import androidx.annotation.NonNull;
@@ -33,9 +36,12 @@ public class DataViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(DataViewModel.class)) {
-            return (T) new DataViewModel(mApplication,(DataModel)model);
+        if (modelClass.isAssignableFrom(DataGroupDataViewModel.class)) {
+            return (T) new DataGroupDataViewModel(mApplication,(DataGroupDataModel)model);
+        }else if (modelClass.isAssignableFrom(DataGroupNewViewModel.class)) {
+            return (T) new DataGroupNewViewModel(mApplication,(DataGroupNewModel)model);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
+
 }

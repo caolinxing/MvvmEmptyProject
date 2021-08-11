@@ -93,5 +93,5 @@ dependencies {
     api rootProject.ext.dependencies["autosize"]
     //leakcanary内存泄露检测
     debugImplementation rootProject.ext.dependencies["leakcanary"]
-
+    api rootProject.ext.dependencies["tab"]
 }

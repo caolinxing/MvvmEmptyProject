@@ -7,12 +7,12 @@
         <import type="android.text.TextUtils" />
         <variable
             name="dataViewModel"
-            type="com.zhulong.data.view.data.DataViewModel" />
+            type="com.zhulong.data.view.data_home.DataViewModel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/base_color_f4">
+        android:background="@{dataViewModel.pagerIndex==0 ? @color/base_color_f4 : @color/base_white}">
 
         <com.flyco.tablayout.SegmentTabLayout
             android:id="@+id/tab_layout"
@@ -24,6 +24,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             binding:addTabData="@{dataViewModel.mTabData}"
+            binding:addTabSelectListener="@{dataViewModel.onTabSelectListener}"
             binding:layout_constraintRight_toRightOf="parent"
             binding:layout_constraintTop_toTopOf="parent"
             binding:tl_bar_color="@color/base_color_line"
@@ -41,8 +42,10 @@
             binding:tl_textUnselectColor="@color/base_font_gray"
             binding:tl_textsize="10sp" />
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            binding:onPageSelectedCommand="@{dataViewModel.onPagerSelectListener}"
             android:layout_marginBottom="50dp"
             android:layout_below="@id/tab_layout"/>
     </RelativeLayout>
