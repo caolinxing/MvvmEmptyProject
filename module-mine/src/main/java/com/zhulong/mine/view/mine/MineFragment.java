@@ -38,7 +38,7 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     public void onResume() {
         super.onResume();
         viewModel.loginAfterUpdate();
-        setStatusBar(true);
+        setStatusBar(viewModel.isClickLogin);
     }
 
     @Override

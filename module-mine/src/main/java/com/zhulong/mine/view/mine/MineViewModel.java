@@ -225,6 +225,7 @@ public class MineViewModel extends BaseViewModel<MineModel> {
 
     //登录后刷新
     public void loginAfterUpdate(){
+        isClickLogin = false;
         String json = MMKV.defaultMMKV().getString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, null);
         if (json != null) {
             mPersonHeaderBean = GsonUtils.fromLocalJson(json, PersonHeaderBean.class);
