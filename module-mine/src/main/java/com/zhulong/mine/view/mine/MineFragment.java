@@ -1,11 +1,13 @@
 package com.zhulong.mine.view.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
+import com.orhanobut.logger.Logger;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.library_base.mvvm.base_view.BaseFragment;
 import com.zhulong.mine.BR;
@@ -34,6 +36,11 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
         return R.layout.mine_fragment_mine;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.loginUpdateUserHeader();
+    }
 
     @Override
     public void setMenuVisibility(boolean isVisibleToUser) {

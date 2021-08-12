@@ -39,6 +39,8 @@ public class MineViewModel extends BaseViewModel<MineModel> {
     public ObservableField<PersonHeaderBean> data = new ObservableField<>();
     public ObservableInt isVip = new ObservableInt(0);
     private PersonHeaderBean mPersonHeaderBean;
+    public boolean isLoginClick = false;
+
 
     public MineViewModel(@NonNull Application application, MineModel<BaseModel> model) {
         super(application, model);
@@ -50,6 +52,7 @@ public class MineViewModel extends BaseViewModel<MineModel> {
     public BindingCommand<View> otherClick = new BindingCommand<>((view) -> {
         switch (view.getTag().toString()) {
             case "goLogin":
+                isLoginClick = true;
                 //去登陆
                 startActivity(LoginActivity.class);
                 break;
@@ -221,6 +224,15 @@ public class MineViewModel extends BaseViewModel<MineModel> {
                 break;
         }
     });
+
+    //登录之后更新用户信息
+    public void loginUpdateUserHeader() {
+        if (isLoginClick) {
+            isLoginClick = false;
+            getUserHeader();
+        }
+    }
+
 
     //头信息
     public void getUserHeader() {
