@@ -54,6 +54,8 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
     //密码明/密文的显示隐藏绑定
     public ObservableInt pwdVisibility = new ObservableInt(View.INVISIBLE);
 
+    public UIChangeObservable mUc = new UIChangeObservable();
+
     public LoginViewModel(@NonNull @NotNull Application application, LoginModel<BaseModel> model) {
         super(application, model);
         this.model = model;
@@ -64,9 +66,9 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
      */
     public static class UIChangeObservable {
         //密码开关观察者
-        public static SingleLiveEvent<Boolean> pSwitchEvent = new SingleLiveEvent<>();
+        public SingleLiveEvent<Boolean> pSwitchEvent = new SingleLiveEvent<>();
         //协议勾选
-        public static SingleLiveEvent<Boolean> checkedAgreementSwitchEvent = new SingleLiveEvent<>();
+        public SingleLiveEvent<Boolean> checkedAgreementSwitchEvent = new SingleLiveEvent<>();
     }
 
 
@@ -97,7 +99,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
      * 登录相关点击
      */
     public BindingCommand<View> clickLogin = new BindingCommand<>((view) -> {
-        switch (view.getTag().toString()){
+        switch (view.getTag().toString()) {
             case "QQLogin":
                 //QQ登录
                 showToast("QQ登录");
@@ -127,7 +129,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
      * 页面其他点击
      */
     public BindingCommand<View> otherClick = new BindingCommand<>((view) -> {
-        switch (view.getTag().toString()){
+        switch (view.getTag().toString()) {
             case "close":
                 //关闭页面
                 finish();
@@ -139,21 +141,20 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
             case "passwordShowSwitchOnClickCommand":
                 //密码显示开关
                 //让观察者的数据改变,逻辑从ViewModel层转到View层，在View层的监听则会被调用
-                UIChangeObservable.pSwitchEvent.setValue(UIChangeObservable.pSwitchEvent.getValue() == null || !UIChangeObservable.pSwitchEvent.getValue());
+                mUc.pSwitchEvent.setValue(mUc.pSwitchEvent.getValue() == null || !mUc.pSwitchEvent.getValue());
                 break;
             case "checkedAgreementOnClickCommand":
                 //协议勾选
-                UIChangeObservable.checkedAgreementSwitchEvent.setValue(true);
+                mUc.checkedAgreementSwitchEvent.setValue(true);
                 break;
             case "clearAccountOnClickCommand":
                 //清除账号
                 userName.set("");
-            break;
+                break;
             default:
                 break;
         }
     });
-
 
 
     /**
@@ -161,7 +162,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
      */
     private void doAccountLogin() {
         boolean isAgree = MMKV.defaultMMKV().getBoolean(MineConfig.KeyConfig.KEY_IS_AGREE_AGREEMENT, false);
-        if (!isAgree){
+        if (!isAgree) {
             showToast("请先同意服务协议和隐私政策");
             return;
         }
@@ -225,7 +226,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel<BaseModel>> {
             public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
                 PersonHeaderBean personHeaderBean = result.getData().getResult();
                 MMKV.defaultMMKV().putString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, GsonUtils.toJson(personHeaderBean));
-                showToast(ToastUtil.SUCCESS,personHeaderBean.getUsername()+"登入成功");
+                showToast(ToastUtil.SUCCESS, personHeaderBean.getUsername() + "登入成功");
                 finish();
             }
 

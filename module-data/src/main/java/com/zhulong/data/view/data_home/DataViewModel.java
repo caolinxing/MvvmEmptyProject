@@ -34,12 +34,15 @@ public class DataViewModel extends BaseViewModel {
     public List<Fragment> fragmentList = new ArrayList<>();
     public ObservableInt pagerIndex = new ObservableInt(0);
     public ObservableField<FragmentManager> childFragmentManager = new ObservableField<>();
+    public UIChangeObservable mUc = new UIChangeObservable();
+
+
     /**
      * 封装一个界面发生改变的观察者
      */
     public static class UIChangeObservable {
         //切换Fragment
-        public static SingleLiveEvent<Integer> onFragmentSelectEvent = new SingleLiveEvent<>();
+        public SingleLiveEvent<Integer> onFragmentSelectEvent = new SingleLiveEvent<>();
     }
 
     public DataViewModel(@NonNull @NotNull Application application) {
@@ -56,10 +59,10 @@ public class DataViewModel extends BaseViewModel {
 
     public BindingCommand<Integer> onTabSelectListener = new BindingCommand<>((index) -> {
         pagerIndex.set(index);
-        UIChangeObservable.onFragmentSelectEvent.setValue(index);
+        mUc.onFragmentSelectEvent.setValue(index);
     });
     public BindingCommand<Integer> onPagerSelectListener = new BindingCommand<>((index) -> {
         pagerIndex.set(index);
-        UIChangeObservable.onFragmentSelectEvent.setValue(index);
+        mUc.onFragmentSelectEvent.setValue(index);
     });
 }

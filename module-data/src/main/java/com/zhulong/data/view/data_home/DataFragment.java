@@ -46,7 +46,7 @@ public class DataFragment extends BaseFragment<DataFragmentDataBinding, DataView
     public void initViewObservable() {
         super.initViewObservable();
         //切换页面
-        DataViewModel.UIChangeObservable.onFragmentSelectEvent.observe(this, position -> {
+        viewModel.mUc.onFragmentSelectEvent.observe(this, position -> {
             binding.viewPager.setCurrentItem(position);
             binding.tabLayout.setCurrentTab(position);
         });

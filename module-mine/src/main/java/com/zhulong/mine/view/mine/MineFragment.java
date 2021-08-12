@@ -34,10 +34,20 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
         return R.layout.mine_fragment_mine;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.loginAfterUpdate();
+        setStatusBar(true);
+    }
 
     @Override
     public void setMenuVisibility(boolean isVisibleToUser) {
         super.setMenuVisibility(isVisibleToUser);
+        setStatusBar(isVisibleToUser);
+    }
+
+    private void setStatusBar(boolean isVisibleToUser) {
         if (viewModel != null) {
             if (isVisibleToUser) {
                 if (viewModel.isVip.get() == 1) {

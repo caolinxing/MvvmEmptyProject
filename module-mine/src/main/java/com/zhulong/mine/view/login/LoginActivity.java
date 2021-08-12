@@ -105,7 +105,7 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
     @Override
     public void initViewObservable() {
         //密码明/密文切换
-        LoginViewModel.UIChangeObservable.pSwitchEvent.observe(this, aBoolean -> {
+        viewModel.mUc.pSwitchEvent.observe(this, aBoolean -> {
             //pSwitchObservable是boolean类型的观察者,所以可以直接使用它的值改变密码开关的图标
             if (aBoolean) {
                 //密码可见
@@ -120,7 +120,7 @@ public class LoginActivity extends BaseActivity<MineActivityLoginBinding, LoginV
 
         });
         //协议勾选
-        LoginViewModel.UIChangeObservable.checkedAgreementSwitchEvent.observe(this, aBoolean -> {
+        viewModel.mUc.checkedAgreementSwitchEvent.observe(this, aBoolean -> {
             boolean isSelect = !binding.loginIvCheckBoxPrivacy.isSelected();
             binding.loginIvCheckBoxPrivacy.setSelected(isSelect);
             MMKV.defaultMMKV().putBoolean(MineConfig.KeyConfig.KEY_IS_AGREE_AGREEMENT, isSelect);
