@@ -25,7 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
  * @author clx
  * @since 2021-07-03
  */
-@Route(path = RouterFragmentPath.Data.PAGER_DATA_GroupData)
+@Route(path = RouterFragmentPath.Data.PAGER_DATA_GROUP_DATA)
 public class DataGroupDataFragment extends BaseFragment<DataFragmentDataBinding, DataGroupDataViewModel> implements IDataContractView.IGroupData.IView {
     public static final int GROUP_DATA_TYPE  = 1;  //1资料小组 2问答小组
     public static final String GROUP_DATA_TYPE_KEY  = "type";

@@ -26,7 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
  * @author clx
  * @since 2021-07-03
  */
-@Route(path = RouterFragmentPath.Data.PAGER_DATA_GroupNew)
+@Route(path = RouterFragmentPath.Data.PAGER_DATA_GROUP_NEW)
 public class DataGroupNewFragment extends BaseFragment<DataFragmentDataBinding, DataGroupNewViewModel> implements IDataContractView.IGroupNew.IView {
 
     public static DataGroupNewFragment newInstance() {

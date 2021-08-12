@@ -9,6 +9,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zhulong.library_base.view.CircleImageView;
 
@@ -40,6 +41,23 @@ public final class ViewAdapter {
                     .into(imageView);
         }
     }
+
+    @BindingAdapter(value = {"noDiskCacheUrl", "placeholderRes"}, requireAll = false)
+    public static void setNoDiskCache(ImageView imageView, String noDiskCacheUrl, int placeholderRes) {
+        if (!TextUtils.isEmpty(noDiskCacheUrl)) {
+            //使用Glide框架加载图片
+            Glide.with(imageView.getContext())
+                    .load(noDiskCacheUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) // 不使用磁盘缓存
+                    .apply(new RequestOptions().placeholder(placeholderRes))
+                    .into(imageView);
+        }else{
+            Glide.with(imageView.getContext())
+                    .load(placeholderRes)
+                    .apply(new RequestOptions().placeholder(placeholderRes))
+                    .into(imageView);
+        }
+    }
     @BindingAdapter(value = {"url", "placeholderRes"}, requireAll = false)
     public static void setImageUri(ImageView imageView, int url, int placeholderRes) {
             //使用Glide框架加载图片
@@ -49,6 +67,8 @@ public final class ViewAdapter {
                     .error(placeholderRes)
                     .into(imageView);
     }
+
+
 
 
     @BindingAdapter(value = {"animatorTime"})

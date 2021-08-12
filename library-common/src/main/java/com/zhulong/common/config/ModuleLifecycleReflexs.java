@@ -23,5 +23,5 @@ public class ModuleLifecycleReflexs {
     private static final String MINE_INIT = "com.zhulong.mine.application.MineModuleInit";
 
 
-    public static String[] initModuleNames = {BASE_INIT,MINE_INIT,};
+    public static String[] initModuleNames = {BASE_INIT};
 }

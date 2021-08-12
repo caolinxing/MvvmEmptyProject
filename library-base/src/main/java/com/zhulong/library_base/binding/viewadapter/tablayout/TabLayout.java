@@ -1,6 +1,7 @@
 package com.zhulong.library_base.binding.viewadapter.tablayout;
 
 import com.flyco.tablayout.SegmentTabLayout;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.zhulong.library_base.binding.command.BindingCommand;
 
@@ -22,7 +23,23 @@ public class TabLayout {
     }
 
     @BindingAdapter(value = {"addTabSelectListener"}, requireAll = false)
-    public static void addTabData(SegmentTabLayout tabLayout, final BindingCommand onTabSelectCommand) {
+    public static void addTabSelectListener(SegmentTabLayout tabLayout, final BindingCommand onTabSelectCommand) {
+        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                if (onTabSelectCommand != null) {
+                    onTabSelectCommand.execute(position);
+                }
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+    }
+    @BindingAdapter(value = {"addTabSelectListener"}, requireAll = false)
+    public static void addTabSelectListener(SlidingTabLayout tabLayout, final BindingCommand onTabSelectCommand) {
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {

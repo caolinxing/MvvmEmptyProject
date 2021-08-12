@@ -12,6 +12,7 @@
     <attr name="onScrollChangeCommand" format="reference" tools:ignore="ResourceName" />
     <attr name="onScrollStateChangedCommand" format="reference" tools:ignore="ResourceName" />
     <attr name="url" format="string|integer" tools:ignore="ResourceName" />
+    <attr name="noDiskCacheUrl" format="string|integer" tools:ignore="ResourceName" />
     <attr name="animatorTime" format="integer" tools:ignore="ResourceName" />
     <attr name="onTouchCommand" format="reference" tools:ignore="ResourceName" />
 
@@ -73,6 +74,7 @@
     <declare-styleable name="ImageView" tools:ignore="ResourceName">
         <!--  load bitmap from uri(string type) -->
         <attr name="url" tools:ignore="ResourceName" />
+        <attr name="noDiskCacheUrl" tools:ignore="DuplicateDefinition,ResourceName" />
         <!--width for ResizeOptions (use Fresco to load bitmap). -->
         <attr name="request_width" format="integer" tools:ignore="ResourceName" />
         <!--height for ResizeOptions (use Fresco to load bitmap). -->

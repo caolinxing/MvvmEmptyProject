@@ -1,4 +1,4 @@
-package com.zhulong.lessonclass.application;
+package com.zhulong.lesson.application;
 
 import com.orhanobut.logger.Logger;
 import com.zhulong.common.config.ModuleLifecycleConfig;

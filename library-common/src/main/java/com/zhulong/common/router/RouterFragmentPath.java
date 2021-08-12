@@ -22,10 +22,11 @@ public class RouterFragmentPath {
     /** 课程 */
     public static class Lesson {
 
-        private static final String LESSON = "/class";
+        private static final String LESSON = "/lesson";
         
         /** 课程页 */
-        public static final String PAGER_LESSON = LESSON + "/Class";
+        public static final String PAGER_LESSON = LESSON + "/lesson";
+        public static final String PAGER_LESSON_LIST = LESSON + "/lessonList";
     }
     
     /** Vip */
@@ -44,8 +45,8 @@ public class RouterFragmentPath {
         
         /** 资料页面 */
         public static final String PAGER_DATA = DATA + "/Data";
-        public static final String PAGER_DATA_GroupNew = DATA + "/GroupNew";
-        public static final String PAGER_DATA_GroupData = DATA + "/GroupData";
+        public static final String PAGER_DATA_GROUP_NEW = DATA + "/GroupNew";
+        public static final String PAGER_DATA_GROUP_DATA = DATA + "/GroupData";
     }
     
     /** 我的*/

@@ -31,13 +31,13 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, BaseView
 
     private void initFragment() {
         Fragment homeFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Home.PAGER_HOME).navigation();
-        Fragment classFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Lesson.PAGER_LESSON).navigation();
+        Fragment lessonFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Lesson.PAGER_LESSON).navigation();
         Fragment vipFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Vip.PAGER_VIP).navigation();
         Fragment dataFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Data.PAGER_DATA).navigation();
         Fragment mineFragment = (Fragment) ARouter.getInstance().build(RouterFragmentPath.Mine.PAGER_MINE).navigation();
         fragments = new ArrayList<>();
         fragments.add(homeFragment);
-        fragments.add(classFragment);
+        fragments.add(lessonFragment);
         fragments.add(vipFragment);
         fragments.add(dataFragment);
         fragments.add(mineFragment);

@@ -68,7 +68,7 @@
                                 android:layout_marginTop="16dp"
                                 binding:civ_border_color="@{mineViewModel.isVip == 0 ? R.color.base_white : (mineViewModel.isVip == 1 ? R.color.base_color_vip_yellow : R.color.base_color_vip_yin_se)}"
                                 binding:civ_border_width="2dp"
-                                binding:url = "@{mineViewModel.data.avatar}"
+                                binding:noDiskCacheUrl = "@{mineViewModel.data.avatar}"
                                 binding:placeholderRes ="@{R.drawable.mine_ic_avatar}"/>
                             <ImageView
                                 android:id="@+id/iv_crowon"

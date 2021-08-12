@@ -1,8 +1,10 @@
-package com.zhulong.lessonclass.application;
+package com.zhulong.lesson.application;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.zhulong.lesson.view.lesson_list.LessonListModel;
+import com.zhulong.lesson.view.lesson_list.LessonListViewModel;
 import com.zhulong.library_base.mvvm.model.BaseModel;
 
 import androidx.annotation.NonNull;
@@ -31,9 +33,9 @@ public class LessonViewModelFactory extends ViewModelProvider.NewInstanceFactory
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-      /*  if (modelClass.isAssignableFrom(DataViewModel.class)) {
-            return (T) new DataViewModel(mApplication,(DataModel)model);
-        }*/
+        if (modelClass.isAssignableFrom(LessonListViewModel.class)) {
+            return (T) new LessonListViewModel(mApplication, (LessonListModel) model);
+        }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }
