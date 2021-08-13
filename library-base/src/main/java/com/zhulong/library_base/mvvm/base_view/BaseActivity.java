@@ -3,7 +3,7 @@ package com.zhulong.library_base.mvvm.base_view;
 /**
  * 应用模块:
  * <p>
- * 类描述:
+ * 类描述:基类
  * <p>
  *
  * @since: clx

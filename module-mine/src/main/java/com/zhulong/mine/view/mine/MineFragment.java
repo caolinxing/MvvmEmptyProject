@@ -1,13 +1,11 @@
 package com.zhulong.mine.view.mine;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
-import com.orhanobut.logger.Logger;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.library_base.mvvm.base_view.BaseFragment;
 import com.zhulong.mine.BR;
@@ -31,6 +29,8 @@ import androidx.lifecycle.ViewModelProvider;
 @Route(path = RouterFragmentPath.Mine.PAGER_MINE)
 public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineViewModel> {
 
+    private boolean mIsVisibleToUser;
+
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         return R.layout.mine_fragment_mine;
@@ -40,11 +40,17 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     public void onResume() {
         super.onResume();
         viewModel.loginUpdateUserHeader();
+        setStatusBar(mIsVisibleToUser);
     }
 
     @Override
     public void setMenuVisibility(boolean isVisibleToUser) {
         super.setMenuVisibility(isVisibleToUser);
+        mIsVisibleToUser = isVisibleToUser;
+        setStatusBar(isVisibleToUser);
+    }
+
+    private void setStatusBar(boolean isVisibleToUser) {
         if (viewModel != null) {
             if (isVisibleToUser) {
                 if (viewModel.isVip.get() == 1) {

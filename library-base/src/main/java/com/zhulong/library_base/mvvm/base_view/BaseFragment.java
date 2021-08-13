@@ -27,9 +27,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-/**
- * Created by goldze on 2017/6/15.
- */
 public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment implements IBaseView {
     protected V binding;
     protected VM viewModel;
