@@ -39,7 +39,9 @@ public class MineViewModel extends BaseViewModel<MineModel> {
     public ObservableField<PersonHeaderBean> data = new ObservableField<>();
     public ObservableInt isVip = new ObservableInt(0);
     private PersonHeaderBean mPersonHeaderBean;
-    public boolean isClickLogin = false;
+    public boolean isLoginClick = false;
+
+
     public MineViewModel(@NonNull Application application, MineModel<BaseModel> model) {
         super(application, model);
     }
@@ -50,8 +52,8 @@ public class MineViewModel extends BaseViewModel<MineModel> {
     public BindingCommand<View> otherClick = new BindingCommand<>((view) -> {
         switch (view.getTag().toString()) {
             case "goLogin":
+                isLoginClick = true;
                 //去登陆
-                isClickLogin = true;
                 startActivity(LoginActivity.class);
                 break;
             case "goSetting":
@@ -223,41 +225,15 @@ public class MineViewModel extends BaseViewModel<MineModel> {
         }
     });
 
-    //登录后刷新
-    public void loginAfterUpdate(){
-        isClickLogin = false;
-        String json = MMKV.defaultMMKV().getString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, null);
-        if (json != null) {
-            mPersonHeaderBean = GsonUtils.fromLocalJson(json, PersonHeaderBean.class);
-            data.set(mPersonHeaderBean);
-            if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "4")) {
-                isVip.set(4);
-            } else if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "1")) {
-                isVip.set(1);
-            }
-            requestMap.clear();
-            requestMap.put("zuid", getUserInfo().getUid() + "");
-            model.getUserHeader(requestMap).subscribe(new ApiCallBack<Reply<BaseResponse<PersonHeaderBean>>>() {
-                @Override
-                public void onSuccess(Reply<BaseResponse<PersonHeaderBean>> result) {
-                    mPersonHeaderBean = result.getData().getResult();
-                    MMKV.defaultMMKV().putString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, GsonUtils.toJson(mPersonHeaderBean));
-                    data.set(mPersonHeaderBean);
-                    if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "4")) {
-                        isVip.set(4);
-                    } else if (TextUtils.equals(mPersonHeaderBean.getIs_vip(), "1")) {
-                        isVip.set(1);
-                    }
-                    showToast(ToastUtil.SUCCESS, mPersonHeaderBean.getUsername() + "登入成功");
-                }
-
-                @Override
-                public void onFail(int code, String wrongMsg, String result) {
-                    showToast(wrongMsg);
-                }
-            });
+    //登录之后更新用户信息
+    public void loginUpdateUserHeader() {
+        if (isLoginClick) {
+            isLoginClick = false;
+            getUserHeader();
         }
     }
+
+
     //头信息
     public void getUserHeader() {
         String json = MMKV.defaultMMKV().getString(MineConfig.KeyConfig.KEY_USER_HEADER_INFO, null);

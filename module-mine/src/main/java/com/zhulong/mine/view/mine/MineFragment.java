@@ -1,11 +1,13 @@
 package com.zhulong.mine.view.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
+import com.orhanobut.logger.Logger;
 import com.zhulong.common.router.RouterFragmentPath;
 import com.zhulong.library_base.mvvm.base_view.BaseFragment;
 import com.zhulong.mine.BR;
@@ -37,17 +39,12 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.loginAfterUpdate();
-        setStatusBar(viewModel.isClickLogin);
+        viewModel.loginUpdateUserHeader();
     }
 
     @Override
     public void setMenuVisibility(boolean isVisibleToUser) {
         super.setMenuVisibility(isVisibleToUser);
-        setStatusBar(isVisibleToUser);
-    }
-
-    private void setStatusBar(boolean isVisibleToUser) {
         if (viewModel != null) {
             if (isVisibleToUser) {
                 if (viewModel.isVip.get() == 1) {
